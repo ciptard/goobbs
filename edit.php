@@ -65,9 +65,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		$out['content'] .= '<form action = "edit.php?topic=' .$_GET['topic']. '" method = "post">
 		<p>' .text('title', $topicEntry['title']). '</p>
 		<p>' .textarea($topicEntry['content']). '</p>'.
-		(isModerator()? '<p>' .select('close', $options, $topicEntry['close']? 'yes' : 'no'). '</p>
-		<p>' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). '</p>
-		<p>' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
+		(isModerator()? '<p>' .select('close', $options, $topicEntry['close']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
 		'<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
