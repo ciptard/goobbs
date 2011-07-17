@@ -140,6 +140,7 @@ else if(isGET('user') && isAdmin() && $_GET['user'] !== md5('admin') && isValidE
 
 			$forumEntry = readEntry('forum', $topicEntry['forum']);
 			unset($forumEntry['topic'][$topic]);
+			unset($forumEntry['pinnedTopic'][$topic]);
 			saveEntry('forum', $topicEntry['forum'], $forumEntry);
 			foreach($topicEntry['reply'] as $reply)
 			{
