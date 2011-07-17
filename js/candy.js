@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("a, img, input[type='submit']").hover(
+	$("a, img, input[type='submit'], select").hover(
 		function() {
 		           $(this).animate({
 		                opacity: 0.5
