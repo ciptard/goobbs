@@ -15,7 +15,7 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 		$topicEntry['view'] = 0;
 		$topicEntry['forum'] = $_GET['topic'];
 		$topicEntry['reply'] = array();
-		$topicEntry['close'] = false;
+		$topicEntry['locked'] = false;
 		$topic = newEntry();
 		saveEntry('topic', $topic, $topicEntry);
 
@@ -43,7 +43,7 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 {
 	$topicEntry = readEntry('topic', $_GET['reply']);
-	if($topicEntry['close'])
+	if($topicEntry['locked'])
 	{
 		exit;
 	}

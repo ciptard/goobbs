@@ -25,7 +25,7 @@ if(checkBot('token') && check('topic') && checkBot('captcha'))
 	{
 		foreach($foundTopics as $topic => $topicEntry)
 		{
-			$out['content'] .= '<li>' .manageTopic($topic, $topicEntry['author']). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a> @ <a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></li>';
+			$out['content'] .= '<li>' .manageTopic($topic, $topicEntry['author']). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></li>';
 		}
 	}
 	else

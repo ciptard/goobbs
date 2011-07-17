@@ -23,7 +23,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$out['content'] .= '<table>
 	<tr class = "entryHeader"><td colspan = "2"><h1><a href = "view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
 	<tr><td><p>' .content($topicEntry['content']). '</p>'.
-	(!$topicEntry['close'] && isUser()? '<p><a class = "important" href = "add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+	(!$topicEntry['locked'] && isUser()? '<p><a class = "important" href = "add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']).
 	'<p class = "entryFooter">' .manageTopic($_GET['topic'], $topicEntry['author']).entryDate($_GET['topic']). '</p></td>
 	<td class = "w2"><p>' .manageUser($user). '<a href = "view.php?user=' .$user. '">' .$topicEntry['author']. '</a></p>
@@ -68,7 +68,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	{
 		$topicEntry = readEntry('topic', $topic);
 		$forumEntry = readEntry('forum', $topicEntry['forum']);
-		$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a> @ <a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+		$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 		<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 		<td><a href = "view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a></td></tr>';
 	}
@@ -100,7 +100,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 		foreach($page[$i] as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
-			$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']).(isset($forumEntry['pinnedTopic'][$topic])? '[▼]':'').($topicEntry['close']? '[☻]':''). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a> @ <a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+			$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']).(isset($forumEntry['pinnedTopic'][$topic])? '[' .$lang['pinned']. ']':'').($topicEntry['locked']? '[' .$lang['locked']. ']':''). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .entryDate($topic). '</td></tr>';
 		}

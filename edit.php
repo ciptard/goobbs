@@ -17,11 +17,11 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
 		if(isModerator() &&
-			isPOST('close') && ($_POST['close'] === 'yes' || $_POST['close'] === 'no') &&
+			isPOST('locked') && ($_POST['locked'] === 'yes' || $_POST['locked'] === 'no') &&
 			isPOST('pinned') && ($_POST['pinned'] === 'yes' || $_POST['pinned'] === 'no') &&
 			isPOST('forum') && isValidEntry('forum', $_POST['forum']))
 		{
-			$topicEntry['close'] = $_POST['close'] === 'yes';
+			$topicEntry['locked'] = $_POST['locked'] === 'yes';
 
 			if($topicEntry['forum'] !== $_POST['forum'])
 			{
@@ -65,7 +65,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		$out['content'] .= '<form action = "edit.php?topic=' .$_GET['topic']. '" method = "post">
 		<p>' .text('title', $topicEntry['title']). '</p>
 		<p>' .textarea($topicEntry['content']). '</p>'.
-		(isModerator()? '<p>' .select('close', $options, $topicEntry['close']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
+		(isModerator()? '<p>' .select('locked', $options, $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
 		'<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
