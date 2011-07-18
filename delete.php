@@ -3,13 +3,9 @@
 $template = 'main';
 require 'header.php';
 
-if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
+if(isGET('topic') && isModerator() && isValidEntry('topic', $_GET['topic']))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
-	if(!isModerator() && !isAuthor($topicEntry['author']))
-	{
-		exit;
-	}
 	$out['subtitle'] = $lang['delete'].$lang['topic']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot('token'))
@@ -45,13 +41,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		</form>';
 	}
 }
-else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
+else if(isGET('reply') && isModerator() && isValidEntry('reply', $_GET['reply']))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
-	if(!isModerator() && !isAuthor($replyEntry['author']))
-	{
-		exit;
-	}
 	$out['subtitle'] = $lang['delete'].$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot('token'))
