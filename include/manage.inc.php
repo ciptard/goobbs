@@ -3,13 +3,13 @@
 function manageTopic($topic, $author)
 {
 	global $lang;
-	return (isModerator() || isAuthor($author)? '<a href = "edit.php?topic=' .$topic. '">[' .$lang['edit']. ']</a><a href = "delete.php?topic=' .$topic. '">[' .$lang['delete']. ']</a>' : '').hook('manageTopic', $topic);
+	return (isModerator() || isAuthor($author)? '<a href = "edit.php?topic=' .$topic. '">[' .$lang['edit']. ']</a>' : '').(isModerator()? '<a href = "delete.php?topic=' .$topic. '">[' .$lang['delete']. ']</a>' : '').hook('manageTopic', $topic);
 }
 
 function manageReply($reply, $author)
 {
 	global $lang;
-	return (isModerator() || isAuthor($author)? '<a href = "edit.php?reply=' .$reply. '">[' .$lang['edit']. ']</a><a href = "delete.php?reply=' .$reply. '">[' .$lang['delete']. ']</a>' : '').hook('manageReply', $reply);
+	return (isModerator() || isAuthor($author)? '<a href = "edit.php?reply=' .$reply. '">[' .$lang['edit']. ']</a>' : '').(isModerator()? '<a href = "delete.php?reply=' .$reply. '">[' .$lang['delete']. ']</a>' : '').hook('manageReply', $reply);
 }
 
 function manageForum($forum)
