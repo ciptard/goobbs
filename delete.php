@@ -8,7 +8,7 @@ if(isGET('topic') && isModerator() && isValidEntry('topic', $_GET['topic']))
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$out['subtitle'] = $lang['delete'].$lang['topic']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token'))
+	if(checkBot('token') && checkBot('captcha'))
 	{
 		deleteEntry('topic', $_GET['topic']);
 
@@ -37,6 +37,7 @@ if(isGET('topic') && isModerator() && isValidEntry('topic', $_GET['topic']))
 	else
 	{
 		$out['content'] .= '<form action = "delete.php?topic=' .$_GET['topic']. '" method = "post">
+		<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -46,7 +47,7 @@ else if(isGET('reply') && isModerator() && isValidEntry('reply', $_GET['reply'])
 	$replyEntry = readEntry('reply', $_GET['reply']);
 	$out['subtitle'] = $lang['delete'].$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token'))
+	if(checkBot('token') && checkBot('captcha'))
 	{
 		deleteEntry('reply', $_GET['reply']);
 
@@ -64,6 +65,7 @@ else if(isGET('reply') && isModerator() && isValidEntry('reply', $_GET['reply'])
 	else
 	{
 		$out['content'] .= '<form action = "delete.php?reply=' .$_GET['reply']. '" method = "post">
+		<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -73,7 +75,7 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $lang['delete'].$lang['forum']. ' : ' .$forumEntry['name'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token'))
+	if(checkBot('token') && checkBot('captcha'))
 	{
 		deleteEntry('forum', $_GET['forum']);
 		foreach($forumEntry['topic'] as $topic)
@@ -102,6 +104,7 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 	else
 	{
 		$out['content'] .= '<form action = "delete.php?forum=' .$_GET['forum']. '" method = "post">
+		<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -111,7 +114,7 @@ else if(isGET('user') && isAdmin() && $_GET['user'] !== md5('admin') && isValidE
 	$userEntry = readEntry('user', $_GET['user']);
 	$out['subtitle'] = $lang['delete'].$lang['user']. ' : ' .$userEntry['name'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token'))
+	if(checkBot('token') && checkBot('captcha'))
 	{
 		deleteEntry('user', $_GET['user']);
 
@@ -150,6 +153,7 @@ else if(isGET('user') && isAdmin() && $_GET['user'] !== md5('admin') && isValidE
 	else
 	{
 		$out['content'] .= '<form action = "delete.php?user=' .$_GET['user']. '" method = "post">
+		<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
