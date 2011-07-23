@@ -25,6 +25,9 @@ function bbcode($text)
 
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
 	$replace[] = '<iframe width = "600" height = "375" src = "http://www.youtube.com/embed/$1?rel=0" frameborder = "0"></iframe>';
+	
+	$pattern[] = '%\[block\]([^\[\]]+)\[/block\]%';
+	$replace[] = '<p class = "block">$1</p>';
 	//the variable for the replace
 	return preg_replace($pattern, $replace, $text);
 }

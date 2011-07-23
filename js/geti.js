@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var ta = $('textarea').get(0);
 	//display panel
-	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube'];
+	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block'];
 	var text = '';
 	for(var i in tags)
 	{
