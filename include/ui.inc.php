@@ -71,8 +71,7 @@ function check($name, $min = 1, $max = 40)
 	global $lang;
 	if(!isPOST($name))
 		return false;
-	$len = strlen($_POST[$name]);
-	if($len < $min || $len > $max)
+	if(!isset($_POST[$name][$min-1]) || isset($_POST[$name][$max]))
 	{
 		message($lang[$name].$lang['errorLength']);
 		return false;
