@@ -16,10 +16,10 @@ function message($msg)
 	$out['content'] .= '<div class = "important">' .$msg. '</div>';
 }
 
-function password()
+function password($default = '')
 {
 	global $lang;
-	return $lang['password']. ' <input type = "password" name = "password"/>';
+	return $lang['password']. ' <input type = "password" name = "password" value = "' .$default. '"/>';
 }
 
 function text($name, $default = '')
@@ -72,7 +72,7 @@ function check($name, $min = 1, $max = 40)
 	if(!isPOST($name))
 		return false;
 	$len = strlen(utf8_decode($_POST[$name]));
-	if(($min > 0 && $len < $min) || ($max > 0 && $len > $max))
+	if($len < $min || $len > $max)
 	{
 		message($lang[$name].$lang['errorLength']);
 		return false;

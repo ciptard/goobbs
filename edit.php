@@ -12,7 +12,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	}
 	$out['subtitle'] = $lang['edit'].$lang['topic']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('title') && check('content', 1, 0) && checkBot('captcha'))
+	if(checkBot('token') && check('title') && check('content', 1, 1000) && checkBot('captcha'))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
@@ -80,7 +80,7 @@ else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
 	}
 	$out['subtitle'] = $lang['edit'].$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('content', 1, 0) && checkBot('captcha'))
+	if(checkBot('token') && check('content', 1, 1000) && checkBot('captcha'))
 	{
 		$replyEntry['content'] = clean($_POST['content']);
 		saveEntry('reply', $_GET['reply'], $replyEntry);
@@ -122,12 +122,9 @@ else if(isGET('user') && (isAdmin() || $_GET['user'] === md5($_SESSION['name']))
 	$userEntry = readEntry('user', $_GET['user']);
 	$out['subtitle'] = $lang['edit'].$lang['user']. ' : ' .$userEntry['name'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('password', 0))
+	if(checkBot('token') && check('password'))
 	{
-		if($_POST['password'] !== '')
-		{
-			$userEntry['password'] = hide($_POST['password']);
-		}
+		$userEntry['password'] = hide($_POST['password']);
 		if(isAdmin() && $userEntry['role'] !== 'admin' &&
 			isPOST('role') && ($_POST['role'] === 'user' || $_POST['role'] === 'moderator'))
 		{
@@ -142,7 +139,7 @@ else if(isGET('user') && (isAdmin() || $_GET['user'] === md5($_SESSION['name']))
 		$roleOptions['moderator'] = $lang['moderator'];
 
 		$out['content'] .= '<form action = "edit.php?user=' .$_GET['user']. '" method = "post">
-		<p>' .password(). '</p>'.
+		<p>' .password($userEntry['password']). '</p>'.
 		(isAdmin() && $userEntry['role'] !== 'admin'? '<p>' .select('role', $roleOptions, $userEntry['role']). '</p>' : '').
 		'<p>' .submit(). '</p>
 		</form>';
