@@ -16,10 +16,10 @@ function message($msg)
 	$out['content'] .= '<div class = "important">' .$msg. '</div>';
 }
 
-function password($default = '')
+function password()
 {
 	global $lang;
-	return $lang['password']. ' <input type = "password" name = "password" value = "' .$default. '"/>';
+	return $lang['password']. ' <input type = "password" name = "password"/>';
 }
 
 function text($name, $default = '')

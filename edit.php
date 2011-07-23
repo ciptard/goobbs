@@ -139,7 +139,7 @@ else if(isGET('user') && (isAdmin() || $_GET['user'] === md5($_SESSION['name']))
 		$roleOptions['moderator'] = $lang['moderator'];
 
 		$out['content'] .= '<form action = "edit.php?user=' .$_GET['user']. '" method = "post">
-		<p>' .password($userEntry['password']). '</p>'.
+		<p>' .password(). '</p>'.
 		(isAdmin() && $userEntry['role'] !== 'admin'? '<p>' .select('role', $roleOptions, $userEntry['role']). '</p>' : '').
 		'<p>' .submit(). '</p>
 		</form>';
