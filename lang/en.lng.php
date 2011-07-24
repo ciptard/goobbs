@@ -45,7 +45,7 @@ $lang['second'] = 'second';
 $lang['plural'] = 's';
 $lang['ago'] = 'ago';
 $lang['errorLength'] = ' is too short or too long';
-$lang['errorBot'] = 'You are a bot';
+$lang['errorBot'] = 'Incorrect CAPTCHA';
 $lang['pinned'] = 'Pinned';
 
 ?>

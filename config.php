@@ -7,7 +7,7 @@ if(isAdmin())
 {
 	$out['subtitle'] = $lang['config'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('title') &&
+	if(checkBot() && check('title') &&
 		isPOST('theme') && isEntry($_POST['theme']) && is_file('theme/' .$_POST['theme']. '.thm.css') &&
 		isPOST('lang') && isEntry($_POST['lang']) && is_file('lang/' .$_POST['lang']. '.lng.php'))
 	{

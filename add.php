@@ -7,7 +7,7 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 {
 	$out['subtitle'] = $lang['add'].$lang['topic'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('title') && check('content', 1, 1000) && checkBot('captcha'))
+	if(checkBot() && check('title') && check('content', 1, 1000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
@@ -35,7 +35,6 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 		$out['content'] .= '<form action = "add.php?topic=' .$_GET['topic']. '" method = "post">
 		<p>' .text('title'). '</p>
 		<p>' .textarea(). '</p>
-		<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -49,7 +48,7 @@ else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 	}
 	$out['subtitle'] = $lang['add'].$lang['reply']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('content', 1, 1000) && checkBot('captcha'))
+	if(checkBot() && check('content', 1, 1000))
 	{
 		$replyEntry['author'] = $_SESSION['name'];
 		$replyEntry['content'] = clean($_POST['content']);
@@ -71,7 +70,6 @@ else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 	{
 		$out['content'] .= '<form action = "add.php?reply=' .$_GET['reply']. '" method = "post">
 		<p>' .textarea(). '</p>
-		<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -80,7 +78,7 @@ else if(isGET('forum') && isAdmin())
 {
 	$out['subtitle'] = $lang['add'].$lang['forum'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('name') && check('info', 1, 80))
+	if(checkBot() && check('name') && check('info', 1, 80))
 	{
 		$forumEntry['name'] = clean($_POST['name']);
 		$forumEntry['info'] = clean($_POST['info']);
@@ -103,8 +101,7 @@ else if(isGET('user'))
 {
 	$out['subtitle'] = $lang['add'].$lang['user'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('name') && check('password') &&
-		checkBot('captcha') && !isValidEntry('user', md5(clean($_POST['name']))))
+	if(checkBot() && check('name') && check('password') && !isValidEntry('user', md5(clean($_POST['name']))))
 	{
 		$userEntry['name'] = clean($_POST['name']);
 		$userEntry['role'] = 'user';
@@ -121,7 +118,6 @@ else if(isGET('user'))
 		$out['content'] .= '<form action = "add.php?user" method = "post">
 		<p>' .text('name'). '</p>
 		<p>' .password(). '</p>
-		<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}

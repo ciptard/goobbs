@@ -7,7 +7,7 @@ if(isGET('login'))
 {
 	$out['subtitle'] = $lang['login'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot('token') && check('name') && check('password') && checkBot('captcha') &&
+	if(checkBot() && check('name') && check('password') &&
 		login($_POST['name'], $_POST['password']))
 	{
 		session_regenerate_id(true);
@@ -18,7 +18,6 @@ if(isGET('login'))
 		$out['content'] .= '<form action = "auth.php?login" method = "post">
 		<p>' .text('name'). '</p>
 		<p>' .password(). '</p>
-		<p>' .captcha(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}

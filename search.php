@@ -7,7 +7,7 @@ require 'include/manage.inc.php';
 $out['subtitle'] = $lang['search'];
 $out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 
-if(checkBot('token') && check('topic') && checkBot('captcha'))
+if(checkBot() && check('topic'))
 {
 	$_POST['topic'] = clean($_POST['topic']);
 	$topics = listEntry('topic');
@@ -37,7 +37,6 @@ if(checkBot('token') && check('topic') && checkBot('captcha'))
 
 $out['content'] .= '<form action = "search.php" method = "post">
 <p>' .text('topic'). '</p>
-<p>' .captcha(). '</p>
 <p>' .submit(). '</p>
 </form>';
 

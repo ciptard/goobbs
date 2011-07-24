@@ -38,9 +38,11 @@ function textarea($default = '')
 function submit()
 {
 	global $lang;
-	$_SESSION['token'] = uniqid();
-	return '<input type = "hidden" name = "token" value = "' .$_SESSION['token']. '"/>
-	<input type = "submit" value = "' .$lang['confirm']. '"/>';
+	$num1 = rand(1, 10);
+	$num2 = rand(1, 10);
+	$num3 = rand(1, 10);
+	$_SESSION['captcha'] = (string) ($num1 * $num2 + $num3);
+	return $num1. ' x ' .$num2. ' + ' .$num3. ' = ? <input type = "text" name = "captcha" style = "width: 10%;"/> <input type = "submit" value = "' .$lang['confirm']. '"/>';
 }
 
 function select($name, $options, $default = '')
@@ -56,16 +58,6 @@ function select($name, $options, $default = '')
 	return $out;
 }
 
-function captcha()
-{
-	global $lang;
-	$num1 = rand(1, 10);
-	$num2 = rand(1, 10);
-	$_SESSION['captcha'] = (string) ($num1 * $num2);
-	$lang['captcha'] = $num1. ' x ' .$num2. ' = ?';
-	return text('captcha');
-}
-
 function check($name, $min = 1, $max = 40)
 {
 	global $lang;
@@ -79,15 +71,15 @@ function check($name, $min = 1, $max = 40)
 	return true;
 }
 
-function checkBot($name)
+function checkBot()
 {
 	global $lang;
-	if(!isPOST($name))
+	if(!isPOST('captcha'))
 		return false;
-	if(!isset($_SESSION[$name]) || $_POST[$name] !== $_SESSION[$name])
+	if(!isset($_SESSION['captcha']) || $_POST['captcha'] !== $_SESSION['captcha'])
 	{
 		message($lang['errorBot']);
-		unset($_SESSION[$name]);
+		unset($_SESSION['captcha']);
 		return false;
 	}
 	return true;
