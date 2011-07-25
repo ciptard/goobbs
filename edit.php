@@ -12,7 +12,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	}
 	$out['subtitle'] = $lang['edit'].$lang['topic']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('title') && check('content', 1, 1000))
+	if(checkBot() && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
@@ -79,7 +79,7 @@ else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
 	}
 	$out['subtitle'] = $lang['edit'].$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('content', 1, 1000))
+	if(checkBot() && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = clean($_POST['content']);
 		saveEntry('reply', $_GET['reply'], $replyEntry);

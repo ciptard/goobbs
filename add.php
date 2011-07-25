@@ -7,7 +7,7 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 {
 	$out['subtitle'] = $lang['add'].$lang['topic'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('title') && check('content', 1, 1000))
+	if(checkBot() && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
@@ -48,7 +48,7 @@ else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 	}
 	$out['subtitle'] = $lang['add'].$lang['reply']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('content', 1, 1000))
+	if(checkBot() && check('content', 1, 2000))
 	{
 		$replyEntry['author'] = $_SESSION['name'];
 		$replyEntry['content'] = clean($_POST['content']);
