@@ -60,28 +60,20 @@ function select($name, $options, $default = '')
 function check($name, $min = 1, $max = 40)
 {
 	global $lang;
-	if(!isPOST($name))
-		return false;
-	if(!isset($_POST[$name][$min-1]) || isset($_POST[$name][$max]))
-	{
-		message($lang[$name].$lang['errorLength']);
-		return false;
-	}
-	return true;
+	if(isPOST($name) && isset($_POST[$name][$min-1]) && !isset($_POST[$name][$max]))
+		return true;
+	message($lang[$name].$lang['errorLength']);
+	return false;
 }
 
 function checkBot()
 {
 	global $lang;
-	if(!isPOST('captcha'))
-		return false;
-	if(!isset($_SESSION['captcha']) || $_POST['captcha'] !== $_SESSION['captcha'])
-	{
-		message($lang['errorBot']);
-		unset($_SESSION['captcha']);
-		return false;
-	}
-	return true;
+	if(isPOST('captcha') && isset($_SESSION['captcha']) && $_POST['captcha'] === $_SESSION['captcha'])
+		return true;
+	message($lang['errorBot']);
+	unset($_SESSION['captcha']);
+	return false;
 }
 
 ?>
