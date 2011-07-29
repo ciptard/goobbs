@@ -40,9 +40,8 @@ function submit()
 	global $lang;
 	$num1 = rand(1, 10);
 	$num2 = rand(1, 10);
-	$num3 = rand(1, 10);
-	$_SESSION['captcha'] = (string) ($num1 * $num2 + $num3);
-	return $num1. ' x ' .$num2. ' + ' .$num3. ' = ? <input type = "text" name = "captcha" style = "width: 10%;"/> <input type = "submit" value = "' .$lang['confirm']. '"/>';
+	$_SESSION['captcha'] = (string) ($num1 * $num2);
+	return $num1. ' x ' .$num2. ' = ? <input type = "text" name = "captcha" style = "width: 10%;"/> <input type = "submit" value = "' .$lang['confirm']. '"/>';
 }
 
 function select($name, $options, $default = '')
