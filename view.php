@@ -29,21 +29,16 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	<td class = "w2"><p>' .manageUser($user). '<a href = "view.php?user=' .$user. '">' .$topicEntry['author']. '</a></p>
 	<p>' .gravatar($user). '</p></td></tr>
 	</table>';
-	$page = array_chunk($topicEntry['reply'], 8);
-	if(!isGET('p') || !isset($page[$_GET['p']-1]))
-	{
-		$_GET['p'] = 1;
-	}
-	$i = $_GET['p'] - 1;
-	if($page)
+
+	if($topicEntry['reply'])
 	{
 		$out['content'] .= '<table>
 		<tr class = "entryHeader"><td colspan = "2">' .$lang['reply']. '</td></tr>';
-		foreach($page[$i] as $reply)
+		foreach($topicEntry['reply'] as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$user = md5($replyEntry['author']);
-			$out['content'] .= '<tr><td><p>' .content($replyEntry['content']). '</p>'.
+			$out['content'] .= '<tr id = "' .$reply. '"><td><p>' .content($replyEntry['content']). '</p>'.
 			hook('afterReply', $reply).
 			'<p class = "entryFooter">' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</p></td>
 			<td class = "w2"><p>' .manageUser($user). '<a href = "view.php?user=' .$user. '">' .$replyEntry['author']. '</a></p>
@@ -51,11 +46,6 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		}
 		$out['content'] .= '</table>';
 	}
-	$out['content'] .= '<div id = "page"><ul>' .
-	(isset($page[$i-1])? '<li><a href = "view.php?topic=' .$_GET['topic']. '&p=' .($_GET['p']-1). '">← ' .$lang['prev']. '</a></li>' : '').
-	'<li>' .$lang['page']. ' : ' .$_GET['p']. ' / ' .count($page). '</li>' .
-	(isset($page[$i+1])? '<li><a href = "view.php?topic=' .$_GET['topic']. '&p=' .($_GET['p']+1). '">' .$lang['next']. ' →</a></li>' : '').
-	'</ul></div>';
 
 	$topics = listEntry('topic');
 	shuffle($topics);
@@ -149,7 +139,7 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$topicEntry = readEntry('topic', $replyEntry['topic']);
-			$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href = "view.php?topic=' .$replyEntry['topic']. '">' .$topicEntry['title']. '</a></td>
+			$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href = "view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
 			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .entryDate($reply). '</td></tr>';
 		}

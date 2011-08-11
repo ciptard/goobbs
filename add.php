@@ -64,7 +64,7 @@ else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 		$userEntry['reply'][$reply] = $reply;
 		saveEntry('user', $user, $userEntry);
 
-		$out['content'] .= '<p><a href = "view.php?topic=' .$_GET['reply']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href = "view.php?topic=' .$_GET['reply']. '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{

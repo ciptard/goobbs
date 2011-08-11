@@ -41,7 +41,7 @@ if(isGET('new'))
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$topicEntry = readEntry('topic', $replyEntry['topic']);
-			$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href = "view.php?user=' .md5($replyEntry['author']). '">' .$replyEntry['author']. '</a>@<a href = "view.php?topic=' .$replyEntry['topic']. '">' .$topicEntry['title']. '</a></td>
+			$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href = "view.php?user=' .md5($replyEntry['author']). '">' .$replyEntry['author']. '</a>@<a href = "view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
 			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .entryDate($reply). '</td></tr>';
 		}

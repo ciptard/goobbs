@@ -43,10 +43,10 @@ else if(isGET('reply'))
 			$replyEntry = readEntry('reply', $reply);
 			$topicEntry = readEntry('topic', $replyEntry['topic']);
 			$out['content'] .= '<entry>
-			<id>' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '</id>
+			<id>' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '</id>
 			<title>' .$replyEntry['author']. '@' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($reply, 'c'). '</updated>
-			<link href = "' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '"/>
+			<link href = "' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '"/>
 			<summary type = "html">' .clean(summary($replyEntry['content'])). '</summary>
 			</entry>';
 		}
