@@ -62,21 +62,15 @@ function entryDate($file, $pattern = 'Y/m/d h:i A')
 	$diff = time() - $timestamp;
 	if($pattern !== 'c' && $diff < 604800) //1 week
 	{
-		$out = '';
-		$len = 2;
-		$periods = array($lang['day'] => 86400, $lang['hour'] => 3600, $lang['minute'] => 60, $lang['second'] => 1);
+		$periods = array(86400 => $lang['day'], 3600 => $lang['hour'], 60 => $lang['minute'], 1 => $lang['second']);
 		foreach($periods as $key => $value)
 		{
-			if($diff >= $value)
+			if($diff >= $key)
 			{
-				$time = (int) ($diff / $value);
-				$out .= $time. ' ' .$key.($time > 1? $lang['plural'] : ''). ' ';
-				$diff %= $value;
-				$len--;
+				$num = (int) ($diff / $key);
+				return $num. ' ' .$value.($num > 1? $lang['plural'] : ''). ' ' .$lang['ago'];
 			}
-			if($len === 0) break;
 		}
-		return $out.$lang['ago'];
 	}
 	return date($pattern, $timestamp);
 }
