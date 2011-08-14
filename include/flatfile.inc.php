@@ -55,7 +55,7 @@ function newEntry()
 	return date('Y-m-dHis').uniqid();
 }
 
-function entryDate($file, $pattern = 'Y/m/d h:i A')
+function entryDate($file, $pattern = 'Y/m/d H:i')
 {
 	global $lang;
 	$timestamp = strtotime(substr($file, 0, 16));
