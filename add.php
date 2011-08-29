@@ -20,7 +20,6 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 		$topic = newEntry();
 		saveEntry('topic', $topic, $topicEntry);
 
-		$forumEntry = readEntry('forum', $topicEntry['forum']);
 		$forumEntry['topic'][$topic] = $topic;
 		saveEntry('forum', $topicEntry['forum'], $forumEntry);
 
