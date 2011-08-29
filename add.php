@@ -5,7 +5,8 @@ require 'header.php';
 
 if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 {
-	$out['subtitle'] = $lang['add'].$lang['topic'];
+	$forumEntry = readEntry('forum', $_GET['topic']);
+	$out['subtitle'] = $lang['add'].$lang['topic']. ' : ' .$forumEntry['name'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('title') && check('content', 1, 2000))
 	{
