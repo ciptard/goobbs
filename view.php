@@ -42,7 +42,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			hook('afterReply', $reply).
 			'<p class = "entryFooter">' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</p></td>
 			<td class = "w2"><p>' .manageUser($user). '<a href = "view.php?user=' .$user. '">' .$replyEntry['author']. '</a></p>
-			<p>' .gravatar($user). '</p></td></tr>';
+			<p>' .avatar($user). '</p></td></tr>';
 		}
 		$out['content'] .= '</table>';
 	}
