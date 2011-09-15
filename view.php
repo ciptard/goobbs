@@ -27,7 +27,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	hook('afterTopic', $_GET['topic']).
 	'<p class = "entryFooter">' .manageTopic($_GET['topic'], $topicEntry['author']).entryDate($_GET['topic']). '</p></td>
 	<td class = "w2"><p>' .manageUser($user). '<a href = "view.php?user=' .$user. '">' .$topicEntry['author']. '</a></p>
-	<p>' .gravatar($user). '</p></td></tr>
+	<p>' .avatar($user). '</p></td></tr>
 	</table>';
 
 	if($topicEntry['reply'])
@@ -108,7 +108,7 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 	$out['subtitle'] = $userEntry['name'];
 	$out['content'] .= '<table>
 	<tr class = "entryHeader"><td colspan = "2"><h1>' .manageUser($_GET['user']).$out['subtitle']. '</h1></td></tr>
-	<tr><td rowspan = "2" class = "w1">' .gravatar($_GET['user']). '</td>
+	<tr><td rowspan = "2" class = "w1">' .avatar($_GET['user']). '</td>
 	<td>' .$lang['role']. ' : ' .$lang[$userEntry['role']]. '</td></tr>
 	<tr><td>' .$lang['count']. ' : ' .(count($userEntry['topic']) + count($userEntry['reply'])). '</td></tr>
 	</table>';
