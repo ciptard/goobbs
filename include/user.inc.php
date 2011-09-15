@@ -20,9 +20,9 @@ function isUser()
 	return $_SESSION['role'] === 'user' || $_SESSION['role'] === 'moderator' || $_SESSION['role'] === 'admin';
 }
 
-function gravatar($user)
+function avatar($user)
 {
-	return '<img src = "http://www.gravatar.com/avatar/' .$user. '?d=identicon&f=y" alt = ""/>';
+	return '<img src = "http://robohash.org/' .$user. '.jpg?size=80x80&bgset=bg1" alt = ""/>';
 }
 
 function login($name, $password)
