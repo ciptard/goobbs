@@ -32,11 +32,11 @@ if(isGET('topic') && isModerator() && isValidEntry('topic', $_GET['topic']))
 			unset($userEntry['reply'][$reply]);
 			saveEntry('user', $user, $userEntry);
 		}
-		$out['content'] .= '<p><a href = "view.php?forum=' .$topicEntry['forum']. '">← ' .$lang['redirect']. ' : ' .$forumEntry['name']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php?forum=' .$topicEntry['forum']. '">← ' .$lang['redirect']. ' : ' .$forumEntry['name']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action = "delete.php?topic=' .$_GET['topic']. '" method = "post">
+		$out['content'] .= '<form action="delete.php?topic=' .$_GET['topic']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -59,11 +59,11 @@ else if(isGET('reply') && isModerator() && isValidEntry('reply', $_GET['reply'])
 		unset($userEntry['reply'][$_GET['reply']]);
 		saveEntry('user', $user, $userEntry);
 
-		$out['content'] .= '<p><a href = "view.php?topic=' .$replyEntry['topic']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php?topic=' .$replyEntry['topic']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action = "delete.php?reply=' .$_GET['reply']. '" method = "post">
+		$out['content'] .= '<form action="delete.php?reply=' .$_GET['reply']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -97,11 +97,11 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 				saveEntry('user', $user, $userEntry);
 			}
 		}
-		$out['content'] .= '<p><a href = "index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action = "delete.php?forum=' .$_GET['forum']. '" method = "post">
+		$out['content'] .= '<form action="delete.php?forum=' .$_GET['forum']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -145,11 +145,11 @@ else if(isGET('user') && isAdmin() && $_GET['user'] !== md5('admin') && isValidE
 				saveEntry('user', $user, $userEntry);
 			}
 		}
-		$out['content'] .= '<p><a href = "index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action = "delete.php?user=' .$_GET['user']. '" method = "post">
+		$out['content'] .= '<form action="delete.php?user=' .$_GET['user']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}

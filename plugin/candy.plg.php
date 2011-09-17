@@ -2,7 +2,7 @@
 
 function candy_head()
 {
-	return '<script src = "js/candy.js"></script>';
+	return '<script src="js/candy.js"></script>';
 }
 
 ?>

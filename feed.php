@@ -23,8 +23,8 @@ if(isGET('topic'))
 			<id>' .$out['url']. 'view.php?topic=' .$topic. '</id>
 			<title>' .$topicEntry['author']. '@' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($topic, 'c'). '</updated>
-			<link href = "' .$out['url']. 'view.php?topic=' .$topic. '"/>
-			<summary type = "html">' .clean(summary($topicEntry['content'])). '</summary>
+			<link href="' .$out['url']. 'view.php?topic=' .$topic. '"/>
+			<summary type="html">' .clean(summary($topicEntry['content'])). '</summary>
 			</entry>';
 		}
 	}
@@ -46,8 +46,8 @@ else if(isGET('reply'))
 			<id>' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '</id>
 			<title>' .$replyEntry['author']. '@' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($reply, 'c'). '</updated>
-			<link href = "' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '"/>
-			<summary type = "html">' .clean(summary($replyEntry['content'])). '</summary>
+			<link href="' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '"/>
+			<summary type="html">' .clean(summary($replyEntry['content'])). '</summary>
 			</entry>';
 		}
 	}

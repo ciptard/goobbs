@@ -21,27 +21,27 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$user = md5($topicEntry['author']);
 	$out['subtitle'] = $topicEntry['title'];
 	$out['content'] .= '<table>
-	<tr class = "entryHeader"><td colspan = "2"><h1><a href = "view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
+	<tr class="entryHeader"><td colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
 	<tr><td><p>' .content($topicEntry['content']). '</p>'.
-	(!$topicEntry['locked'] && isUser()? '<p><a class = "important" href = "add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+	(!$topicEntry['locked'] && isUser()? '<p><a class="important" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']).
-	'<p class = "entryFooter">' .manageTopic($_GET['topic'], $topicEntry['author']).entryDate($_GET['topic']). '</p></td>
-	<td class = "w2"><p>' .manageUser($user). '<a href = "view.php?user=' .$user. '">' .$topicEntry['author']. '</a></p>
+	'<p class="entryFooter">' .manageTopic($_GET['topic'], $topicEntry['author']).entryDate($_GET['topic']). '</p></td>
+	<td class="w2"><p>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$topicEntry['author']. '</a></p>
 	<p>' .avatar($user). '</p></td></tr>
 	</table>';
 
 	if($topicEntry['reply'])
 	{
 		$out['content'] .= '<table>
-		<tr class = "entryHeader"><td colspan = "2">' .$lang['reply']. '</td></tr>';
+		<tr class="entryHeader"><td colspan="2">' .$lang['reply']. '</td></tr>';
 		foreach($topicEntry['reply'] as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$user = md5($replyEntry['author']);
-			$out['content'] .= '<tr id = "' .$reply. '"><td><p>' .content($replyEntry['content']). '</p>'.
+			$out['content'] .= '<tr id="' .$reply. '"><td><p>' .content($replyEntry['content']). '</p>'.
 			hook('afterReply', $reply).
-			'<p class = "entryFooter">' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</p></td>
-			<td class = "w2"><p>' .manageUser($user). '<a href = "view.php?user=' .$user. '">' .$replyEntry['author']. '</a></p>
+			'<p class="entryFooter">' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</p></td>
+			<td class="w2"><p>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$replyEntry['author']. '</a></p>
 			<p>' .avatar($user). '</p></td></tr>';
 		}
 		$out['content'] .= '</table>';
@@ -51,16 +51,16 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	shuffle($topics);
 	$topics = array_chunk($topics, 4);
 	$out['content'] .= '<table>
-	<tr class = "entryHeader"><td>' .$lang['more'].$lang['topic']. '</td>
-	<td class = "w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-	<td class = "w2">' .$lang['forum']. '</td></tr>';
+	<tr class="entryHeader"><td>' .$lang['more'].$lang['topic']. '</td>
+	<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
+	<td class="w2">' .$lang['forum']. '</td></tr>';
 	foreach($topics[0] as $topic)
 	{
 		$topicEntry = readEntry('topic', $topic);
 		$forumEntry = readEntry('forum', $topicEntry['forum']);
-		$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+		$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href="view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 		<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
-		<td><a href = "view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a></td></tr>';
+		<td><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a></td></tr>';
 	}
 	$out['content'] .= '</table>';
 }
@@ -69,9 +69,9 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $forumEntry['name'];
 	$out['content'] .= '<table>
-	<tr class = "entryHeader"><td><h1>' .manageForum($_GET['forum']).$out['subtitle']. '</h1></td></tr>
+	<tr class="entryHeader"><td><h1>' .manageForum($_GET['forum']).$out['subtitle']. '</h1></td></tr>
 	<tr><td><p>' .$forumEntry['info']. '</p>'.
-	(isUser()? '<p><a class = "important" href = "add.php?topic=' .$_GET['forum']. '">' .$lang['add'].$lang['topic']. '</a></p>' : '').
+	(isUser()? '<p><a class="important" href="add.php?topic=' .$_GET['forum']. '">' .$lang['add'].$lang['topic']. '</a></p>' : '').
 	hook('afterForum', $_GET['forum']).
 	'</td></tr>
 	</table>';
@@ -84,22 +84,22 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	if($page)
 	{
 		$out['content'] .= '<table>
-		<tr class = "entryHeader"><td>' .$lang['topic']. '</td>
-		<td class = "w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class = "w2">' .$lang['date']. '</td></tr>';
+		<tr class="entryHeader"><td>' .$lang['topic']. '</td>
+		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
+		<td class="w2">' .$lang['date']. '</td></tr>';
 		foreach($page[$i] as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
-			$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']).(isset($forumEntry['pinnedTopic'][$topic])? '[' .$lang['pinned']. ']':'').($topicEntry['locked']? '[' .$lang['locked']. ']':''). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+			$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']).(isset($forumEntry['pinnedTopic'][$topic])? '[' .$lang['pinned']. ']':'').($topicEntry['locked']? '[' .$lang['locked']. ']':''). '<a href="view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .entryDate($topic). '</td></tr>';
 		}
 		$out['content'] .= '</table>';
 	}
-	$out['content'] .= '<div id = "page"><ul>' .
-	(isset($page[$i-1])? '<li><a href = "view.php?forum=' .$_GET['forum']. '&p=' .($_GET['p']-1). '">← ' .$lang['prev']. '</a></li>' : '').
+	$out['content'] .= '<div id="page"><ul>' .
+	(isset($page[$i-1])? '<li><a href="view.php?forum=' .$_GET['forum']. '&p=' .($_GET['p']-1). '">← ' .$lang['prev']. '</a></li>' : '').
 	'<li>' .$lang['page']. ' : ' .$_GET['p']. ' / ' .count($page). '</li>' .
-	(isset($page[$i+1])? '<li><a href = "view.php?forum=' .$_GET['forum']. '&p=' .($_GET['p']+1). '">' .$lang['next']. ' →</a></li>' : '').
+	(isset($page[$i+1])? '<li><a href="view.php?forum=' .$_GET['forum']. '&p=' .($_GET['p']+1). '">' .$lang['next']. ' →</a></li>' : '').
 	'</ul></div>';
 }
 else if(isGET('user') && isValidEntry('user', $_GET['user']))
@@ -107,8 +107,8 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 	$userEntry = readEntry('user', $_GET['user']);
 	$out['subtitle'] = $userEntry['name'];
 	$out['content'] .= '<table>
-	<tr class = "entryHeader"><td colspan = "2"><h1>' .manageUser($_GET['user']).$out['subtitle']. '</h1></td></tr>
-	<tr><td rowspan = "2" class = "w1">' .avatar($_GET['user']). '</td>
+	<tr class="entryHeader"><td colspan="2"><h1>' .manageUser($_GET['user']).$out['subtitle']. '</h1></td></tr>
+	<tr><td rowspan="2" class="w1">' .avatar($_GET['user']). '</td>
 	<td>' .$lang['role']. ' : ' .$lang[$userEntry['role']]. '</td></tr>
 	<tr><td>' .$lang['count']. ' : ' .(count($userEntry['topic']) + count($userEntry['reply'])). '</td></tr>
 	</table>';
@@ -116,13 +116,13 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 	if($topics)
 	{
 		$out['content'] .= '<table>
-		<tr class = "entryHeader"><td>' .$lang['new'].$lang['topic']. '</td>
-		<td class = "w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class = "w2">' .$lang['date']. '</td></tr>';
+		<tr class="entryHeader"><td>' .$lang['new'].$lang['topic']. '</td>
+		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
+		<td class="w2">' .$lang['date']. '</td></tr>';
 		foreach($topics[0] as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
-			$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+			$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .entryDate($topic). '</td></tr>';
 		}
@@ -132,14 +132,14 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 	if($replies)
 	{
 		$out['content'] .= '<table>
-		<tr class = "entryHeader"><td>' .$lang['new'].$lang['reply']. '</td>
-		<td class = "w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class = "w2">' .$lang['date']. '</td></tr>';
+		<tr class="entryHeader"><td>' .$lang['new'].$lang['reply']. '</td>
+		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
+		<td class="w2">' .$lang['date']. '</td></tr>';
 		foreach($replies[0] as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$topicEntry = readEntry('topic', $replyEntry['topic']);
-			$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href = "view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
+			$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href="view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
 			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .entryDate($reply). '</td></tr>';
 		}

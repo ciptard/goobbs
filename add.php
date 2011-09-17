@@ -28,17 +28,17 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 		$userEntry['topic'][$topic] = $topic;
 		saveEntry('user', $user, $userEntry);
 
-		$out['content'] .= '<p><a href = "view.php?topic=' .$topic. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php?topic=' .$topic. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
 		require 'include/parser.inc.php';
-		$out['content'] .= '<form action = "add.php?topic=' .$_GET['topic']. '" method = "post">
+		$out['content'] .= '<form action="add.php?topic=' .$_GET['topic']. '" method="post">
 		<p>' .text('title'). '</p>
 		<p>' .textarea(). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
-		(check('content', 1, 2000)? '<div class = "block">' .content(clean($_POST['content'])). '</div>' : '');
+		(check('content', 1, 2000)? '<div class="block">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
 else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
@@ -66,16 +66,16 @@ else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 		$userEntry['reply'][$reply] = $reply;
 		saveEntry('user', $user, $userEntry);
 
-		$out['content'] .= '<p><a href = "view.php?topic=' .$_GET['reply']. '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php?topic=' .$_GET['reply']. '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
 		require 'include/parser.inc.php';
-		$out['content'] .= '<form action = "add.php?reply=' .$_GET['reply']. '" method = "post">
+		$out['content'] .= '<form action="add.php?reply=' .$_GET['reply']. '" method="post">
 		<p>' .textarea(). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
-		(check('content', 1, 2000)? '<div class = "block">' .content(clean($_POST['content'])). '</div>' : '');
+		(check('content', 1, 2000)? '<div class="block">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
 else if(isGET('forum') && isAdmin())
@@ -90,11 +90,11 @@ else if(isGET('forum') && isAdmin())
 		$forumEntry['topic'] = array();
 		$forumEntry['pinnedTopic'] = array();
 		saveEntry('forum', newEntry(), $forumEntry);
-		$out['content'] .= '<p><a href = "index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action = "add.php?forum" method = "post">
+		$out['content'] .= '<form action="add.php?forum" method="post">
 		<p>' .text('name'). '</p>
 		<p>' .text('info'). '</p>
 		<p>' .submit(). '</p>
@@ -115,11 +115,11 @@ else if(isGET('user'))
 		saveEntry('user', md5($userEntry['name']), $userEntry);
 		$_SESSION['name'] = $userEntry['name'];
 		$_SESSION['role'] = $userEntry['role'];
-		$out['content'] .= '<p><a href = "index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action = "add.php?user" method = "post">
+		$out['content'] .= '<form action="add.php?user" method="post">
 		<p>' .text('name'). '</p>
 		<p>' .password(). '</p>
 		<p>' .submit(). '</p>

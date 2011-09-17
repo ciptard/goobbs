@@ -18,16 +18,16 @@ function bbcode($text)
 	$replace[] = '<del>$1</del>';
 
 	$pattern[] = '%\[img\]([^\[\]]+)\[/img\]%';
-	$replace[] = '<img src = "$1" alt = ""/>';
+	$replace[] = '<img src="$1" alt=""/>';
 
 	$pattern[] = '%\[url=([^\[\]]+)\]([^\[\]]+)\[/url\]%';
-	$replace[] = '<a href = "$1">$2</a>';
+	$replace[] = '<a href="$1">$2</a>';
 
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
-	$replace[] = '<iframe width = "600" height = "375" src = "http://www.youtube.com/embed/$1?rel=0" frameborder = "0"></iframe>';
+	$replace[] = '<iframe width="600" height="375" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
 	
 	$pattern[] = '%\[block\]([^\[\]]+)\[/block\]%';
-	$replace[] = '<div class = "block">$1</div>';
+	$replace[] = '<div class="block">$1</div>';
 	//the variable for the replace
 	return preg_replace($pattern, $replace, $text);
 }

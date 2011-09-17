@@ -15,7 +15,7 @@ if(isAdmin())
 		$config['theme'] = $_POST['theme'];
 		$config['lang'] = $_POST['lang'];
 		saveEntry('config', 'config', $config);
-		$out['content'] .= '<p><a href = "index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
@@ -31,7 +31,7 @@ if(isAdmin())
 			$value = pathToEntry($language);
 			$langOptions[$value] = $value;
 		}
-		$out['content'] .= '<form action = "config.php" method = "post">
+		$out['content'] .= '<form action="config.php" method="post">
 		<p>' .text('title', $config['title']). '</p>
 		<p>' .select('theme', $themeOptions, $config['theme']). ' ' .select('lang', $langOptions, $config['lang']). '</p>
 		<p>' .submit(). '</p>

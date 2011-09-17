@@ -25,7 +25,7 @@ if(checkBot() && check('topic'))
 	{
 		foreach($foundTopics as $topic => $topicEntry)
 		{
-			$out['content'] .= '<li>' .manageTopic($topic, $topicEntry['author']). '<a href = "view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href = "view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></li>';
+			$out['content'] .= '<li>' .manageTopic($topic, $topicEntry['author']). '<a href="view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></li>';
 		}
 	}
 	else
@@ -35,7 +35,7 @@ if(checkBot() && check('topic'))
 	$out['content'] .= '</ul>';
 }
 
-$out['content'] .= '<form action = "search.php" method = "post">
+$out['content'] .= '<form action="search.php" method="post">
 <p>' .text('topic'). '</p>
 <p>' .submit(). '</p>
 </form>';

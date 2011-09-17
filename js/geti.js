@@ -5,9 +5,9 @@ $(document).ready(function(){
 	var text = '';
 	for(var i in tags)
 	{
-		text += '<input type = "button" value = "' +tags[i]+ '"/>';
+		text += '<input type="button" value="' +tags[i]+ '"/>';
 	}
-	$(ta).before('<div id = "bbcode">'+text+'</div>');
+	$(ta).before('<div id="bbcode">'+text+'</div>');
 	
 	//eyecandy
 	$('#bbcode input').css('margin', 5);
