@@ -30,6 +30,7 @@ img {
 }
 .block {
 	color: #666;
+	border: 1px dotted #666;
 	background-color: #EEE;
 }
 #menu {

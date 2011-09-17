@@ -52,6 +52,8 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	}
 	else
 	{
+		require 'include/parser.inc.php';
+		
 		$options['yes'] = $lang['yes'];
 		$options['no'] = $lang['no'];
 
@@ -67,7 +69,8 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		<p>' .textarea($topicEntry['content']). '</p>'.
 		(isModerator()? '<p>' .select('locked', $options, $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
 		'<p>' .submit(). '</p>
-		</form>';
+		</form>'.
+		(check('content', 1, 2000)? '<div class = "block">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
 else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
@@ -88,10 +91,12 @@ else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
 	}
 	else
 	{
+		require 'include/parser.inc.php';
 		$out['content'] .= '<form action = "edit.php?reply=' .$_GET['reply']. '" method = "post">
 		<p>' .textarea($replyEntry['content']). '</p>
 		<p>' .submit(). '</p>
-		</form>';
+		</form>'.
+		(check('content', 1, 2000)? '<div class = "block">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
 else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))

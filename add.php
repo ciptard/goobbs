@@ -32,11 +32,13 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 	}
 	else
 	{
+		require 'include/parser.inc.php';
 		$out['content'] .= '<form action = "add.php?topic=' .$_GET['topic']. '" method = "post">
 		<p>' .text('title'). '</p>
 		<p>' .textarea(). '</p>
 		<p>' .submit(). '</p>
-		</form>';
+		</form>'.
+		(check('content', 1, 2000)? '<div class = "block">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
 else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
@@ -68,10 +70,12 @@ else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 	}
 	else
 	{
+		require 'include/parser.inc.php';
 		$out['content'] .= '<form action = "add.php?reply=' .$_GET['reply']. '" method = "post">
 		<p>' .textarea(). '</p>
 		<p>' .submit(). '</p>
-		</form>';
+		</form>'.
+		(check('content', 1, 2000)? '<div class = "block">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
 else if(isGET('forum') && isAdmin())

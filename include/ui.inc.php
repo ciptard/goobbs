@@ -74,10 +74,8 @@ function checkBot()
 	if(!isPOST('captcha'))
 		return false;
 	if(isset($_SESSION['captcha']) && $_POST['captcha'] === $_SESSION['captcha'])
-	{
-		unset($_SESSION['captcha']);
 		return true;
-	}
+	unset($_SESSION['captcha']);
 	message($lang['errorBot']);
 	return false;
 }
