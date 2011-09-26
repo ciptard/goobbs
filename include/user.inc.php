@@ -22,7 +22,7 @@ function isUser()
 
 function avatar($user)
 {
-	return '<img src="http://robohash.org/' .$user. '.jpg?size=80x80&bgset=bg1" alt=""/>';
+	return '<img src="http://robohash.org/' .$user. '.jpg?size=80x80&bgset=bg2" alt=""/>';
 }
 
 function login($name, $password)
