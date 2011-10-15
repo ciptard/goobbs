@@ -28,12 +28,12 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	hook('afterTopic', $_GET['topic']).'</td></tr>';
 	if($topicEntry['reply'])
 	{
-		$out['content'] .= '<tr id="' .$reply. '" class="entryHeader"><td>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$replyEntry['author']. '</a>@' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</td></tr>';
 		foreach($topicEntry['reply'] as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$user = md5($replyEntry['author']);
-			$out['content'] .= '<tr><td><p>' .content($replyEntry['content']). '</p>'.
+			$out['content'] .= '<tr id="' .$reply. '" class="entryHeader"><td>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$replyEntry['author']. '</a>@' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</td></tr>
+			<tr><td><p>' .content($replyEntry['content']). '</p>'.
 			hook('afterReply', $reply). '</td></tr>';
 		}	
 	}
