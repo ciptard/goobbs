@@ -20,11 +20,6 @@ function isUser()
 	return $_SESSION['role'] === 'user' || $_SESSION['role'] === 'moderator' || $_SESSION['role'] === 'admin';
 }
 
-function avatar($user)
-{
-	return '<img src="http://robohash.org/' .$user. '.jpg?size=80x80&bgset=bg2" alt=""/>';
-}
-
 function login($name, $password)
 {
 	$user = md5(clean($name));

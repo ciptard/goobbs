@@ -21,32 +21,24 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$user = md5($topicEntry['author']);
 	$out['subtitle'] = $topicEntry['title'];
 	$out['content'] .= '<table>
-	<tr class="entryHeader"><td colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
+	<tr class="entryHeader"><td><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
+	<tr class="entryHeader"><td>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$topicEntry['author']. '</a>@' .manageTopic($_GET['topic'], $topicEntry['author']).entryDate($_GET['topic']). '</td></tr>
 	<tr><td><p>' .content($topicEntry['content']). '</p>'.
 	(!$topicEntry['locked'] && isUser()? '<p><a class="important" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
-	hook('afterTopic', $_GET['topic']).
-	'<p class="entryFooter">' .manageTopic($_GET['topic'], $topicEntry['author']).entryDate($_GET['topic']). '</p></td>
-	<td class="w2"><p>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$topicEntry['author']. '</a></p>
-	<p>' .avatar($user). '</p></td></tr>
-	</table>';
-
+	hook('afterTopic', $_GET['topic']).'</td></tr>';
 	if($topicEntry['reply'])
 	{
-		$out['content'] .= '<table>
-		<tr class="entryHeader"><td colspan="2">' .$lang['reply']. '</td></tr>';
+		$out['content'] .= '<tr id="' .$reply. '" class="entryHeader"><td>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$replyEntry['author']. '</a>@' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</td></tr>';
 		foreach($topicEntry['reply'] as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$user = md5($replyEntry['author']);
-			$out['content'] .= '<tr id="' .$reply. '"><td><p>' .content($replyEntry['content']). '</p>'.
-			hook('afterReply', $reply).
-			'<p class="entryFooter">' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</p></td>
-			<td class="w2"><p>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$replyEntry['author']. '</a></p>
-			<p>' .avatar($user). '</p></td></tr>';
-		}
-		$out['content'] .= '</table>';
+			$out['content'] .= '<tr><td><p>' .content($replyEntry['content']). '</p>'.
+			hook('afterReply', $reply). '</td></tr>';
+		}	
 	}
-
+	$out['content'] .= '</table>';
+	
 	$topics = listEntry('topic');
 	shuffle($topics);
 	$topics = array_chunk($topics, 4);
@@ -107,9 +99,8 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 	$userEntry = readEntry('user', $_GET['user']);
 	$out['subtitle'] = $userEntry['name'];
 	$out['content'] .= '<table>
-	<tr class="entryHeader"><td colspan="2"><h1>' .manageUser($_GET['user']).$out['subtitle']. '</h1></td></tr>
-	<tr><td rowspan="2" class="w1">' .avatar($_GET['user']). '</td>
-	<td>' .$lang['role']. ' : ' .$lang[$userEntry['role']]. '</td></tr>
+	<tr class="entryHeader"><td><h1>' .manageUser($_GET['user']).$out['subtitle']. '</h1></td></tr>
+	<tr><td>' .$lang['role']. ' : ' .$lang[$userEntry['role']]. '</td></tr>
 	<tr><td>' .$lang['count']. ' : ' .(count($userEntry['topic']) + count($userEntry['reply'])). '</td></tr>
 	</table>';
 	$topics = array_chunk(array_reverse($userEntry['topic']), 4);
