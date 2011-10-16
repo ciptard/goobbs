@@ -105,7 +105,7 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 	<tr><td>' .$lang['count']. ' : ' .count($mixed). '</td></tr>
 	</table>';
 	rsort($mixed);
-	$mixed = array_chunk($mixed, 8);
+	$mixed = array_chunk($mixed, 4);
 	if($mixed)
 	{
 		$out['content'] .= '<table>
