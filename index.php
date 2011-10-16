@@ -9,46 +9,38 @@ if(isGET('new'))
 	$out['subtitle'] = $lang['new'].$lang['topic']. ' / ' .$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 
-	$topics = listEntry('topic');
-	rsort($topics);
-	$topics = array_chunk($topics, 4);
-	if($topics)
+	$mixed = array_merge(listEntry('topic'), listEntry('reply'));
+	rsort($mixed);
+	$mixed = array_chunk($mixed, 8);
+	if($mixed)
 	{
 		$out['content'] .= '<table>
-		<tr class="entryHeader"><td>' .$lang['new'].$lang['topic']. '</td>
+		<tr class="entryHeader"><td>' .$out['subtitle']. '</td>
 		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
-		foreach($topics[0] as $topic)
+		foreach($mixed[0] as $mixed)
 		{
-			$topicEntry = readEntry('topic', $topic);
-			$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href="view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
-			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
-			<td>' .entryDate($topic). '</td></tr>';
+			if(isValidEntry('topic', $mixed))
+			{
+				$topic = $mixed;
+				$topicEntry = readEntry('topic', $topic);
+				$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href="view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+				<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
+				<td>' .entryDate($topic). '</td></tr>';
+			}
+			else
+			{
+				$reply = $mixed;
+				$replyEntry = readEntry('reply', $reply);
+				$topicEntry = readEntry('topic', $replyEntry['topic']);
+				$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href="view.php?user=' .md5($replyEntry['author']). '">' .$replyEntry['author']. '</a>@<a href="view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
+				<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
+				<td>' .entryDate($reply). '</td></tr>';
+			}
 		}
 		$out['content'] .= '</table>';
 	}
-
-	$replies = listEntry('reply');
-	rsort($replies);
-	$replies = array_chunk($replies, 4);
-	if($replies)
-	{
-		$out['content'] .= '<table>
-		<tr class="entryHeader"><td>' .$lang['new'].$lang['reply']. '</td>
-		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class="w2">' .$lang['date']. '</td></tr>';
-		foreach($replies[0] as $reply)
-		{
-			$replyEntry = readEntry('reply', $reply);
-			$topicEntry = readEntry('topic', $replyEntry['topic']);
-			$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href="view.php?user=' .md5($replyEntry['author']). '">' .$replyEntry['author']. '</a>@<a href="view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
-			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
-			<td>' .entryDate($reply). '</td></tr>';
-		}
-		$out['content'] .= '</table>';
-	}
-
-	if(!$topics && !$replies)
+	else
 	{
 		$out['content'] .= '<p>' .$lang['none']. '</p>';
 	}
