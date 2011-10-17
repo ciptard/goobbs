@@ -13,10 +13,10 @@ if(isGET('topic'))
 	$out['type'] = 'topic';
 	$topics = listEntry('topic');
 	rsort($topics);
-	$page = array_chunk($topics, 4);
-	if($page)
+	$topics = array_slice($topics, 0, 4);
+	if($topics)
 	{
-		foreach($page[0] as $topic)
+		foreach($topics as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
 			$out['content'] .= '<entry>
@@ -35,10 +35,10 @@ else if(isGET('reply'))
 	$out['type'] = 'reply';
 	$replies = listEntry('reply');
 	rsort($replies);
-	$page = array_chunk($replies, 4);
-	if($page)
+	$replies = array_slice($replies, 0, 4);
+	if($replies)
 	{
-		foreach($page[0] as $reply)
+		foreach($replies as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$topicEntry = readEntry('topic', $replyEntry['topic']);
