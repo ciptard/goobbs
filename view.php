@@ -109,7 +109,7 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 	if($mixed)
 	{
 		$out['content'] .= '<table>
-		<tr class="entryHeader"><td>' .$lang['new'].$lang['topic']. ' / ' .$lang['reply']. '</td>
+		<tr class="entryHeader"><td>' .$lang['topic']. '</td>
 		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
 		foreach($mixed as $entry => $type)
