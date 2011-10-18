@@ -70,7 +70,7 @@ else if(isGET('forum'))
 		$out['content'] .= '<p>' .$lang['none']. '</p>';
 	}
 }
-else if(isGET('user'))
+else if(isGET('user') && isModerator())
 {
 	$out['subtitle'] = $lang['user'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
