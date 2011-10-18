@@ -10,7 +10,7 @@ if($template === 'main')
 	$forums = listEntry('forum');
 	$out['content'] .= '<div id="jump"><ul>
 	<li>' .$lang['user']. ' : ' .count(listEntry('user')). '</li>
-	<li>' .$lang['count']. ' : ' .(count(listEntry('topic')) + count(listEntry('reply'))). '</li>';
+	<li>' .$lang['count']. ' : ' .count(listEntry('topic') + listEntry('reply')). '</li>';
 	foreach($forums as $forum)
 	{
 		$forumEntry = readEntry('forum', $forum);
