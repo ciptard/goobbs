@@ -86,7 +86,6 @@ else if(isGET('forum') && isAdmin())
 	{
 		$forumEntry['name'] = clean($_POST['name']);
 		$forumEntry['info'] = clean($_POST['info']);
-		$forumEntry['view'] = 0;
 		$forumEntry['topic'] = array();
 		$forumEntry['pinnedTopic'] = array();
 		saveEntry('forum', newEntry(), $forumEntry);

@@ -14,10 +14,6 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$topicEntry['view'] ++;
 	saveEntry('topic', $_GET['topic'], $topicEntry);
 
-	//forum view++
-	$forumEntry['view'] ++;
-	saveEntry('forum', $topicEntry['forum'], $forumEntry);
-
 	$user = md5($topicEntry['author']);
 	$out['subtitle'] = $topicEntry['title'];
 	$out['content'] .= '<table>
@@ -97,26 +93,26 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 else if(isGET('user') && isValidEntry('user', $_GET['user']))
 {
 	$userEntry = readEntry('user', $_GET['user']);
-	$mixed = array_merge(array_fill_keys($userEntry['topic'], 'topic'), array_fill_keys($userEntry['reply'], 'reply'));
+	$mixes = array_merge(array_fill_keys($userEntry['topic'], 'topic'), array_fill_keys($userEntry['reply'], 'reply'));
 	$out['subtitle'] = $userEntry['name'];
 	$out['content'] .= '<table>
 	<tr class="entryHeader"><td><h1>' .manageUser($_GET['user']).$out['subtitle']. '</h1></td></tr>
 	<tr><td>' .$lang['role']. ' : ' .$lang[$userEntry['role']]. '</td></tr>
-	<tr><td>' .$lang['count']. ' : ' .count($mixed). '</td></tr>
+	<tr><td>' .$lang['count']. ' : ' .count($mixes). '</td></tr>
 	</table>';
-	krsort($mixed);
-	$mixed = array_slice($mixed, 0, 4);
-	if($mixed)
+	krsort($mixes);
+	$mixes = array_slice($mixes, 0, 4);
+	if($mixes)
 	{
 		$out['content'] .= '<table>
 		<tr class="entryHeader"><td>' .$lang['topic']. '</td>
 		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
-		foreach($mixed as $entry => $type)
+		foreach($mixes as $mix => $type)
 		{
 			if($type === 'topic')
 			{
-				$topic = $entry;
+				$topic = $mix;
 				$topicEntry = readEntry('topic', $topic);
 				$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 				<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
@@ -124,7 +120,7 @@ else if(isGET('user') && isValidEntry('user', $_GET['user']))
 			}
 			else
 			{
-				$reply = $entry;
+				$reply = $mix;
 				$replyEntry = readEntry('reply', $reply);
 				$topicEntry = readEntry('topic', $replyEntry['topic']);
 				$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href="view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
