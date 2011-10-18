@@ -9,9 +9,7 @@ if(isUser())
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 
 	if(checkBot() && check('topic'))
-	{
-		require 'include/manage.inc.php';
-		
+	{	
 		$_POST['topic'] = clean($_POST['topic']);
 		$topics = listEntry('topic');
 		foreach($topics as $topic)
@@ -26,6 +24,8 @@ if(isUser())
 		$out['content'] .= '<ul>';
 		if($foundTopics)
 		{
+			require 'include/manage.inc.php';
+			
 			foreach($foundTopics as $topic => $topicEntry)
 			{
 				$out['content'] .= '<li>' .manageTopic($topic, $topicEntry['author']). '<a href="view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></li>';
