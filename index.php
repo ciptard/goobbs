@@ -9,7 +9,7 @@ if(isGET('new'))
 	$out['subtitle'] = $lang['new'].$lang['topic']. ' / ' .$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 
-	$mixes = array_fill_keys(listEntry('topic'), 'topic') + array_fill_keys(listEntry('reply'), 'reply');
+	$mixes = array_merge(array_fill_keys(listEntry('topic'), 'topic'), array_fill_keys(listEntry('reply'), 'reply'));
 	krsort($mixes);
 	$mixes = array_slice($mixes, 0, 8);
 	if($mixes)

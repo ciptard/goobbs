@@ -11,7 +11,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$forumEntry = readEntry('forum', $topicEntry['forum']);
 
 	//topic view++
-	$topicEntry['view'] ++;
+	$topicEntry['view']++;
 	saveEntry('topic', $_GET['topic'], $topicEntry);
 
 	$user = md5($topicEntry['author']);
@@ -63,7 +63,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	hook('afterForum', $_GET['forum']).
 	'</td></tr>
 	</table>';
-	$page = array_chunk($forumEntry['pinnedTopic'] + array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic'])), 8);
+	$page = array_chunk(array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic']))), 8);
 	if(!isGET('p') || !isset($page[$_GET['p']-1]))
 	{
 		$_GET['p'] = 1;
@@ -93,7 +93,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 else if(isGET('user') && isValidEntry('user', $_GET['user']))
 {
 	$userEntry = readEntry('user', $_GET['user']);
-	$mixes = array_fill_keys($userEntry['topic'], 'topic') + array_fill_keys($userEntry['reply'], 'reply');
+	$mixes = array_merge(array_fill_keys($userEntry['topic'], 'topic'), array_fill_keys($userEntry['reply'], 'reply'));
 	$out['subtitle'] = $userEntry['name'];
 	$out['content'] .= '<table>
 	<tr class="entryHeader"><td><h1>' .manageUser($_GET['user']).$out['subtitle']. '</h1></td></tr>
