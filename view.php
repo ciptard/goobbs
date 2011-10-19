@@ -17,9 +17,10 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$user = md5($topicEntry['author']);
 	$out['subtitle'] = $topicEntry['title'];
 	$out['content'] .= '<table>
-	<tr class="entryHeader"><td><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
-	<tr class="entryHeader"><td>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$topicEntry['author']. '</a>@' .manageTopic($_GET['topic'], $topicEntry['author']).entryDate($_GET['topic']). '</td></tr>
-	<tr><td><p>' .content($topicEntry['content']). '</p>'.
+	<tr class="entryHeader"><td colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
+	<tr><td class="w2"><p>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$topicEntry['author']. '</a></p>
+	<p>' .manageTopic($_GET['topic'], $topicEntry['author']).entryDate($_GET['topic']). '</p></td>
+	<td><p>' .content($topicEntry['content']). '</p>'.
 	(!$topicEntry['locked'] && isUser()? '<p><a class="important" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']).'</td></tr>';
 	if($topicEntry['reply'])
@@ -28,8 +29,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$user = md5($replyEntry['author']);
-			$out['content'] .= '<tr id="' .$reply. '" class="entryHeader"><td>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$replyEntry['author']. '</a>@' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</td></tr>
-			<tr><td><p>' .content($replyEntry['content']). '</p>'.
+			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p>' .manageUser($user). '<a href="view.php?user=' .$user. '">' .$replyEntry['author']. '</a></p>
+			<p>' .manageReply($reply, $replyEntry['author']).entryDate($reply). '</p></td>
+			<td><p>' .content($replyEntry['content']). '</p>'.
 			hook('afterReply', $reply). '</td></tr>';
 		}	
 	}
