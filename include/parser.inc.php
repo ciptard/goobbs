@@ -24,7 +24,7 @@ function bbcode($text)
 	$replace[] = '<a href="$1">$2</a>';
 
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
-	$replace[] = '<iframe width="480" height="300" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
+	$replace[] = '<iframe width="320" height="240" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
 
 	$pattern[] = '%\[block\]([^\[\]]+)\[/block\]%';
 	$replace[] = '<div class="block">$1</div>';

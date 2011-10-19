@@ -27,7 +27,8 @@ input[type="text"], input[type="password"] {
 	width: 50%;
 }
 img {
-	max-width: 480px;
+	max-width: 320px;
+	max-height: 320px;
 }
 .block {
 	color: #666;
