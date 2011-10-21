@@ -23,7 +23,6 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 
 		foreach($topicEntry['reply'] as $reply)
 		{
-			$replyEntry = readEntry('reply', $reply);
 			deleteEntry('reply', $reply);
 		}
 		$out['content'] .= '<p><a href="view.php?forum=' .$topicEntry['forum']. '">← ' .$lang['redirect']. ' : ' .$forumEntry['name']. '</a></p>';
@@ -76,7 +75,6 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 
 			foreach($topicEntry['reply'] as $reply)
 			{
-				$replyEntry = readEntry('reply', $reply);
 				deleteEntry('reply', $reply);
 			}
 		}
