@@ -3,9 +3,13 @@
 $template = 'main';
 require 'header.php';
 
-if(isGET('topic') && isModerator() && isValidEntry('topic', $_GET['topic']))
+if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
+	if(!isWorker() && !isAuthor($_GET['topic']))
+	{
+		exit;
+	}
 	$out['subtitle'] = $lang['delete'].$lang['topic']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
@@ -17,20 +21,10 @@ if(isGET('topic') && isModerator() && isValidEntry('topic', $_GET['topic']))
 		unset($forumEntry['pinnedTopic'][$_GET['topic']]);
 		saveEntry('forum', $topicEntry['forum'], $forumEntry);
 
-		$user = md5($topicEntry['author']);
-		$userEntry = readEntry('user', $user);
-		unset($userEntry['topic'][$_GET['topic']]);
-		saveEntry('user', $user, $userEntry);
-
 		foreach($topicEntry['reply'] as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			deleteEntry('reply', $reply);
-
-			$user = md5($replyEntry['author']);
-			$userEntry = readEntry('user', $user);
-			unset($userEntry['reply'][$reply]);
-			saveEntry('user', $user, $userEntry);
 		}
 		$out['content'] .= '<p><a href="view.php?forum=' .$topicEntry['forum']. '">← ' .$lang['redirect']. ' : ' .$forumEntry['name']. '</a></p>';
 	}
@@ -41,9 +35,13 @@ if(isGET('topic') && isModerator() && isValidEntry('topic', $_GET['topic']))
 		</form>';
 	}
 }
-else if(isGET('reply') && isModerator() && isValidEntry('reply', $_GET['reply']))
+else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
+	if(!isWorker() && !isAuthor($_GET['reply']))
+	{
+		exit;
+	}
 	$out['subtitle'] = $lang['delete'].$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
@@ -53,11 +51,6 @@ else if(isGET('reply') && isModerator() && isValidEntry('reply', $_GET['reply'])
 		$topicEntry = readEntry('topic', $replyEntry['topic']);
 		unset($topicEntry['reply'][$_GET['reply']]);
 		saveEntry('topic', $replyEntry['topic'], $topicEntry);
-
-		$user = md5($replyEntry['author']);
-		$userEntry = readEntry('user', $user);
-		unset($userEntry['reply'][$_GET['reply']]);
-		saveEntry('user', $user, $userEntry);
 
 		$out['content'] .= '<p><a href="view.php?topic=' .$replyEntry['topic']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
@@ -81,20 +74,10 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 			$topicEntry = readEntry('topic', $topic);
 			deleteEntry('topic', $topic);
 
-			$user = md5($topicEntry['author']);
-			$userEntry = readEntry('user', $user);
-			unset($userEntry['topic'][$topic]);
-			saveEntry('user', $user, $userEntry);
-
 			foreach($topicEntry['reply'] as $reply)
 			{
 				$replyEntry = readEntry('reply', $reply);
 				deleteEntry('reply', $reply);
-
-				$user = md5($replyEntry['author']);
-				$userEntry = readEntry('user', $user);
-				unset($userEntry['reply'][$reply]);
-				saveEntry('user', $user, $userEntry);
 			}
 		}
 		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
@@ -106,50 +89,19 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 		</form>';
 	}
 }
-else if(isGET('user') && isAdmin() && $_GET['user'] !== md5('admin') && isValidEntry('user', $_GET['user']))
+else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]))
 {
-	$userEntry = readEntry('user', $_GET['user']);
-	$out['subtitle'] = $lang['delete'].$lang['user']. ' : ' .$userEntry['name'];
+	$out['subtitle'] = $lang['delete'].$lang['worker'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
 	{
-		deleteEntry('user', $_GET['user']);
-
-		foreach($userEntry['reply'] as $reply)
-		{
-			$replyEntry = readEntry('reply', $reply);
-			deleteEntry('reply', $reply);
-
-			$topicEntry = readEntry('topic', $replyEntry['topic']);
-			unset($topicEntry['reply'][$reply]);
-			saveEntry('topic', $replyEntry['topic'], $topicEntry);
-		}
-
-		foreach($userEntry['topic'] as $topic)
-		{
-			$topicEntry = readEntry('topic', $topic);
-			deleteEntry('topic', $topic);
-
-			$forumEntry = readEntry('forum', $topicEntry['forum']);
-			unset($forumEntry['topic'][$topic]);
-			unset($forumEntry['pinnedTopic'][$topic]);
-			saveEntry('forum', $topicEntry['forum'], $forumEntry);
-			foreach($topicEntry['reply'] as $reply)
-			{
-				$replyEntry = readEntry('reply', $reply);
-				deleteEntry('reply', $reply);
-
-				$user = md5($replyEntry['author']);
-				$userEntry = readEntry('user', $user);
-				unset($userEntry['reply'][$reply]);
-				saveEntry('user', $user, $userEntry);
-			}
-		}
+		unset($config['worker'][$_GET['worker']]);
+		saveEntry('config', 'config', $config);
 		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php?user=' .$_GET['user']. '" method="post">
+		$out['content'] .= '<form action="delete.php?worker" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}

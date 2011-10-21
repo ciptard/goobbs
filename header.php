@@ -14,9 +14,9 @@ if(!isValidEntry('config', 'config'))
 }
 
 session_start();
-if(!isset($_SESSION['name'], $_SESSION['role']))
+if(!isset($_SESSION['role']))
 {
-	$_SESSION['name'] = $_SESSION['role'] = '';
+	$_SESSION['role'] = '';
 }
 
 //load config

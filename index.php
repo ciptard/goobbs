@@ -24,7 +24,7 @@ if(isGET('new'))
 			{
 				$topic = $mix;
 				$topicEntry = readEntry('topic', $topic);
-				$out['content'] .= '<tr><td>' .manageTopic($topic, $topicEntry['author']). '<a href="view.php?user=' .md5($topicEntry['author']). '">' .$topicEntry['author']. '</a>@<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+				$out['content'] .= '<tr><td>' .manageTopic($topic). '<a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 				<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 				<td>' .entryDate($topic). '</td></tr>';
 			}
@@ -33,7 +33,7 @@ if(isGET('new'))
 				$reply = $mix;
 				$replyEntry = readEntry('reply', $reply);
 				$topicEntry = readEntry('topic', $replyEntry['topic']);
-				$out['content'] .= '<tr><td>' .manageReply($reply, $replyEntry['author']). '<a href="view.php?user=' .md5($replyEntry['author']). '">' .$replyEntry['author']. '</a>@<a href="view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
+				$out['content'] .= '<tr><td>' .manageReply($reply). '@<a href="view.php?topic=' .$replyEntry['topic']. '#' .$reply. '">' .$topicEntry['title']. '</a></td>
 				<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 				<td>' .entryDate($reply). '</td></tr>';
 			}
@@ -70,18 +70,23 @@ else if(isGET('forum'))
 		$out['content'] .= '<p>' .$lang['none']. '</p>';
 	}
 }
-else if(isGET('user') && isModerator())
+else if(isGET('worker') && isAdmin())
 {
-	$out['subtitle'] = $lang['user'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
-	<div id="user"><ul>';
-	$users = listEntry('user');
-	foreach($users as $user)
+	$out['subtitle'] = $lang['worker'];
+	$out['content'] .= '<h1><a class="important" href="add.php?worker">' .$lang['add']. '</a>' .$out['subtitle']. '</h1>';
+	if($config['worker'])
 	{
-		$userEntry = readEntry('user', $user);
-		$out['content'] .= '<li><a href="view.php?user=' .$user. '">' .$userEntry['name']. '</a></li>';
+		$out['content'] .= '<div id="user"><ul>';
+		foreach($config['worker'] as $key => $password)
+		{
+			$out['content'] .= '<li><a href="delete.php?worker=' .$key. '">' .$password. '</a></li>';
+		}
+		$out['content'] .= '</ul></div>';
 	}
-	$out['content'] .= '</ul></div>';
+	else
+	{
+		$out['content'] .= '<p>' .$lang['none']. '</p>';
+	}
 }
 else
 {

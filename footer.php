@@ -9,7 +9,6 @@ if($template === 'main')
 {
 	$forums = listEntry('forum');
 	$out['content'] .= '<div id="jump"><ul>
-	<li>' .$lang['user']. ' : ' .count(listEntry('user')). '</li>
 	<li>' .$lang['count']. ' : ' .count(array_merge(listEntry('topic'), listEntry('reply'))). '</li>';
 	foreach($forums as $forum)
 	{

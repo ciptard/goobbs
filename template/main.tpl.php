@@ -25,15 +25,13 @@ header('Content-Type: text/html; charset=UTF-8');
 		<div id="menu"><ul>
 			<li><a href="index.php?new"><?php echo $lang['new'].$lang['topic']. ' / ' .$lang['reply'];?></a></li>
 			<li><a href="index.php?forum"><?php echo $lang['forum'];?></a></li>
+			<li><a href="search.php"><?php echo $lang['search'];?></a></li>
 			<?php echo hook('menu').
-			(isModerator()? '<li><a href="index.php?user">' .$lang['user']. '</a></li>' : '').
-			(isAdmin()? '<li><a href="config.php">' .$lang['config']. '</a></li>' : '').
-			(isUser()?
-			'<li><a href="search.php">' .$lang['search']. '</a></li>
-			<li><a href="view.php?user=' .md5($_SESSION['name']). '">' .$lang['user']. ' : ' .$_SESSION['name']. '</a></li>
-			<li><a href="auth.php?logout">' .$lang['logout']. '</a></li>' :
-			'<li><a href="add.php?user">' .$lang['register']. '</a></li>
-			<li><a href="auth.php?login">' .$lang['login']. '</a></li>');?>
+			(isAdmin()? '<li><a href="config.php">' .$lang['config']. '</a></li>
+			<li><a href="index.php?worker">' .$lang['worker']. '</a></li>' : '').
+			(isWorker()?
+			'<li><a href="auth.php?logout">' .$lang['logout']. ' (' .$lang[$_SESSION['role']]. ')</a></li>' :
+			'<li><a href="auth.php?login">' .$lang['login']. '</a></li>');?>
 		</ul></div>
 		<div id="main"><?php echo $out['content'].hook('main');?></div>
 		<div id="footer"><ul>

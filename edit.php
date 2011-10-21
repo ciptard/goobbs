@@ -6,7 +6,7 @@ require 'header.php';
 if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
-	if(!isModerator() && !isAuthor($topicEntry['author']))
+	if(!isWorker() && !isAuthor($_GET['topic']))
 	{
 		exit;
 	}
@@ -16,7 +16,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
-		if(isModerator() &&
+		if(isWorker() &&
 			isPOST('locked') && ($_POST['locked'] === 'yes' || $_POST['locked'] === 'no') &&
 			isPOST('pinned') && ($_POST['pinned'] === 'yes' || $_POST['pinned'] === 'no') &&
 			isPOST('forum') && isValidEntry('forum', $_POST['forum']))
@@ -67,7 +67,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		$out['content'] .= '<form action="edit.php?topic=' .$_GET['topic']. '" method="post">
 		<p>' .text('title', $topicEntry['title']). '</p>
 		<p>' .textarea($topicEntry['content']). '</p>'.
-		(isModerator()? '<p>' .select('locked', $options, $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
+		(isWorker()? '<p>' .select('locked', $options, $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
 		'<p>' .submit(). '</p>
 		</form>'.
 		(check('content', 1, 2000)? '<div class="block">' .content(clean($_POST['content'])). '</div>' : '');
@@ -76,7 +76,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
-	if(!isModerator() && !isAuthor($replyEntry['author']))
+	if(!isWorker() && !isAuthor($_GET['reply']))
 	{
 		exit;
 	}
@@ -117,34 +117,6 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 		<p>' .text('name', $forumEntry['name']). '</p>
 		<p>' .text('info', $forumEntry['info']). '</p>
 		<p>' .submit(). '</p>
-		</form>';
-	}
-}
-else if(isGET('user') && (isAdmin() || $_GET['user'] === md5($_SESSION['name'])) && isValidEntry('user', $_GET['user']))
-{
-	$userEntry = readEntry('user', $_GET['user']);
-	$out['subtitle'] = $lang['edit'].$lang['user']. ' : ' .$userEntry['name'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('password'))
-	{
-		$userEntry['password'] = hide($_POST['password']);
-		if(isAdmin() && $userEntry['role'] !== 'admin' &&
-			isPOST('role') && ($_POST['role'] === 'user' || $_POST['role'] === 'moderator'))
-		{
-			$userEntry['role'] = $_POST['role'];
-		}
-		saveEntry('user', $_GET['user'], $userEntry);
-		$out['content'] .= '<p><a href="view.php?user=' .$_GET['user']. '">← ' .$lang['redirect']. ' : ' .$userEntry['name']. '</a></p>';
-	}
-	else
-	{
-		$roleOptions['user'] = $lang['user'];
-		$roleOptions['moderator'] = $lang['moderator'];
-
-		$out['content'] .= '<form action="edit.php?user=' .$_GET['user']. '" method="post">
-		<p>' .password(). '</p>'.
-		(isAdmin() && $userEntry['role'] !== 'admin'? '<p>' .select('role', $roleOptions, $userEntry['role']). '</p>' : '').
-		'<p>' .submit(). '</p>
 		</form>';
 	}
 }

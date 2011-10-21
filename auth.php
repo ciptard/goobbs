@@ -7,8 +7,8 @@ if(isGET('login'))
 {
 	$out['subtitle'] = $lang['login'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('name') && check('password') &&
-		login($_POST['name'], $_POST['password']))
+	if(checkBot() && check('password') &&
+		login($_POST['password']))
 	{
 		session_regenerate_id(true);
 		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
@@ -16,15 +16,14 @@ if(isGET('login'))
 	else
 	{
 		$out['content'] .= '<form action="auth.php?login" method="post">
-		<p>' .text('name'). '</p>
 		<p>' .password(). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
 }
-else if(isGET('logout') && isUser())
+else if(isGET('logout') && isWorker())
 {
-	$_SESSION['name'] = $_SESSION['role'] = '';
+	$_SESSION['role'] = '';
 	$out['subtitle'] = $lang['logout'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
 	<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';

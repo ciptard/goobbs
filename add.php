@@ -3,7 +3,7 @@
 $template = 'main';
 require 'header.php';
 
-if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
+if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 {
 	$forumEntry = readEntry('forum', $_GET['topic']);
 	$out['subtitle'] = $lang['add'].$lang['topic']. ' : ' .$forumEntry['name'];
@@ -12,7 +12,6 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
-		$topicEntry['author'] = $_SESSION['name'];
 		$topicEntry['view'] = 0;
 		$topicEntry['forum'] = $_GET['topic'];
 		$topicEntry['reply'] = array();
@@ -22,11 +21,8 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 
 		$forumEntry['topic'][$topic] = $topic;
 		saveEntry('forum', $topicEntry['forum'], $forumEntry);
-
-		$user = md5($topicEntry['author']);
-		$userEntry = readEntry('user', $user);
-		$userEntry['topic'][$topic] = $topic;
-		saveEntry('user', $user, $userEntry);
+		
+		$_SESSION[$topic] = $topic;
 
 		$out['content'] .= '<p><a href="view.php?topic=' .$topic. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
@@ -41,7 +37,7 @@ if(isGET('topic') && isUser() && isValidEntry('forum', $_GET['topic']))
 		(check('content', 1, 2000)? '<div class="block">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
-else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
+else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 {
 	$topicEntry = readEntry('topic', $_GET['reply']);
 	if($topicEntry['locked'])
@@ -52,7 +48,6 @@ else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('content', 1, 2000))
 	{
-		$replyEntry['author'] = $_SESSION['name'];
 		$replyEntry['content'] = clean($_POST['content']);
 		$replyEntry['topic'] = $_GET['reply'];
 		$reply = newEntry();
@@ -60,11 +55,8 @@ else if(isGET('reply') && isUser() && isValidEntry('topic', $_GET['reply']))
 
 		$topicEntry['reply'][$reply] = $reply;
 		saveEntry('topic', $replyEntry['topic'], $topicEntry);
-
-		$user = md5($replyEntry['author']);
-		$userEntry = readEntry('user', $user);
-		$userEntry['reply'][$reply] = $reply;
-		saveEntry('user', $user, $userEntry);
+		
+		$_SESSION[$reply] = $reply;
 
 		$out['content'] .= '<p><a href="view.php?topic=' .$_GET['reply']. '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
@@ -100,27 +92,20 @@ else if(isGET('forum') && isAdmin())
 		</form>';
 	}
 }
-else if(isGET('user'))
+else if(isGET('worker') && isAdmin())
 {
-	$out['subtitle'] = $lang['add'].$lang['user'];
+	$out['subtitle'] = $lang['add'].$lang['worker'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('name') && check('password') && !isValidEntry('user', md5(clean($_POST['name']))))
+	if(checkBot() && check('password'))
 	{
-		$userEntry['name'] = clean($_POST['name']);
-		$userEntry['role'] = 'user';
-		$userEntry['password'] = hide($_POST['password']);
-		$userEntry['topic'] = array();
-		$userEntry['reply'] = array();
-		saveEntry('user', md5($userEntry['name']), $userEntry);
-		$_SESSION['name'] = $userEntry['name'];
-		$_SESSION['role'] = $userEntry['role'];
-		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$config['worker'][hide($_POST['password'])] = clean($_POST['password']);
+		saveEntry('config', 'config', $config);
+		$out['content'] .= '<p><a href="index.php?worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="add.php?user" method="post">
-		<p>' .text('name'). '</p>
-		<p>' .password(). '</p>
+		$out['content'] .= '<form action="add.php?worker" method="post">
+		<p>' .text('password'). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}

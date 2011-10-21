@@ -5,33 +5,28 @@ function isAdmin()
 	return $_SESSION['role'] === 'admin';
 }
 
-function isAuthor($name)
+function isAuthor($entry)
 {
-	return $_SESSION['name'] === $name;
+	return isset($_SESSION[$entry]);
 }
 
-function isModerator()
+function isWorker()
 {
-	return $_SESSION['role'] === 'moderator' || $_SESSION['role'] === 'admin';
+	return $_SESSION['role'] === 'worker' || $_SESSION['role'] === 'admin';
 }
 
-function isUser()
+function login($password)
 {
-	return $_SESSION['role'] === 'user' || $_SESSION['role'] === 'moderator' || $_SESSION['role'] === 'admin';
-}
-
-function login($name, $password)
-{
-	$user = md5(clean($name));
-	if(!isValidEntry('user', $user))
+	global $config;
+	$password = hide($password);
+	if($password === $config['admin'])
 	{
-		return false;
+		$_SESSION['role'] = 'admin';
+		return true;
 	}
-	$userEntry = readEntry('user', $user);
-	if($userEntry['password'] === hide($password))
+	if(isset($config['worker'][$password]))
 	{
-		$_SESSION['name'] = $userEntry['name'];
-		$_SESSION['role'] = $userEntry['role'];
+		$_SESSION['role'] = 'worker';
 		return true;
 	}
 	return false;
