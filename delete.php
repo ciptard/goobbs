@@ -101,7 +101,7 @@ else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php?worker" method="post">
+		$out['content'] .= '<form action="delete.php?worker=' .$_GET['worker']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}
