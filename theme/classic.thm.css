@@ -53,7 +53,7 @@ img {
 .important, #menu ul li a, #page ul li a, #user ul li a, #jump ul li a {
 	text-decoration: none;
 }
-#menu ul li, #footer ul li, #page ul li, #jump ul li {
+#menu ul li, #footer ul li, #page ul li, #user ul li, #jump ul li {
 	display: inline-block;
 }
 #menu ul li {
