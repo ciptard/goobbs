@@ -11,7 +11,7 @@ if(isAdmin())
 		isPOST('theme') && isEntry($_POST['theme']) && is_file('theme/' .$_POST['theme']. '.thm.css') &&
 		isPOST('lang') && isEntry($_POST['lang']) && is_file('lang/' .$_POST['lang']. '.lng.php'))
 	{
-		$config['password'] = hide($_POST['password']);
+		$config['admin'] = hide($_POST['password']);
 		$config['title'] = clean($_POST['title']);
 		$config['theme'] = $_POST['theme'];
 		$config['lang'] = $_POST['lang'];
