@@ -41,7 +41,7 @@ function submit()
 	$num1 = rand(1, 10);
 	$num2 = rand(1, 10);
 	$_SESSION['captcha'] = (string) ($num1 * $num2);
-	return $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 10%;"/> <input type="submit" value="' .$lang['confirm']. '"/>';
+	return $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> <input type="submit" value="' .$lang['confirm']. '"/>';
 }
 
 function select($name, $options, $default = '')
