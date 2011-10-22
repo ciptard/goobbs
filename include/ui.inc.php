@@ -19,7 +19,7 @@ function message($msg)
 function password()
 {
 	global $lang;
-	return $lang['password']. ' <input type="password" name="password"/>';
+	return $lang['password']. ' <input type="password" name="password"/>  <input type="password" name="password2"/>';
 }
 
 function text($name, $default = '')
@@ -67,6 +67,11 @@ function check($name, $min = 1, $max = 40)
 		return true;
 	message($lang[$name].$lang['errorLength']);
 	return false;
+}
+
+function checkPass()
+{
+	return check('password') && isPOST('password2') && $_POST['password'] === $_POST['password2'];
 }
 
 function checkBot()

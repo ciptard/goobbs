@@ -23,7 +23,7 @@ h2 {
 textarea {
 	width: 100%;
 }
-input[type="text"], input[type="password"] {
+input[type="text"] {
 	width: 50%;
 }
 img {
