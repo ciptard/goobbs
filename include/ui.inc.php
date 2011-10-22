@@ -62,7 +62,8 @@ function check($name, $min = 1, $max = 40)
 	global $lang;
 	if(!isPOST($name))
 		return false;
-	if(isset($_POST[$name][$min-1]) && !isset($_POST[$name][$max]))
+	$len = strlen($_POST[$name]);
+	if($len >= $min && $len <= $max)
 		return true;
 	message($lang[$name].$lang['errorLength']);
 	return false;
@@ -75,7 +76,6 @@ function checkBot()
 		return false;
 	if(isset($_SESSION['captcha']) && $_POST['captcha'] === $_SESSION['captcha'])
 		return true;
-	unset($_SESSION['captcha']);
 	message($lang['errorBot']);
 	return false;
 }
