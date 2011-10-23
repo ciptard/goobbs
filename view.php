@@ -17,8 +17,8 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$out['subtitle'] = $topicEntry['title'];
 	$out['content'] .= '<table>
 	<tr class="entryHeader"><td colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
-	<tr><td class="w2"><p>' .substr($_GET['topic'], -7, 7). '</p>
-	<p>' .manageTopic($_GET['topic']).entryDate($_GET['topic']). '</p></td>
+	<tr><td class="w2"><p>' .manageTopic($_GET['topic']).substr($_GET['topic'], -7, 7). '</p>
+	<p>' .entryDate($_GET['topic']). '</p></td>
 	<td><p>' .content($topicEntry['content']). '</p>'.
 	(!$topicEntry['locked']? '<p><a class="important" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']).'</td></tr>';
@@ -27,8 +27,8 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		foreach($topicEntry['reply'] as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
-			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p>' .substr($reply, -7, 7). '</p>
-			<p>' .manageReply($reply).entryDate($reply). '</p></td>
+			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p>' .manageReply($reply).substr($reply, -7, 7). '</p>
+			<p>' .entryDate($reply). '</p></td>
 			<td><p>' .content($replyEntry['content']). '</p>'.
 			hook('afterReply', $reply). '</td></tr>';
 		}	
