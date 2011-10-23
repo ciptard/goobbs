@@ -34,12 +34,8 @@ function bbcode($text)
 
 function summary($text)
 {
-	$pos = strpos($text, "\n");
-	if($pos !== false)
-	{
-		$text = substr($text, 0, $pos);
-	}
-	return bbcode($text). '...';
+	$parts = explode("\n", $text, 2);
+	return bbcode($parts[0]). '...';
 }
 
 function content($text)
