@@ -8,7 +8,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 	$forumEntry = readEntry('forum', $_GET['topic']);
 	$out['subtitle'] = $lang['add'].$lang['topic']. ' : ' .$forumEntry['name'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('title') && check('content', 1, 2000))
+	if(checkBot() && check('name', 0) && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
@@ -17,6 +17,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		$topicEntry['reply'] = array();
 		$topicEntry['locked'] = false;
 		$topic = newEntry();
+		$topictEntry['trip'] = $_POST['name'] === ''? substr($topic, -7) : trip(clean($_POST['name']));
 		saveEntry('topic', $topic, $topicEntry);
 
 		$forumEntry['topic'][$topic] = $topic;
@@ -31,6 +32,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		require 'include/parser.inc.php';
 		$out['content'] .= '<form action="add.php?topic=' .$_GET['topic']. '" method="post">
 		<p>' .text('title'). '</p>
+		<p>' .text('name'). '</p>
 		<p>' .textarea(). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
@@ -46,11 +48,12 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	}
 	$out['subtitle'] = $lang['add'].$lang['reply']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('content', 1, 2000))
+	if(checkBot() && check('name', 0) && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = clean($_POST['content']);
 		$replyEntry['topic'] = $_GET['reply'];
 		$reply = newEntry();
+		$replyEntry['trip'] = $_POST['name'] === ''? substr($reply, -7) : trip(clean($_POST['name']));
 		saveEntry('reply', $reply, $replyEntry);
 
 		$topicEntry['reply'][$reply] = $reply;
@@ -64,6 +67,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	{
 		require 'include/parser.inc.php';
 		$out['content'] .= '<form action="add.php?reply=' .$_GET['reply']. '" method="post">
+		<p>' .text('name'). '</p>
 		<p>' .textarea(). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
