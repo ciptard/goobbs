@@ -102,7 +102,7 @@ else if(isGET('worker') && isAdmin())
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('password'))
 	{
-		$config['worker'][hide($_POST['password'])] = clean($_POST['password']);
+		$config['worker'][md5($_POST['password'])] = clean($_POST['password']);
 		saveEntry('config', 'config', $config);
 		$out['content'] .= '<p><a href="index.php?worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
 	}

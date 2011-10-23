@@ -81,7 +81,7 @@ function clean($text)
 	{
 		$text = stripslashes($text);
 	}
-	return htmlspecialchars($text, ENT_QUOTES);
+	return htmlspecialchars(trim($text), ENT_QUOTES);
 }
 
 function hide($text)
