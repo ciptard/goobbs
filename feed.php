@@ -21,7 +21,7 @@ if(isGET('topic'))
 			$topicEntry = readEntry('topic', $topic);
 			$out['content'] .= '<entry>
 			<id>' .$out['url']. 'view.php?topic=' .$topic. '</id>
-			<title>' .$topicEntry['title']. '</title>
+			<title>' .$topicEntry['trip']. ' - ' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($topic, 'c'). '</updated>
 			<link href="' .$out['url']. 'view.php?topic=' .$topic. '"/>
 			<summary type="html">' .clean(summary($topicEntry['content'])). '</summary>
@@ -44,7 +44,7 @@ else if(isGET('reply'))
 			$topicEntry = readEntry('topic', $replyEntry['topic']);
 			$out['content'] .= '<entry>
 			<id>' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '</id>
-			<title>@' .$topicEntry['title']. '</title>
+			<title>' .$replyEntry['trip']. ' - ' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($reply, 'c'). '</updated>
 			<link href="' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '"/>
 			<summary type="html">' .clean(summary($replyEntry['content'])). '</summary>
