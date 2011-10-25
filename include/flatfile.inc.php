@@ -52,7 +52,7 @@ function pathToEntry($path)
 
 function newEntry()
 {
-	return date('Y-m-dHis').substr(uniqid(), -7);
+	return date('Y-m-dHis').substr(uniqid(), -5);
 }
 
 function entryDate($file, $pattern = 'Y/m/d H:i')
