@@ -17,7 +17,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		$topicEntry['reply'] = array();
 		$topicEntry['locked'] = false;
 		$topic = newEntry();
-		$topictEntry['trip'] = $_POST['name'] === ''? substr($topic, -5) : trip(clean($_POST['name']));
+		$topicEntry['trip'] = $_POST['name'] === ''? substr($topic, -5) : trip(clean($_POST['name']));
 		saveEntry('topic', $topic, $topicEntry);
 
 		$forumEntry['topic'][$topic] = $topic;
