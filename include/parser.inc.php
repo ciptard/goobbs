@@ -30,7 +30,7 @@ function bbcode($text)
 	$replace[] = '<div class="block">$1</div>';
 	
 	$pattern[] = '%\[quote\]([^\[\]]+)\[/quote\]%';
-	$replace[] = '<a href="#$1">&gt;&gt;$1</a>';
+	$replace[] = '<a href="#$1">&gt; $1</a>';
 	//the variable for the replace
 	return preg_replace($pattern, $replace, $text);
 }
