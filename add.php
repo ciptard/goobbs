@@ -68,7 +68,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 		require 'include/parser.inc.php';
 		$out['content'] .= '<form action="add.php?reply=' .$_GET['reply']. '" method="post">
 		<p>' .text('name'). '</p>
-		<p>' .textarea(isValidEntry('reply', $_GET['quote'])? '[quote]' .$_GET['quote']. '[/quote]' : ''). '</p>
+		<p>' .textarea(isGET('quote') && isValidEntry('reply', $_GET['quote'])? '[quote]' .$_GET['quote']. '[/quote]' : ''). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
 		(check('content', 1, 2000)? '<div class="block">' .content(clean($_POST['content'])). '</div>' : '');
