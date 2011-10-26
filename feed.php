@@ -24,7 +24,7 @@ if(isGET('topic'))
 			<title>' .$topicEntry['trip']. ' - ' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($topic, 'c'). '</updated>
 			<link href="' .$out['url']. 'view.php?topic=' .$topic. '"/>
-			<summary type="html">' .clean(summary($topicEntry['content'])). '</summary>
+			<summary type="html">' .htmlspecialchars(summary($topicEntry['content']), ENT_QUOTES). '</summary>
 			</entry>';
 		}
 	}
@@ -47,7 +47,7 @@ else if(isGET('reply'))
 			<title>' .$replyEntry['trip']. ' - ' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($reply, 'c'). '</updated>
 			<link href="' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '"/>
-			<summary type="html">' .clean(summary($replyEntry['content'])). '</summary>
+			<summary type="html">' .htmlspecialchars(summary($replyEntry['content']), ENT_QUOTES). '</summary>
 			</entry>';
 		}
 	}
