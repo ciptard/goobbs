@@ -91,6 +91,13 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	(isset($page[$i+1])? '<li><a href="view.php?forum=' .$_GET['forum']. '&p=' .($_GET['p']+1). '">' .$lang['next']. ' →</a></li>' : '').
 	'</ul></div>';
 }
+else if(isGET('plugin') && function_exists($_GET['plugin']. '_page'))
+{
+	$misc = $_GET['plugin']. '_page';
+	$out['subtitle'] = $_GET['plugin'];
+	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>'.
+	$misc();
+}
 else
 {
 	exit;
