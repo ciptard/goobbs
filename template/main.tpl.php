@@ -13,7 +13,7 @@ header('Content-Type: text/html; charset=UTF-8');
 	<meta charset="UTF-8"/>
 	<meta name="description" content="<?php echo $out['subtitle'];?>"/>
 	<title><?php echo $out['subtitle'];?> - <?php echo $config['title'];?></title>
-	<link rel="stylesheet" type="text/css" href="theme/<?php echo $config['theme'];?>.thm.css"/>
+	<link rel="stylesheet" type="text/css" href="theme/<?php echo $config['theme'];?>.css"/>
 	<link rel="alternate" type="application/atom+xml" href="feed.php?topic" title="<?php echo $lang['topic'];?> - <?php echo $config['title'];?>"/>
 	<link rel="alternate" type="application/atom+xml" href="feed.php?reply" title="<?php echo $lang['reply'];?> - <?php echo $config['title'];?>"/>
 	<script src="http://code.jquery.com/jquery.min.js"></script>

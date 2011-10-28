@@ -15,9 +15,9 @@ function fdir($dir)
 	return $files;
 }
 
-function isEntry($file)
+function indir($file, $dir, $ext)
 {
-	return strpos($file, '/') === false && strpos($file, '.') === false && strpos($file, "\0") === false;
+	return strpos($file, '/') === false && strpos($file, '.') === false && strpos($file, "\0") === false && is_file($dir. '/' .$file. '.' .$ext);
 }
 
 function readEntry($type, $file)
@@ -42,7 +42,7 @@ function listEntry($type)
 
 function isValidEntry($type, $file)
 {
-	return isEntry($file) && is_file('data/' .$type. '/' .$file. '.dat.php');
+	return indir($file, 'data/' .$type, 'dat.php');
 }
 
 function newEntry()

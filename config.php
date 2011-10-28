@@ -8,8 +8,8 @@ if(isAdmin())
 	$out['subtitle'] = $lang['config'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && checkPass() && check('title') &&
-		isPOST('theme') && isEntry($_POST['theme']) && is_file('theme/' .$_POST['theme']. '.thm.css') &&
-		isPOST('lang') && isEntry($_POST['lang']) && is_file('lang/' .$_POST['lang']. '.lng.php'))
+		isPOST('theme') && indir($_POST['theme'], 'theme', 'css') &&
+		isPOST('lang') && indir($_POST['lang'], 'lang', 'lng.php'))
 	{
 		$config['admin'] = hide($_POST['password']);
 		$config['title'] = clean($_POST['title']);
@@ -21,13 +21,11 @@ if(isAdmin())
 	else
 	{
 		$themes = fdir('theme');
-		$themeOptions = array_combine($themes, $themes);
-		$languages = fdir('lang');
-		$langOptions = array_combine($languages, $languages);
+		$langs = fdir('lang');
 		$out['content'] .= '<form action="config.php" method="post">
 		<p>' .password(). '</p>
 		<p>' .text('title', $config['title']). '</p>
-		<p>' .select('theme', $themeOptions, $config['theme']). ' ' .select('lang', $langOptions, $config['lang']). '</p>
+		<p>' .select('theme', array_combine($themes, $themes), $config['theme']). ' ' .select('lang', array_combine($langs, $langs), $config['lang']). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
