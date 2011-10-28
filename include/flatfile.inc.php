@@ -8,7 +8,7 @@ function fdir($dir)
 	{
 		if($file !== '.' && $file !== '..')
 		{
-			$files[] = $file;
+			$files[] = substr($file, 0, strpos($file, '.'));
 		}
 	}
 	closedir($dh);
@@ -37,17 +37,12 @@ function deleteEntry($type, $file)
 
 function listEntry($type)
 {
-	return array_map('pathToEntry', fdir('data/' .$type));
+	return fdir('data/' .$type);
 }
 
 function isValidEntry($type, $file)
 {
 	return isEntry($file) && is_file('data/' .$type. '/' .$file. '.dat.php');
-}
-
-function pathToEntry($path)
-{
-	return substr($path, 0, -8);
 }
 
 function newEntry()

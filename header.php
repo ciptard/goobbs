@@ -27,7 +27,7 @@ require 'include/user.inc.php';
 require 'include/ui.inc.php';
 require 'include/plugin.inc.php';
 
-$plugins = array_map('pathToEntry', fdir('plugin'));
+$plugins = fdir('plugin');
 
 foreach($plugins as $plugin)
 {

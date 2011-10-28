@@ -21,17 +21,9 @@ if(isAdmin())
 	else
 	{
 		$themes = fdir('theme');
-		foreach($themes as $theme)
-		{
-			$value = pathToEntry($theme);
-			$themeOptions[$value] = $value;
-		}
+		$themeOptions = array_combine($themes, $themes);
 		$languages = fdir('lang');
-		foreach($languages as $language)
-		{
-			$value = pathToEntry($language);
-			$langOptions[$value] = $value;
-		}
+		$langOptions = array_combine($languages, $languages);
 		$out['content'] .= '<form action="config.php" method="post">
 		<p>' .password(). '</p>
 		<p>' .text('title', $config['title']). '</p>

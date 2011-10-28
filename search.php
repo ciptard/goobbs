@@ -10,6 +10,7 @@ if(checkBot() && check('topic'))
 {	
 	$_POST['topic'] = clean($_POST['topic']);
 	$topics = listEntry('topic');
+	$foundTopics = array();
 	foreach($topics as $topic)
 	{
 		$topicEntry = readEntry('topic', $topic);
