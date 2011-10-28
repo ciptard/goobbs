@@ -14,7 +14,7 @@ if(checkBot() && check('topic'))
 	foreach($topics as $topic)
 	{
 		$topicEntry = readEntry('topic', $topic);
-		if(strpos($topicEntry['title'], $_POST['topic']) !== false || strpos($topicEntry['content'], $_POST['topic']) !== false)
+		if(stripos($topicEntry['title'], $_POST['topic']) !== false || stripos($topicEntry['content'], $_POST['topic']) !== false)
 		{
 			$foundTopics[$topic] = $topicEntry['title'];
 		}
