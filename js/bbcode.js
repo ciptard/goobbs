@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	bbcode();
+});
+
+function bbcode() {
 	var ta = $('textarea')[0];
 
 	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block'];
@@ -10,21 +14,16 @@ $(document).ready(function(){
 	$(e).insertBefore(ta);
 	
 	//eyecandy
-	$('#bbcode input').css('margin', 5);
-	$('#bbcode input').hover(
-	function() {
-		$(this).animate({
-			opacity: 0.5
-		});
-	},
-	function() {
-		$(this).animate({
-			opacity: 1
-		});
-	});
-	
-	//click
-	$('#bbcode input').click(function() {
+	$('#bbcode input').css('margin', 5)
+	.hover(
+		function() {
+			$(this).animate({opacity: 0.5});
+		},
+		function() {
+			$(this).animate({opacity: 1});
+		}
+	)
+	.click(function() {
 		var tag = $(this).attr('value');
 		var start = '['+tag+']';
 		var end = '[/'+tag+']';
@@ -67,4 +66,4 @@ $(document).ready(function(){
 			ta.value += start + end;
 		}
 	});
-});
+}
