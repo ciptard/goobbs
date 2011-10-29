@@ -3,13 +3,9 @@
 $template = 'main';
 require 'header.php';
 
-if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
+if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('topic', $_GET['topic']))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
-	if(!isWorker() && !isAuthor($_GET['topic']))
-	{
-		exit;
-	}
 	$out['subtitle'] = $lang['delete'].$lang['topic']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
@@ -34,13 +30,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		</form>';
 	}
 }
-else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
+else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEntry('reply', $_GET['reply']))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
-	if(!isWorker() && !isAuthor($_GET['reply']))
-	{
-		exit;
-	}
 	$out['subtitle'] = $lang['delete'].$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())

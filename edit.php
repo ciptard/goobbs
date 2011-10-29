@@ -3,13 +3,9 @@
 $template = 'main';
 require 'header.php';
 
-if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
+if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('topic', $_GET['topic']))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
-	if(!isWorker() && !isAuthor($_GET['topic']))
-	{
-		exit;
-	}
 	$out['subtitle'] = $lang['edit'].$lang['topic']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('title') && check('content', 1, 2000))
@@ -73,13 +69,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		(check('content', 1, 2000)? '<div class="block">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
-else if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
+else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEntry('reply', $_GET['reply']))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
-	if(!isWorker() && !isAuthor($_GET['reply']))
-	{
-		exit;
-	}
 	$out['subtitle'] = $lang['edit'].$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('content', 1, 2000))
