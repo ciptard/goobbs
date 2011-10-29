@@ -12,8 +12,7 @@ function bbcode() {
 		$('<input type="button"/>').attr('value', tags[i]).appendTo(e);
 	}
 	$(e).insertBefore(ta);
-	
-	//eyecandy
+
 	$('#bbcode input').css('margin', 5)
 	.hover(
 		function() {
