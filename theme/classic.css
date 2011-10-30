@@ -32,8 +32,10 @@ img {
 }
 .block {
 	color: #666;
-	border: 1px dotted #666;
+	border: 1px dashed #666;
 	background-color: #EEE;
+	font-family: monospace;
+	font-size: 11px;
 }
 #menu {
 	border-bottom: 1px dotted #666;
