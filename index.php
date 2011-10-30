@@ -48,7 +48,7 @@ if(isGET('new'))
 else if(isGET('forum'))
 {
 	$out['subtitle'] = $lang['forum'];
-	$out['content'] .= '<h1>' .(isAdmin()? '<a class="important" href="add.php?forum">' .$lang['add']. '</a>' : '').$out['subtitle']. '</h1>';
+	$out['content'] .= '<h1>' .(isAdmin()? '<a href="add.php?forum">[' .$lang['add']. ']</a>' : '').$out['subtitle']. '</h1>';
 	$forums = listEntry('forum');
 	if($forums)
 	{
@@ -73,7 +73,7 @@ else if(isGET('forum'))
 else if(isGET('worker') && isAdmin())
 {
 	$out['subtitle'] = $lang['worker'];
-	$out['content'] .= '<h1><a class="important" href="add.php?worker">' .$lang['add']. '</a>' .$out['subtitle']. '</h1>';
+	$out['content'] .= '<h1><a href="add.php?worker">[' .$lang['add']. ']</a>' .$out['subtitle']. '</h1>';
 	if($config['worker'])
 	{
 		$out['content'] .= '<div id="user"><ul>';
