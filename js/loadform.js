@@ -2,8 +2,9 @@ $(document).ready(function(){
 	$('a.important[href^="add.php"]').click(function(event) {
 		event.preventDefault();
 		$('#form').remove();
-		$('<div id="form"></div>').load($(this).attr('href') + ' form', function() {
+		$('<div id="form"></div>').hide().insertAfter(this).load($(this).attr('href') + ' form', function() {
 			bbcode();
-		}).insertAfter(this);
+			$(this).slideDown('slow');
+		});
 	});
 });
