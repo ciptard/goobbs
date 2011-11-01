@@ -95,3 +95,17 @@ table {
 .w2 {
 	width: 20%;
 }
+.pinned, .locked {
+	padding: 1px 2px;
+	font-size: 9px;
+	font-weight: bold;
+	margin: 0 4px;
+}
+.pinned {
+	background-color: #daede2;
+	color: #528f6c
+}
+.locked {
+	background-color: #EAD7D7;
+	color: #8E5252
+}
