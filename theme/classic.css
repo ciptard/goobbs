@@ -99,13 +99,13 @@ table {
 	padding: 1px 2px;
 	font-size: 9px;
 	font-weight: bold;
-	margin: 0 4px;
+	margin: 0 2px;
 }
 .pinned {
-	background-color: #daede2;
-	color: #528f6c
+	background-color: #DAEDE2;
+	color: #528F6C;
 }
 .locked {
 	background-color: #EAD7D7;
-	color: #8E5252
+	color: #8E5252;
 }
