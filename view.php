@@ -47,7 +47,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	{
 		$topicEntry = readEntry('topic', $topic);
 		$forumEntry = readEntry('forum', $topicEntry['forum']);
-		$out['content'] .= '<tr><td>' .manageTopic($topic).$topicEntry['trip']. ' - <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+		$out['content'] .= '<tr><td>' .manageTopic($topic).$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 		<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 		<td><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a></td></tr>';
 	}
@@ -79,7 +79,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 		foreach($page[$i] as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
-			$out['content'] .= '<tr><td>' .manageTopic($topic).(isset($forumEntry['pinnedTopic'][$topic])? '<span class="pinned">' .$lang['pinned']. '</span>':'').($topicEntry['locked']? '<span class="locked">' .$lang['locked']. '</span>':'').$topicEntry['trip']. ' - <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+			$out['content'] .= '<tr><td>' .manageTopic($topic).(isset($forumEntry['pinnedTopic'][$topic])? '<span class="pinned">' .$lang['pinned']. '</span>':'').($topicEntry['locked']? '<span class="locked">' .$lang['locked']. '</span>':'').$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .entryDate($topic). '</td></tr>';
 		}
