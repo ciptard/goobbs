@@ -55,6 +55,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 }
 else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 {
+	require 'include/page.inc.php';
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $forumEntry['name'];
 	$out['content'] .= '<table>
@@ -64,19 +65,16 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	hook('afterForum', $_GET['forum']).
 	'</td></tr>
 	</table>';
-	$page = array_chunk(array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic']))), 8);
-	if(!isGET('p') || !isset($page[$_GET['p']-1]))
-	{
-		$_GET['p'] = 1;
-	}
-	$i = $_GET['p'] - 1;
-	if($page)
+	$pages = array_chunk(array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic']))), 8);
+	$total = count($pages);
+	$p = pageNum($total);
+	if($total > 0)
 	{
 		$out['content'] .= '<table>
 		<tr class="entryHeader"><td>' .$lang['topic']. '</td>
 		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
-		foreach($page[$i] as $topic)
+		foreach($pages[$p-1] as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
 			$out['content'] .= '<tr><td>' .manageTopic($topic).(isset($forumEntry['pinnedTopic'][$topic])? '<span class="pinned">' .$lang['pinned']. '</span>':'').($topicEntry['locked']? '<span class="locked">' .$lang['locked']. '</span>':'').$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
@@ -85,11 +83,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 		}
 		$out['content'] .= '</table>';
 	}
-	$out['content'] .= '<div id="page"><ul>' .
-	(isset($page[$i-1])? '<li><a href="view.php?forum=' .$_GET['forum']. '&p=' .($_GET['p']-1). '">← ' .$lang['prev']. '</a></li>' : '').
-	'<li>' .$lang['page']. ' : ' .$_GET['p']. ' / ' .count($page). '</li>' .
-	(isset($page[$i+1])? '<li><a href="view.php?forum=' .$_GET['forum']. '&p=' .($_GET['p']+1). '">' .$lang['next']. ' →</a></li>' : '').
-	'</ul></div>';
+	$out['content'] .= pageControl($p, $total, '?forum=' .$_GET['forum']);
 }
 else if(isGET('plugin') && function_exists($_GET['plugin']. '_page'))
 {
