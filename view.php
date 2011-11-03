@@ -83,7 +83,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 		}
 		$out['content'] .= '</table>';
 	}
-	$out['content'] .= pageControl($p, $total, '?forum=' .$_GET['forum']);
+	$out['content'] .= pageControl($p, $total, 'forum=' .$_GET['forum']);
 }
 else if(isGET('plugin') && function_exists($_GET['plugin']. '_view'))
 {
