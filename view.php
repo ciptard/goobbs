@@ -30,7 +30,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p>' .manageReply($reply).$replyEntry['trip']. '</p>
 			<p>' .entryDate($reply). '</p></td>
 			<td><p>' .content($replyEntry['content']). '</p>'.
-			(!$topicEntry['locked']? '<p><a class="important" href="add.php?reply=' .$_GET['topic']. '&quote=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+			(!$topicEntry['locked']? '<p><a class="important" href="add.php?reply=' .$_GET['topic']. '&q=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 			hook('afterReply', $reply). '</td></tr>';
 		}
 	}
@@ -85,10 +85,10 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	}
 	$out['content'] .= pageControl($p, $total, '?forum=' .$_GET['forum']);
 }
-else if(isGET('plugin') && function_exists($_GET['plugin']. '_page'))
+else if(isGET('plugin') && function_exists($_GET['plugin']. '_view'))
 {
-	$misc = $_GET['plugin']. '_page';
-	$out['subtitle'] = $_GET['plugin'];
+	$misc = $_GET['plugin']. '_view';
+	$out['subtitle'] = strtolower($_GET['plugin']);
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>'.
 	$misc();
 }

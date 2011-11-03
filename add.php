@@ -65,10 +65,20 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	}
 	else
 	{
+		if(isGET('q') && isValidEntry('reply', $_GET['q']))
+		{
+			$replyEntry = readEntry('reply', $_GET['q']);
+			$quote = '[quote=' .$_GET['q']. ']' .$replyEntry['trip']. '[/quote]';
+		}
+		else
+		{
+			$quote = '';
+		}
+
 		require 'include/parser.inc.php';
 		$out['content'] .= '<form action="add.php?reply=' .$_GET['reply']. '" method="post">
 		<p>' .text('name'). '</p>
-		<p>' .textarea(isGET('quote') && isValidEntry('reply', $_GET['quote'])? '[quote]' .$_GET['quote']. '[/quote]' : ''). '</p>
+		<p>' .textarea($quote). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
 		(check('content', 1, 2000)? '<div class="block">' .content(clean($_POST['content'])). '</div>' : '');

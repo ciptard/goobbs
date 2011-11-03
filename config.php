@@ -30,6 +30,13 @@ if(isAdmin())
 		</form>';
 	}
 }
+else if(isGET('plugin') && isAdmin() && function_exists($_GET['plugin']. '_config'))
+{
+	$misc = $_GET['plugin']. '_config';
+	$out['subtitle'] = strtolower($_GET['plugin']);
+	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>'.
+	$misc();
+}
 else
 {
 	exit;
