@@ -1,9 +1,7 @@
-* {
-	letter-spacing: 1px;
-	font-size: 14px;
-}
 html {
 	border-top: 16px solid #FC3;
+	letter-spacing: 1px;
+	font-size: 14px;
 }
 ul {
 	list-style: none;
@@ -97,7 +95,7 @@ table {
 }
 .pinned, .locked {
 	padding: 1px 2px;
-	font-size: 9px;
+	font-size: 10px;
 	font-weight: bold;
 	margin: 0 2px;
 }
