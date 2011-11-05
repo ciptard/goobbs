@@ -5,34 +5,34 @@ function bbcode($text)
 	//the pattern to be matched
 	//the replacement
 
-	$pattern[] = '%\[b\]((?:.(?!\[[a-z]+\]))+)\[/b\]%';
+	$pattern[] = '%\[b\]([^\r\n\[]+)\[/b\]%';
 	$replace[] = '<b>$1</b>';
 
-	$pattern[] = '%\[i\]((?:.(?!\[[a-z]+\]))+)\[/i\]%';
+	$pattern[] = '%\[i\]([^\r\n\[]+)\[/i\]%';
 	$replace[] = '<i>$1</i>';
 
-	$pattern[] = '%\[u\]((?:.(?!\[[a-z]+\]))+)\[/u\]%';
+	$pattern[] = '%\[u\]([^\r\n\[]+)\[/u\]%';
 	$replace[] = '<ins>$1</ins>';
 
-	$pattern[] = '%\[s\]((?:.(?!\[[a-z]+\]))+)\[/s\]%';
+	$pattern[] = '%\[s\]([^\r\n\[]+)\[/s\]%';
 	$replace[] = '<del>$1</del>';
 
-	$pattern[] = '%\[img\]((?:.(?!\[[a-z]+\]))+)\[/img\]%';
+	$pattern[] = '%\[img\]([^\r\n\[]+)\[/img\]%';
 	$replace[] = '<img src="$1" alt=""/>';
 
-	$pattern[] = '%\[url=((?:.(?!\[[a-z]+\]))+)\]((?:.(?!\[[a-z]+\]))+)\[/url\]%';
+	$pattern[] = '%\[url=([^\r\n\]]+)\]([^\r\n\[]+)\[/url\]%';
 	$replace[] = '<a href="$1">$2</a>';
 
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
 	$replace[] = '<iframe width="320" height="240" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
 
-	$pattern[] = '%\[block\]((?:(?:.|\n)(?!\[[a-z]+\]))+)\[/block\]%';
-	$replace[] = '<div class="block">$1</div>';
+	$pattern[] = '%\[block\]((?:(.|\n)(?!\[block\]))+)\[/block\]%e';
+	$replace[] = '\'<div class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</div>\'';
 	
 	$pattern[] = '%\[more\]%';
 	$replace[] = '';
 	
-	$pattern[] = '%\[quote=(\d{4}-\d{2}-\d{8}[a-z\d]{5})\]((?:.(?!\[[a-z]+\]))+)\[/quote\]%';
+	$pattern[] = '%\[quote=(\d{4}-\d{2}-\d{8}[a-z\d]{5})\]([^\r\n\[]+)\[/quote\]%';
 	$replace[] = '<a href="#$1">&gt; $2</a>';
 
 	return preg_replace($pattern, $replace, $text);
@@ -46,7 +46,7 @@ function summary($text)
 
 function content($text)
 {
-	return nl2br(bbcode($text));
+	return bbcode(nl2br($text));
 }
 
 ?>
