@@ -34,7 +34,7 @@ img {
 	background-color: #EEE;
 	font-family: monospace;
 	font-size: 10px;
-	white-space: pre;
+	white-space: pre-wrap;
 }
 #menu {
 	border-bottom: 1px dotted #666;
