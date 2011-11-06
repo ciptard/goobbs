@@ -5,7 +5,7 @@ $(document).ready(function(){
 function bbcode() {
 	var ta = $('textarea')[0];
 
-	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block', 'more'];
+	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block', 'cut'];
 	var e = $('<div id="bbcode"></div>');
 	for(var i in tags)
 	{

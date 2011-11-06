@@ -3,7 +3,7 @@
 $template = 'main';
 require 'header.php';
 
-if(isAdmin())
+if(isGET('main') && isAdmin())
 {
 	$out['subtitle'] = $lang['config'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
@@ -22,7 +22,7 @@ if(isAdmin())
 	{
 		$themes = fdir('theme');
 		$langs = fdir('lang');
-		$out['content'] .= '<form action="config.php" method="post">
+		$out['content'] .= '<form action="config.php?main" method="post">
 		<p>' .password(). '</p>
 		<p>' .text('title', $config['title']). '</p>
 		<p>' .select('theme', array_combine($themes, $themes), $config['theme']). ' ' .select('lang', array_combine($langs, $langs), $config['lang']). '</p>

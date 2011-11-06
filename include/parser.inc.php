@@ -29,7 +29,7 @@ function bbcode($text)
 	$pattern[] = '%\[block\]((?:(.|\n)(?!\[block\]))+)\[/block\]%e';
 	$replace[] = '\'<div class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</div>\'';
 	
-	$pattern[] = '%\[more\]%';
+	$pattern[] = '%\[cut\]%';
 	$replace[] = '';
 	
 	$pattern[] = '%\[quote=(\d{4}-\d{2}-\d{8}[a-z\d]{5})\]([^\r\n\[]+)\[/quote\]%';
@@ -40,7 +40,7 @@ function bbcode($text)
 
 function summary($text)
 {
-	$parts = explode('[more]', $text, 2);
+	$parts = explode('[cut]', $text, 2);
 	return content($parts[0]);
 }
 
