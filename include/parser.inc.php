@@ -27,7 +27,7 @@ function bbcode($text)
 	$replace[] = '<iframe width="320" height="240" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
 
 	$pattern[] = '%\[block\]((?:(.|\n)(?!\[block\]))+)\[/block\]%e';
-	$replace[] = '\'<div class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</div>\'';
+	$replace[] = '\'<span class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</span>\'';
 	
 	$pattern[] = '%\[cut\]%';
 	$replace[] = '';

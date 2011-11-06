@@ -9,7 +9,8 @@ ul {
 }
 a {
 	color: #036;
-	margin: 0 1px;
+	margin: 0 2px;
+	text-decoration: none;
 }
 h1 {
 	color: #666;
@@ -29,6 +30,9 @@ img {
 	max-height: 320px;
 }
 .block {
+	display: block;
+	padding: 5px 10px;
+	margin: 5px;
 	color: #666;
 	border: 1px dashed #666;
 	background-color: #EEE;
@@ -47,14 +51,9 @@ img {
 #footer ul {
 	padding: 0;
 }
-.important, .block, #menu ul li, #footer ul li, #page ul li, #user ul li, #jump ul li {
+.important, #menu ul li, #footer ul li, #page ul li, #user ul li, #jump ul li {
 	padding: 2px 4px;
 	margin: 4px;
-}
-.important, #menu ul li a, #page ul li a, #user ul li a, #jump ul li a {
-	text-decoration: none;
-}
-#menu ul li, #footer ul li, #page ul li, #user ul li, #jump ul li {
 	display: inline-block;
 }
 #menu ul li {
@@ -81,7 +80,7 @@ img {
 }
 td{
 	border: 1px dotted #666;
-	padding: 5px 14px;
+	padding: 4px 14px;
 	vertical-align: top;
 }
 table {
