@@ -30,7 +30,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p>' .manageReply($reply).$replyEntry['trip']. '</p>
 			<p>' .entryDate($reply). '</p></td>
 			<td><div>' .content($replyEntry['content']). '</div>'.
-			(!$topicEntry['locked']? '<p><a class="important" href="add.php?reply=' .$_GET['topic']. '&q=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+			(!$topicEntry['locked']? '<p><a class="important" href="add.php?reply=' .$_GET['topic']. '&amp;q=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 			hook('afterReply', $reply). '</td></tr>';
 		}
 	}
