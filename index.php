@@ -6,7 +6,7 @@ require 'include/manage.inc.php';
 
 if(isGET('new'))
 {
-	$out['subtitle'] = $lang['new'].$lang['topic']. ' / ' .$lang['reply'];
+	$out['subtitle'] = $lang['new'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 
 	$mixes = array_merge(array_fill_keys(listEntry('topic'), 'topic'), array_fill_keys(listEntry('reply'), 'reply'));
@@ -64,24 +64,6 @@ else if(isGET('forum'))
 			<td>' .($forumEntry['topic']? entryDate(end($forumEntry['topic'])) : $lang['none']). '</td></tr>';
 		}
 		$out['content'] .= '</table>';
-	}
-	else
-	{
-		$out['content'] .= '<p>' .$lang['none']. '</p>';
-	}
-}
-else if(isGET('worker') && isAdmin())
-{
-	$out['subtitle'] = $lang['worker'];
-	$out['content'] .= '<h1><a href="add.php?worker">[+]</a>' .$out['subtitle']. '</h1>';
-	if($config['worker'])
-	{
-		$out['content'] .= '<div id="user"><ul>';
-		foreach($config['worker'] as $key => $password)
-		{
-			$out['content'] .= '<li><a href="delete.php?worker=' .$key. '">' .$password. '</a></li>';
-		}
-		$out['content'] .= '</ul></div>';
 	}
 	else
 	{

@@ -2,6 +2,7 @@
 
 $lang['topic'] = '主題';
 $lang['reply'] = '回覆';
+$lang['plugin'] = '插件';
 $lang['config'] = '設定';
 $lang['logout'] = '登出';
 $lang['login'] = '登入';

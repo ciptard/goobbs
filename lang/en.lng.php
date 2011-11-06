@@ -2,7 +2,8 @@
 
 $lang['topic'] = 'Topic';
 $lang['reply'] = 'Reply';
-$lang['config'] = 'Config';
+$lang['plugin'] = 'Plugin';
+$lang['config'] = 'Config ';
 $lang['logout'] = 'Logout';
 $lang['login'] = 'Login';
 $lang['redirect'] = 'Go back to';
@@ -27,7 +28,7 @@ $lang['info'] = 'Information';
 $lang['date'] = 'Date';
 $lang['view'] = 'View';
 $lang['count'] = 'Post';
-$lang['new'] = 'New ';
+$lang['new'] = 'New';
 $lang['more'] = 'More ';
 $lang['confirm'] = 'ok';
 $lang['admin'] = 'Admin';

@@ -114,7 +114,7 @@ else if(isGET('worker') && isAdmin())
 	{
 		$config['worker'][hide($_POST['password'])] = clean($_POST['password']);
 		saveEntry('config', 'config', $config);
-		$out['content'] .= '<p><a href="index.php?worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
+		$out['content'] .= '<p><a href="config.php?worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
 	}
 	else
 	{

@@ -30,12 +30,54 @@ if(isGET('main') && isAdmin())
 		</form>';
 	}
 }
-else if(isGET('plugin') && isAdmin() && function_exists($_GET['plugin']. '_config'))
+else if(isGET('worker') && isAdmin())
 {
-	$misc = $_GET['plugin']. '_config';
-	$out['subtitle'] = strtolower($_GET['plugin']);
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>'.
-	$misc();
+	$out['subtitle'] = $lang['worker'];
+	$out['content'] .= '<h1><a href="add.php?worker">[+]</a>' .$out['subtitle']. '</h1>';
+	if($config['worker'])
+	{
+		$out['content'] .= '<div id="user"><ul>';
+		foreach($config['worker'] as $key => $password)
+		{
+			$out['content'] .= '<li><a href="delete.php?worker=' .$key. '">' .$password. '</a></li>';
+		}
+		$out['content'] .= '</ul></div>';
+	}
+	else
+	{
+		$out['content'] .= '<p>' .$lang['none']. '</p>';
+	}
+}
+else if(isGET('plugin') && isAdmin())
+{
+	if(function_exists($_GET['plugin']. '_config'))
+	{
+		$misc = $_GET['plugin']. '_config';
+		$out['subtitle'] = $lang['config'].strtolower($_GET['plugin']);
+		$out['content'] .= '<h1>' .$out['subtitle']. '</h1>'.
+		$misc();
+	}
+	else
+	{
+		$out['subtitle'] = $lang['config'].$lang['plugin'];
+		$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
+		<ul>';
+		if($plugins)
+		{
+			foreach($plugins as $plugin)
+			{
+				if(function_exists($plugin. '_config'))
+				{
+					$out['content'] .= '<li><a href="config?plugin=' .$plugin. '">' .$plugin. '</a></li>';
+				}
+			}
+		}
+		else
+		{
+			$out['content'] .= '<li>' .$lang['none']. '</li>';
+		}
+		$out['content'] .= '</ul>';
+	}
 }
 else
 {

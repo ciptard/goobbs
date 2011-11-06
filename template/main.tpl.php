@@ -23,12 +23,13 @@ header('Content-Type: text/html; charset=UTF-8');
 	<div id="container">
 		<div id="header"><h2><?php echo $config['title'].hook('header');?></h2></div>
 		<div id="menu"><ul>
-			<li><a href="index.php?new"><?php echo $lang['new'].$lang['topic']. ' / ' .$lang['reply'];?></a></li>
+			<li><a href="index.php?new"><?php echo $lang['new'];?></a></li>
 			<li><a href="index.php?forum"><?php echo $lang['forum'];?></a></li>
 			<li><a href="search.php"><?php echo $lang['search'];?></a></li>
 			<?php echo hook('menu').
 			(isAdmin()? '<li><a href="config.php?main">' .$lang['config']. '</a></li>
-			<li><a href="index.php?worker">' .$lang['worker']. '</a></li>' : '').
+			<li><a href="config.php?plugin">' .$lang['plugin']. '</a></li>
+			<li><a href="config.php?worker">' .$lang['worker']. '</a></li>' : '').
 			(isWorker()?
 			'<li><a href="auth.php?logout">' .$lang['logout']. ' (' .$lang[$_SESSION['role']]. ')</a></li>' :
 			'<li><a href="auth.php?login">' .$lang['login']. '</a></li>');?>

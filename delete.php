@@ -87,7 +87,7 @@ else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]
 	{
 		unset($config['worker'][$_GET['worker']]);
 		saveEntry('config', 'config', $config);
-		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="config.php?worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
 	}
 	else
 	{
