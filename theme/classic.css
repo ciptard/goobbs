@@ -75,8 +75,9 @@ img {
 .important {
 	background-color: #9A4444;
 }
-th {
+.th {
 	background-color: #F0D5B7;
+	text-align: center;
 }
 td{
 	border: 1px dotted #666;
