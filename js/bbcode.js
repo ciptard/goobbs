@@ -51,7 +51,7 @@ function bbcode() {
 				else
 					return;
 				break;
-			case 'more':
+			case 'cut':
 				end = '';
 				break;
 		}
