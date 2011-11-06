@@ -75,8 +75,7 @@ img {
 .important {
 	background-color: #9A4444;
 }
-.entryHeader {
-	text-align: center;
+th {
 	background-color: #F0D5B7;
 }
 td{

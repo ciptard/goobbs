@@ -15,9 +15,9 @@ if(isGET('new'))
 	if($mixes)
 	{
 		$out['content'] .= '<table>
-		<tr class="entryHeader"><td>' .$lang['topic']. '</td>
-		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class="w2">' .$lang['date']. '</td></tr>';
+		<tr><th>' .$lang['topic']. '</th>
+		<th class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</th>
+		<th class="w2">' .$lang['date']. '</th></tr>';
 		foreach($mixes as $mix => $type)
 		{
 			if($type === 'topic')
@@ -53,9 +53,9 @@ else if(isGET('forum'))
 	if($forums)
 	{
 		$out['content'] .= '<table>
-		<tr class="entryHeader"><td>' .$lang['forum']. '</td>
-		<td class="w1">' .$lang['topic']. '</td>
-		<td class="w2">' .$lang['date']. '</td></tr>';
+		<tr><th>' .$lang['forum']. '</th>
+		<th class="w1">' .$lang['topic']. '</th>
+		<th class="w2">' .$lang['date']. '</th></tr>';
 		foreach($forums as $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);

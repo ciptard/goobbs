@@ -16,7 +16,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 
 	$out['subtitle'] = $topicEntry['title'];
 	$out['content'] .= '<table>
-	<tr class="entryHeader"><td colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
+	<tr><th colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></th></tr>
 	<tr><td class="w2"><p>' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
 	<p>' .entryDate($_GET['topic']). '</p></td>
 	<td><div>' .content($topicEntry['content']). '</div>'.
@@ -40,9 +40,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	shuffle($topics);
 	$topics = array_slice($topics, 0, 4);
 	$out['content'] .= '<table>
-	<tr class="entryHeader"><td>' .$lang['more'].$lang['topic']. '</td>
-	<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-	<td class="w2">' .$lang['forum']. '</td></tr>';
+	<tr><th>' .$lang['more'].$lang['topic']. '</th>
+	<th class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</th>
+	<th class="w2">' .$lang['forum']. '</th></tr>';
 	foreach($topics as $topic)
 	{
 		$topicEntry = readEntry('topic', $topic);
@@ -59,7 +59,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $forumEntry['name'];
 	$out['content'] .= '<table>
-	<tr class="entryHeader"><td><h1>' .manageForum($_GET['forum']).$out['subtitle']. '</h1></td></tr>
+	<tr><th><h1>' .manageForum($_GET['forum']).$out['subtitle']. '</h1></th></tr>
 	<tr><td><p>' .$forumEntry['info']. '</p>
 	<p><a class="important" href="add.php?topic=' .$_GET['forum']. '">' .$lang['add'].$lang['topic']. '</a></p>'.
 	hook('afterForum', $_GET['forum']).
@@ -71,9 +71,9 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	if($total > 0)
 	{
 		$out['content'] .= '<table>
-		<tr class="entryHeader"><td>' .$lang['topic']. '</td>
-		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class="w2">' .$lang['date']. '</td></tr>';
+		<tr><th>' .$lang['topic']. '</th>
+		<th class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</th>
+		<th class="w2">' .$lang['date']. '</th></tr>';
 		foreach($pages[$p-1] as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
