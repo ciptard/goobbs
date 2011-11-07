@@ -1,4 +1,4 @@
-var lastHash='';
+var lastHash = '';
 
 $(document).ready(function(){
 	highlight();
@@ -8,7 +8,7 @@ $(document).ready(function(){
 });
 
 function highlight() {
-	$(lastHash).css('background-color', '#FFFFFF');
-	$(location.hash).css('background-color', '#FFFF99');
-	lastHash=location.hash;
+	$(lastHash).css('background-color', '#FFF');
+	$(location.hash).css('background-color', '#FFC');
+	lastHash = location.hash;
 }
