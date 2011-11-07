@@ -1,3 +1,5 @@
+var lastHash='';
+
 $(document).ready(function(){
 	highlight();
 	$(window).bind('hashchange', function() {
@@ -6,5 +8,7 @@ $(document).ready(function(){
 });
 
 function highlight() {
-	$(location.hash).fadeTo('slow', 0.1).fadeTo('slow', 1).fadeTo('slow', 0.1).fadeTo('slow', 1);
+	$(lastHash).css('background-color', '#FFFFFF');
+	$(location.hash).css('background-color', '#FFFF99');
+	lastHash=location.hash;
 }
