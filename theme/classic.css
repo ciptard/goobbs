@@ -100,7 +100,7 @@ table {
 	border-collapse: collapse;
 }
 tr:target {
-	background-color: #FFE;
+	background-color: #FFD;
 }
 .w1 {
 	width: 15%;
