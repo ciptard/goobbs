@@ -13,7 +13,7 @@ function isPOST($name)
 function message($msg)
 {
 	global $out;
-	$out['content'] .= '<div class="important">' .$msg. '</div>';
+	$out['content'] .= '<div class="msg">' .$msg. '</div>';
 }
 
 function password()
