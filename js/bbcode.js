@@ -7,8 +7,7 @@ function bbcode() {
 
 	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block', 'cut'];
 	var e = $('<div id="bbcode"></div>');
-	for(var i in tags)
-	{
+	for(var i in tags) {
 		$('<input type="button"/>').attr('value', tags[i]).appendTo(e);
 	}
 	$(e).insertBefore(ta);
@@ -16,10 +15,10 @@ function bbcode() {
 	$('#bbcode input').css('margin', 5)
 	.hover(
 		function() {
-			$(this).animate({opacity: 0.5});
+			$(this).fadeTo('slow', 0.5);
 		},
 		function() {
-			$(this).animate({opacity: 1});
+			$(this).fadeTo('slow', 1);
 		}
 	)
 	.click(function() {
@@ -28,8 +27,7 @@ function bbcode() {
 		var end = '[/'+tag+']';
 		
 		var param;
-		switch(tag)
-		{
+		switch(tag) {
 			case 'img':
 				param = prompt('Enter image URL', 'http://');
 				if (param)
@@ -57,14 +55,11 @@ function bbcode() {
 		}
 
 		ta.focus();
-		if (typeof ta.selectionStart != 'undefined')
-		{
+		if (typeof ta.selectionStart != 'undefined') {
 			var startPos = ta.selectionStart;
 			var endPos = ta.selectionEnd;
 			ta.value = ta.value.substring(0, startPos) + start + ta.value.substring(startPos, endPos) + end + ta.value.substring(endPos, ta.value.length);
-		}
-		else
-		{
+		} else {
 			ta.value += start + end;
 		}
 	});

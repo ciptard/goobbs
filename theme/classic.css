@@ -99,6 +99,9 @@ table {
 	margin: 7px 0;
 	border-collapse: collapse;
 }
+tr:target {
+	background-color: #FFE;
+}
 .w1 {
 	width: 15%;
 }
