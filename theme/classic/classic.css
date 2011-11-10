@@ -102,6 +102,10 @@ table {
 tr:target {
 	background-color: #FFD;
 }
+.box {
+	padding: 7px;
+	border: 1px solid #CCC;
+}
 .w1 {
 	width: 15%;
 }
