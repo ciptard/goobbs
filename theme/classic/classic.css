@@ -4,10 +4,12 @@ html {
 	font-size: 14px;
 	color: #555;
 }
+ul, p {
+	margin: 7px 0;
+}
 ul {
 	list-style: none;
 	padding-left: 14px;
-	margin: 7px 0;
 }
 a {
 	color: #036;
