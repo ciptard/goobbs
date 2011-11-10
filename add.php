@@ -36,7 +36,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		<p>' .textarea(). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
-		(isPOST('content')? '<div class="box">' .content(clean($_POST['content'])). '</div>' : '');
+		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');
 	}
 }
 else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
@@ -81,7 +81,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 		<p>' .textarea($quote). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
-		(isPOST('content')? '<div class="box">' .content(clean($_POST['content'])). '</div>' : '');
+		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');
 	}
 }
 else if(isGET('forum') && isAdmin())
