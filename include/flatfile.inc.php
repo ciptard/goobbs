@@ -8,16 +8,17 @@ function fdir($dir)
 	{
 		if($file !== '.' && $file !== '..')
 		{
-			$files[] = substr($file, 0, strpos($file, '.'));
+			$file = explode('.', $file, 2);
+			$files[] = $file[0];
 		}
 	}
 	closedir($dh);
 	return $files;
 }
 
-function indir($file, $dir, $ext)
+function indir($file, $dir, $ext = '')
 {
-	return strpos($file, '/') === false && strpos($file, '.') === false && strpos($file, "\0") === false && is_file($dir. '/' .$file. '.' .$ext);
+	return strpos($file, '/') === false && strpos($file, '.') === false && strpos($file, "\0") === false && file_exists($dir. '/' .$file.$ext);
 }
 
 function readEntry($type, $file)
@@ -42,7 +43,7 @@ function listEntry($type)
 
 function isValidEntry($type, $file)
 {
-	return indir($file, 'data/' .$type, 'dat.php');
+	return indir($file, 'data/' .$type, '.dat.php');
 }
 
 function newEntry()

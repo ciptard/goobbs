@@ -31,7 +31,7 @@ $plugins = fdir('plugin');
 
 foreach($plugins as $plugin)
 {
-	require 'plugin/' .$plugin. '.plg.php';
+	require 'plugin/' .$plugin. '/' .$plugin. '.plg.php';
 }
 
 $out['content'] = '';

@@ -8,8 +8,8 @@ if(isGET('main') && isAdmin())
 	$out['subtitle'] = $lang['config'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && checkPass() && check('title') &&
-		isPOST('theme') && indir($_POST['theme'], 'theme', 'css') &&
-		isPOST('lang') && indir($_POST['lang'], 'lang', 'lng.php'))
+		isPOST('theme') && indir($_POST['theme'], 'theme') &&
+		isPOST('lang') && indir($_POST['lang'], 'lang', '.lng.php'))
 	{
 		$config['admin'] = hide($_POST['password']);
 		$config['title'] = clean($_POST['title']);
