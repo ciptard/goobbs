@@ -21,7 +21,7 @@ function bbcode($text)
 	$replace[] = '<img src="$1" alt=""/>';
 
 	$pattern[] = '%\[url=([^\r\n\[]+?)\]([^\a]+?)\[/url\]%';
-	$replace[] = '<a href="$1">$2</a>';
+	$replace[] = '<a target="_blank" href="$1">$2</a>';
 
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
 	$replace[] = '<iframe width="320" height="240" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
