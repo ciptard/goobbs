@@ -2,11 +2,10 @@
 
 function pageControl($p, $total, $loc)
 {
-	global $lang;
 	return '<div id="page"><ul>' .
-	($p >= 2? '<li><a href="?' .$loc. '&amp;p=' .($p-1). '">← ' .$lang['prev']. '</a></li>' : '').
-	'<li>' .$lang['page']. ' : ' .$p. ' / ' .$total. '</li>' .
-	($p <= $total-1? '<li><a href="?' .$loc. '&amp;p=' .($p+1). '">' .$lang['next']. ' →</a></li>' : '').
+	($p >= 2? '<li><a href="?' .$loc. '&amp;p=' .($p-1). '">← ' .($p-1). '</a></li>' : '').
+	'<li>' .$p. ' / ' .$total. '</li>' .
+	($p <= $total-1? '<li><a href="?' .$loc. '&amp;p=' .($p+1). '">' .($p+1). ' →</a></li>' : '').
 	'</ul></div>';
 }
 
