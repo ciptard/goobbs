@@ -63,7 +63,7 @@ img {
 #footer ul {
 	padding: 0;
 }
-.button, .msg, #menu ul li, #footer ul li, #page ul li, #user ul li, #jump ul li {
+.button, .msg, #menu ul li, #footer ul li, #page ul li, #worker ul li, #jump ul li {
 	padding: 2px 4px;
 	margin: 4px;
 	display: inline-block;
@@ -72,13 +72,13 @@ img {
 #menu ul li {
 	background-color: #777;
 }
-.msg, #menu ul li a, #user ul li a {
+.msg, #menu ul li a, #worker ul li a {
 	color: #FFF;
 }
 .button, #page ul li {
 	background-color: #E0EAF1;
 }
-#user ul li {
+#worker ul li {
 	background-color: #75845C;
 }
 #jump ul li {
@@ -90,6 +90,12 @@ img {
 .th {
 	background-color: #F0D5B7;
 	text-align: center;
+}
+.user {
+	color: #117743;
+}
+.quote {
+	color: #789922;
 }
 td{
 	border: 1px solid #CCC;

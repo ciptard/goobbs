@@ -36,7 +36,7 @@ else if(isGET('worker') && isAdmin())
 	$out['content'] .= '<h1><a href="add.php?worker">[+]</a>' .$out['subtitle']. '</h1>';
 	if($config['worker'])
 	{
-		$out['content'] .= '<div id="user"><ul>';
+		$out['content'] .= '<div id="worker"><ul>';
 		foreach($config['worker'] as $key => $password)
 		{
 			$out['content'] .= '<li><a href="delete.php?worker=' .$key. '">' .$password. '</a></li>';

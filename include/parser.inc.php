@@ -33,7 +33,7 @@ function bbcode($text)
 	$replace[] = '';
 	
 	$pattern[] = '%\[quote=(\d{4}-\d{2}-\d{8}[a-z\d]{5})\]([^\r\n\[]+?)\[/quote\]%';
-	$replace[] = '<a href="#$1">&gt; $2</a>';
+	$replace[] = '<a class="quote" href="#$1">&gt; $2</a>';
 
 	return preg_replace($pattern, $replace, $text);
 }
