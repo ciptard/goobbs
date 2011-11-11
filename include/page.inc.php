@@ -3,9 +3,11 @@
 function pageControl($p, $total, $loc)
 {
 	return '<div id="page"><ul>' .
-	($p > 1? '<li><a href="?' .$loc. '&amp;p=' .($p-1). '">← ' .($p-1). '</a></li>' : '').
+	($p > 1? '<li><a href="?' .$loc. '&amp;p=1">← 1</a></li>
+	<li><a href="?' .$loc. '&amp;p=' .($p-1). '">← ' .($p-1). '</a></li>' : '').
 	'<li>' .$p. ' / ' .$total. '</li>' .
-	($p < $total? '<li><a href="?' .$loc. '&amp;p=' .($p+1). '">' .($p+1). ' →</a></li>' : '').
+	($p < $total? '<li><a href="?' .$loc. '&amp;p=' .($p+1). '">' .($p+1). ' →</a></li>
+	<li><a href="?' .$loc. '&amp;p=' .$total. '">' .$total. ' →</a></li>' : '').
 	'</ul></div>';
 }
 
