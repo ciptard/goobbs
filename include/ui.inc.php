@@ -85,4 +85,9 @@ function checkBot()
 	return false;
 }
 
+function onPage($item, $items)
+{
+	return (int) (array_search($item, array_values($items), true) / 8) + 1;
+}
+
 ?>

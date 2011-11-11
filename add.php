@@ -61,7 +61,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 		
 		$_SESSION[$reply] = $reply;
 
-		$out['content'] .= '<p><a href="view.php?topic=' .$_GET['reply']. '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php?topic=' .$_GET['reply']. '&amp;p='. onPage($reply, $topicEntry['reply']). '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{

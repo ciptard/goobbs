@@ -19,11 +19,12 @@ if(isGET('topic'))
 		foreach($topics as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
+			$url = $out['url']. 'view.php?topic=' .$topic;
 			$out['content'] .= '<entry>
-			<id>' .$out['url']. 'view.php?topic=' .$topic. '</id>
+			<id>' .$url. '</id>
 			<title>' .$topicEntry['trip']. ' ' .$lang['started']. ' ' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($topic, 'c'). '</updated>
-			<link href="' .$out['url']. 'view.php?topic=' .$topic. '"/>
+			<link href="' .$url. '"/>
 			<summary type="html">' .htmlspecialchars(summary($topicEntry['content']), ENT_QUOTES). '</summary>
 			</entry>';
 		}
@@ -42,11 +43,12 @@ else if(isGET('reply'))
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$topicEntry = readEntry('topic', $replyEntry['topic']);
+			$url = $out['url']. 'view.php?topic=' .$replyEntry['topic']. '&amp;p='. onPage($reply, $topicEntry['reply']). '#' .$reply;
 			$out['content'] .= '<entry>
-			<id>' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '</id>
+			<id>' .$url. '</id>
 			<title>' .$replyEntry['trip']. ' ' .$lang['replied']. ' ' .$topicEntry['title']. '</title>
 			<updated>' .entryDate($reply, 'c'). '</updated>
-			<link href="' .$out['url']. 'view.php?topic=' .$replyEntry['topic']. '#' .$reply. '"/>
+			<link href="' .$url. '"/>
 			<summary type="html">' .htmlspecialchars(summary($replyEntry['content']), ENT_QUOTES). '</summary>
 			</entry>';
 		}
