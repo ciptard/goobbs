@@ -1,16 +1,18 @@
 $(document).ready(function(){
-	$('a.quote').hover(
+	$('a.quote[href]').hover(
 		function(e) {
-			var target = $($(this).attr('href') + ' td:eq(1) p:eq(0)');
-			$('<div id="reply" class="box"></div>').html($(target).length > 0? $(target).html() : 'nothing.')
-			.css({
-				'width': '600px',
-				'background-color': '#FFF',
-				'position': 'absolute',
-				'top': e.pageY+20,
-				'left': e.pageX+20
-			})
-			.hide().appendTo('body').fadeIn();
+			var link = $(this).attr('href').split('#');
+			var target = link[0] + ' #' + link[1] + ' td:eq(1) p:eq(0)';
+			$('<div id="reply" class="box"></div>').hide().appendTo('body').load(target, function() {
+				$(this).css({
+					'width': '600px',
+					'background-color': '#FFF',
+					'position': 'absolute',
+					'top': e.pageY+20,
+					'left': e.pageX+20
+				})
+				.fadeIn();
+			});
 		},
 		function() {
 			$('#reply').remove();

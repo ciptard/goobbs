@@ -32,8 +32,8 @@ function bbcode($text)
 	$pattern[] = '%\[cut\]%';
 	$replace[] = '';
 	
-	$pattern[] = '%\[quote=(\d{4}-\d{2}-\d{8}[a-z\d]{5})\]([^\r\n\[]+?)\[/quote\]%';
-	$replace[] = '<a class="quote" href="#$1">&gt; $2</a>';
+	$pattern[] = '%\[quote\](\d{4}-\d{2}-\d{8}[a-z\d]{5})\[/quote\]%e';
+	$replace[] = 'permalink(\'$1\')';
 
 	return preg_replace($pattern, $replace, $text);
 }
