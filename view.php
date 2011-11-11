@@ -7,6 +7,7 @@ require 'include/manage.inc.php';
 if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 {
 	require 'include/parser.inc.php';
+	require 'include/page.inc.php';
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$forumEntry = readEntry('forum', $topicEntry['forum']);
 
@@ -21,10 +22,15 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	<p>' .entryDate($_GET['topic']). '</p></td>
 	<td><p>' .content($topicEntry['content']). '</p>'.
 	(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
-	hook('afterTopic', $_GET['topic']).'</td></tr>';
-	if($topicEntry['reply'])
+	hook('afterTopic', $_GET['topic']).'</td></tr>
+	</table>';
+	$pages = array_chunk($topicEntry['reply'], 8);
+	$total = count($pages);
+	$p = pageNum($total);
+	if($total > 0)
 	{
-		foreach($topicEntry['reply'] as $reply)
+		$out['content'] .= '<table>';
+		foreach($pages[$p-1] as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
@@ -33,8 +39,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '&amp;q=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 			hook('afterReply', $reply). '</td></tr>';
 		}
+		$out['content'] .= '</table>';
 	}
-	$out['content'] .= '</table>';
+	$out['content'] .= pageControl($p, $total, 'topic=' .$_GET['topic']);
 	
 	$topics = listEntry('topic');
 	shuffle($topics);
