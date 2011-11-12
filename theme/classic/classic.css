@@ -63,7 +63,7 @@ img {
 #footer ul {
 	padding: 0;
 }
-.button, .msg, #menu ul li, #footer ul li, #page ul li, #worker ul li, #jump ul li {
+.button, .msg, #menu ul li, #footer ul li, #page ul li, #jump ul li {
 	padding: 2px 4px;
 	margin: 4px;
 	display: inline-block;
@@ -72,14 +72,11 @@ img {
 #menu ul li {
 	background-color: #777;
 }
-.msg, #menu ul li a, #worker ul li a {
+.msg, #menu ul li a {
 	color: #FFF;
 }
 .button, #page ul li {
 	background-color: #E0EAF1;
-}
-#worker ul li {
-	background-color: #75845C;
 }
 #jump ul li {
 	background-color: #FFEFC6;
