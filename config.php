@@ -59,21 +59,14 @@ else if(isGET('plugin') && isAdmin())
 	}
 	else
 	{
-		foreach($plugins as $plugin)
-		{
-			if(function_exists($plugin. '_config'))
-			{
-				$pluginConfig[] = $plugin;
-			}
-		}
-		$out['subtitle'] = $lang['config'].$lang['plugin'];
+		$out['subtitle'] = $lang['plugin'];
 		$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
 		<ul>';
-		if($pluginConfig)
+		if($plugins)
 		{
-			foreach($pluginConfig as $plugin)
+			foreach($plugins as $plugin)
 			{
-				$out['content'] .= '<li><a href="config.php?plugin=' .$plugin. '">' .$plugin. '</a></li>';
+				$out['content'] .= '<li>' .$plugin.(function_exists($plugin. '_config')? ' - <a href="config.php?plugin=' .$plugin. '">' .$lang['config']. '</a>' : ''). '</li>';
 			}
 		}
 		else
