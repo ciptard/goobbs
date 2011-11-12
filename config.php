@@ -33,20 +33,20 @@ if(isGET('main') && isAdmin())
 else if(isGET('worker') && isAdmin())
 {
 	$out['subtitle'] = $lang['worker'];
-	$out['content'] .= '<h1><a href="add.php?worker">[+]</a>' .$out['subtitle']. '</h1>';
+	$out['content'] .= '<h1><a href="add.php?worker">[+]</a>' .$out['subtitle']. '</h1>
+	<ul>';
 	if($config['worker'])
 	{
-		$out['content'] .= '<div id="worker"><ul>';
 		foreach($config['worker'] as $key => $password)
 		{
-			$out['content'] .= '<li><a href="delete.php?worker=' .$key. '">' .$password. '</a></li>';
+			$out['content'] .= '<li><a href="delete.php?worker=' .$key. '">[x]</a>' .$password. '</li>';
 		}
-		$out['content'] .= '</ul></div>';
 	}
 	else
 	{
-		$out['content'] .= '<p>' .$lang['none']. '</p>';
+		$out['content'] .= '<li>' .$lang['none']. '</li>';
 	}
+	$out['content'] .= '</ul>';
 }
 else if(isGET('plugin') && isAdmin())
 {
