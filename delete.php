@@ -81,7 +81,7 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 }
 else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]))
 {
-	$out['subtitle'] = $lang['delete'].$lang['worker'];
+	$out['subtitle'] = $lang['delete'].$lang['worker']. ' : ' .$config['worker'][$_GET['worker']];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
 	{
