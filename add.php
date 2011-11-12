@@ -8,7 +8,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 	$forumEntry = readEntry('forum', $_GET['topic']);
 	$out['subtitle'] = $lang['add'].$lang['topic']. ' : ' .$forumEntry['name'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('name', 0) && check('title') && check('content', 1, 2000))
+	if(checkBot() && check('name', 0, 20) && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
@@ -48,7 +48,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	}
 	$out['subtitle'] = $lang['add'].$lang['reply']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && check('name', 0) && check('content', 1, 2000))
+	if(checkBot() && check('name', 0, 20) && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = clean($_POST['content']);
 		$replyEntry['topic'] = $_GET['reply'];
