@@ -53,8 +53,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 		$options['yes'] = $lang['yes'];
 		$options['no'] = $lang['no'];
 
-		$forums = listEntry('forum');
-		foreach($forums as $forum)
+		foreach(listEntry('forum') as $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);
 			$forumOptions[$forum] = $forumEntry['name'];

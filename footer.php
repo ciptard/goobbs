@@ -7,10 +7,9 @@ if(!isset($template))
 
 if($template === 'main')
 {
-	$forums = listEntry('forum');
 	$out['content'] .= '<div id="jump"><ul>
 	<li>' .$lang['count']. ' : ' .count(array_merge(listEntry('topic'), listEntry('reply'))). '</li>';
-	foreach($forums as $forum)
+	foreach(listEntry('forum') as $forum)
 	{
 		$forumEntry = readEntry('forum', $forum);
 		$out['content'] .= '<li><a href="view.php?forum=' .$forum. '">' .$forumEntry['name']. '</a></li>';

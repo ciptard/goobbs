@@ -24,13 +24,12 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']).'</td></tr>
 	</table>';
-	$pages = array_chunk($topicEntry['reply'], 8);
-	$total = count($pages);
+	$total = countPage($topicEntry['reply']);
 	$p = pageNum($total);
 	if($total > 0)
 	{
 		$out['content'] .= '<table>';
-		foreach($pages[$p-1] as $reply)
+		foreach(getPage($topicEntry['reply'], $p) as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
@@ -72,8 +71,8 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	hook('afterForum', $_GET['forum']).
 	'</td></tr>
 	</table>';
-	$pages = array_chunk(array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic']))), 8);
-	$total = count($pages);
+	$topics = array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic'])));
+	$total = countPage($topics);
 	$p = pageNum($total);
 	if($total > 0)
 	{
@@ -81,7 +80,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 		<tr class="th"><td>' .$lang['topic']. '</td>
 		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
-		foreach($pages[$p-1] as $topic)
+		foreach(getPage($topics, $p) as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
 			$out['content'] .= '<tr><td>' .manageTopic($topic).(isset($forumEntry['pinnedTopic'][$topic])? '<span class="pinned">' .$lang['pinned']. '</span>':'').($topicEntry['locked']? '<span class="locked">' .$lang['locked']. '</span>':'').$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>

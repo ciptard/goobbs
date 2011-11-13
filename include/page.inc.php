@@ -11,6 +11,16 @@ function pageControl($p, $total, $loc)
 	'</ul></div>';
 }
 
+function countPage($items)
+{
+	return ceil(count($items) / 8);
+}
+
+function getPage($items, $p)
+{
+	return array_slice($items, 8*($p-1), 8);
+}
+
 function pageNum($total)
 {
 	return isGET('p') && $_GET['p'] >= 1 && $_GET['p'] <= $total? $_GET['p'] : 1;
