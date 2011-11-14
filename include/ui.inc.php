@@ -90,4 +90,12 @@ function onPage($item, $items)
 	return (int) (array_search($item, array_values($items), true) / 8) + 1;
 }
 
+function shortNum($int)
+{
+	if($int < 1000)
+		return $int;
+	else
+		return round($int/1000, 1). 'K';
+}
+
 ?>

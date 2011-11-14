@@ -54,7 +54,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		$topicEntry = readEntry('topic', $topic);
 		$forumEntry = readEntry('forum', $topicEntry['forum']);
 		$out['content'] .= '<tr><td>' .manageTopic($topic).$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
-		<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
+		<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
 		<td><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a></td></tr>';
 	}
 	$out['content'] .= '</table>';
@@ -84,7 +84,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 		{
 			$topicEntry = readEntry('topic', $topic);
 			$out['content'] .= '<tr><td>' .manageTopic($topic).(isset($forumEntry['pinnedTopic'][$topic])? '<span class="pinned">' .$lang['pinned']. '</span>':'').($topicEntry['locked']? '<span class="locked">' .$lang['locked']. '</span>':'').$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
-			<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
+			<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .entryDate($topic). '</td></tr>';
 		}
 		$out['content'] .= '</table>';

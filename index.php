@@ -25,7 +25,7 @@ if(isGET('new'))
 				$topic = $mix;
 				$topicEntry = readEntry('topic', $topic);
 				$out['content'] .= '<tr><td>' .manageTopic($topic).$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
-				<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
+				<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
 				<td>' .entryDate($topic). '</td></tr>';
 			}
 			else
@@ -34,7 +34,7 @@ if(isGET('new'))
 				$replyEntry = readEntry('reply', $reply);
 				$topicEntry = readEntry('topic', $replyEntry['topic']);
 				$out['content'] .= '<tr><td>' .manageReply($reply).$replyEntry['trip']. ' ' .$lang['replied']. ' <a href="view.php?topic=' .$replyEntry['topic']. '&amp;p='. onPage($reply, $topicEntry['reply']). '#' .$reply. '">' .$topicEntry['title']. '</a></td>
-				<td>' .$topicEntry['view']. ' / ' .count($topicEntry['reply']). '</td>
+				<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
 				<td>' .entryDate($reply). '</td></tr>';
 			}
 		}
