@@ -22,7 +22,7 @@ if(!isset($_SESSION['role']))
 //load config
 $config = readEntry('config', 'config');
 
-require 'lang/' .$config['lang']. '.lng.php';
+$lang = json_decode(file_get_contents('lang/' .$config['lang']. '.json'), true);
 require 'include/user.inc.php';
 require 'include/ui.inc.php';
 require 'include/plugin.inc.php';
