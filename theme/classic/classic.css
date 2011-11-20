@@ -40,6 +40,7 @@ input[type="text"] {
 img {
 	max-width: 320px;
 	max-height: 320px;
+	border: 0;
 }
 .block {
 	display: block;
