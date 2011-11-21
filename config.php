@@ -9,7 +9,7 @@ if(isGET('main') && isAdmin())
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && checkPass() && check('title') &&
 		isPOST('theme') && indir($_POST['theme'], 'theme') &&
-		isPOST('lang') && indir($_POST['lang'], 'lang', '.json'))
+		isPOST('lang') && indir($_POST['lang'], 'lang', '.lng.php'))
 	{
 		$config['admin'] = hide($_POST['password']);
 		$config['title'] = clean($_POST['title']);
