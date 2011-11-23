@@ -5,6 +5,7 @@ require 'header.php';
 
 if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('topic', $_GET['topic']))
 {
+	require 'include/parser.inc.php';
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$out['subtitle'] = $lang['edit'].$lang['topic']. ' : ' .$topicEntry['title'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
@@ -12,6 +13,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
+		$topicEntry['contentHTML'] = bbcode($topicEntry['content']);
 		if(isWorker() &&
 			isPOST('locked') && ($_POST['locked'] === 'yes' || $_POST['locked'] === 'no') &&
 			isPOST('pinned') && ($_POST['pinned'] === 'yes' || $_POST['pinned'] === 'no') &&
@@ -48,8 +50,6 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 	}
 	else
 	{
-		require 'include/parser.inc.php';
-		
 		$options['yes'] = $lang['yes'];
 		$options['no'] = $lang['no'];
 
@@ -65,29 +65,30 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 		(isWorker()? '<p>' .select('locked', $options, $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
 		'<p>' .submit(). '</p>
 		</form>'.
-		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');
+		(isPOST('content')? '<p class="box">' .bbcode(clean($_POST['content'])). '</p>' : '');
 	}
 }
 else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEntry('reply', $_GET['reply']))
 {
+	require 'include/parser.inc.php';
 	$replyEntry = readEntry('reply', $_GET['reply']);
 	$out['subtitle'] = $lang['edit'].$lang['reply'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = clean($_POST['content']);
+		$replyEntry['contentHTML'] = bbcode($replyEntry['content']);
 		saveEntry('reply', $_GET['reply'], $replyEntry);
 		$topicEntry = readEntry('topic', $replyEntry['topic']);
 		$out['content'] .= '<p><a href="view.php?topic=' .$replyEntry['topic']. '&amp;p='. onPage($_GET['reply'], $topicEntry['reply']). '#' .$_GET['reply']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
-		require 'include/parser.inc.php';
 		$out['content'] .= '<form action="edit.php?reply=' .$_GET['reply']. '" method="post">
 		<p>' .textarea($replyEntry['content']). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
-		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');
+		(isPOST('content')? '<p class="box">' .bbcode(clean($_POST['content'])). '</p>' : '');
 	}
 }
 else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
