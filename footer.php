@@ -17,6 +17,6 @@ if($template === 'main')
 	$out['content'] .= '</ul></div>';
 }
 
-require 'template/' .$template. '.tpl.php';
+require 'theme/' $config['theme']. '/' .$template. '.tpl.php';
 
 ?>
