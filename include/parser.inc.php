@@ -5,6 +5,9 @@ function bbcode($text)
 	//the pattern to be matched
 	//the replacement
 
+	$pattern[] = '%\[block\]([^\a]+?)\[/block\]%e';
+	$replace[] = '\'<span class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</span>\'';
+
 	$pattern[] = '%\[b\]([^\a]+?)\[/b\]%';
 	$replace[] = '<b>$1</b>';
 
@@ -25,9 +28,6 @@ function bbcode($text)
 
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
 	$replace[] = '<iframe width="320" height="240" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
-
-	$pattern[] = '%\[block\]([^\a]+?)\[/block\]%e';
-	$replace[] = '\'<span class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</span>\'';
 	
 	$pattern[] = '%\[cut\]%';
 	$replace[] = '';
