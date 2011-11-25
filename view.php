@@ -6,6 +6,7 @@ require 'include/manage.inc.php';
 
 if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 {
+	require 'include/parser.inc.php';
 	require 'include/page.inc.php';
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$forumEntry = readEntry('forum', $topicEntry['forum']);
@@ -19,7 +20,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	<tr class="th"><td colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
 	<tr><td class="w2"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
 	<p>' .entryDate($_GET['topic']). '</p></td>
-	<td><p>' .$topicEntry['contentHTML']. '</p>'.
+	<td><p>' .content($topicEntry['content']). '</p>'.
 	(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']).'</td></tr>
 	</table>';
@@ -33,7 +34,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			$replyEntry = readEntry('reply', $reply);
 			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
 			<p>' .entryDate($reply). '</p></td>
-			<td><p>' .$replyEntry['contentHTML']. '</p>'.
+			<td><p>' .content($replyEntry['content']). '</p>'.
 			(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '&amp;q=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 			hook('afterReply', $reply). '</td></tr>';
 		}

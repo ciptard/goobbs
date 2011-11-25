@@ -29,16 +29,24 @@ function bbcode($text)
 	$pattern[] = '%\[block\]([^\a]+?)\[/block\]%e';
 	$replace[] = '\'<span class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</span>\'';
 	
+	$pattern[] = '%\[cut\]%';
+	$replace[] = '';
+	
 	$pattern[] = '%\[quote\](\d{4}-\d{2}-\d{8}[a-z\d]{5})\[/quote\]%e';
 	$replace[] = 'permalink(\'$1\')';
 
-	return preg_replace($pattern, $replace, nl2br($text));
+	return preg_replace($pattern, $replace, $text);
 }
 
 function summary($text)
 {
 	$parts = explode('[cut]', $text, 2);
-	return $parts[0];
+	return content($parts[0]);
+}
+
+function content($text)
+{
+	return bbcode(nl2br($text));
 }
 
 ?>

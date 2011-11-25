@@ -5,7 +5,6 @@ require 'header.php';
 
 if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 {
-	require 'include/parser.inc.php';
 	$forumEntry = readEntry('forum', $_GET['topic']);
 	$out['subtitle'] = $lang['add'].$lang['topic']. ' : ' .$forumEntry['name'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
@@ -13,7 +12,6 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = clean($_POST['content']);
-		$topicEntry['contentHTML'] = bbcode($topicEntry['content']);
 		$topicEntry['view'] = 0;
 		$topicEntry['forum'] = $_GET['topic'];
 		$topicEntry['reply'] = array();
@@ -31,18 +29,18 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 	}
 	else
 	{
+		require 'include/parser.inc.php';
 		$out['content'] .= '<form action="add.php?topic=' .$_GET['topic']. '" method="post">
 		<p>' .text('title'). '</p>
 		<p>' .text('name'). '</p>
 		<p>' .textarea(). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
-		(isPOST('content')? '<p class="box">' .bbcode(clean($_POST['content'])). '</p>' : '');
+		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');
 	}
 }
 else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 {
-	require 'include/parser.inc.php';
 	$topicEntry = readEntry('topic', $_GET['reply']);
 	if($topicEntry['locked'])
 	{
@@ -53,7 +51,6 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	if(checkBot() && check('name', 0, 20) && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = clean($_POST['content']);
-		$replyEntry['contentHTML'] = bbcode($replyEntry['content']);
 		$replyEntry['topic'] = $_GET['reply'];
 		$reply = newEntry();
 		$replyEntry['trip'] = $_POST['name'] === ''? substr($reply, -5) : trip(clean($_POST['name']));
@@ -77,12 +74,13 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 			$quote = '';
 		}
 
+		require 'include/parser.inc.php';
 		$out['content'] .= '<form action="add.php?reply=' .$_GET['reply']. '" method="post">
 		<p>' .text('name'). '</p>
 		<p>' .textarea($quote). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
-		(isPOST('content')? '<p class="box">' .bbcode(clean($_POST['content'])). '</p>' : '');
+		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');
 	}
 }
 else if(isGET('forum') && isAdmin())
