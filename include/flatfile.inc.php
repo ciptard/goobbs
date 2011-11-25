@@ -35,7 +35,7 @@ function _json_encode($var)
 			array('"', "\r", "\n", "\t"), 
 			array('\"', '\r', '\n', '\t'), 
 			array($key, $value));
-		$tmp = '"' .$key. '": ';
+		$tmp = '"' .$key. '":';
 		if(is_array($value))
 			$tmp .= _json_encode($value);
 		else
