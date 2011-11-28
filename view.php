@@ -40,14 +40,12 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		}
 		$out['content'] .= '</table>';
 	}
-	$out['content'] .= pageControl($p, $total, 'topic=' .$_GET['topic']);
-	
-	$topics = part('shuffle', listEntry('topic'), 4);
-	$out['content'] .= '<table>
+	$out['content'] .= pageControl($p, $total, 'topic=' .$_GET['topic']).
+	'<table>
 	<tr class="th"><td>' .$lang['more'].$lang['topic']. '</td>
 	<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 	<td class="w2">' .$lang['forum']. '</td></tr>';
-	foreach($topics as $topic)
+	foreach(part('shuffle', listEntry('topic'), 4) as $topic)
 	{
 		$topicEntry = readEntry('topic', $topic);
 		$forumEntry = readEntry('forum', $topicEntry['forum']);
