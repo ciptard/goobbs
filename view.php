@@ -42,9 +42,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	}
 	$out['content'] .= pageControl($p, $total, 'topic=' .$_GET['topic']);
 	
-	$topics = listEntry('topic');
-	shuffle($topics);
-	$topics = array_slice($topics, 0, 4);
+	$topics = part('shuffle', listEntry('topic'), 4);
 	$out['content'] .= '<table>
 	<tr class="th"><td>' .$lang['more'].$lang['topic']. '</td>
 	<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>

@@ -9,7 +9,7 @@ if(isGET('new'))
 	$out['subtitle'] = $lang['new'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 
-	$mixes = top(8, array_merge(listEntry('topic'), listEntry('reply')));
+	$mixes = part('rsort', array_merge(listEntry('topic'), listEntry('reply')), 8);
 	if($mixes)
 	{
 		$out['content'] .= '<table>
