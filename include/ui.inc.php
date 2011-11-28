@@ -98,4 +98,10 @@ function shortNum($int)
 		return round($int/1000, 1). 'K';
 }
 
+function top($limit, $arr)
+{
+	rsort($arr);
+	return array_slice($arr, 0, $limit);
+}
+
 ?>

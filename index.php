@@ -9,18 +9,16 @@ if(isGET('new'))
 	$out['subtitle'] = $lang['new'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 
-	$mixes = array_merge(array_fill_keys(listEntry('topic'), 'topic'), array_fill_keys(listEntry('reply'), 'reply'));
-	krsort($mixes);
-	$mixes = array_slice($mixes, 0, 8);
+	$mixes = top(8, array_merge(listEntry('topic'), listEntry('reply')));
 	if($mixes)
 	{
 		$out['content'] .= '<table>
 		<tr class="th"><td>' .$lang['topic']. '</td>
 		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
-		foreach($mixes as $mix => $type)
+		foreach($mixes as $mix)
 		{
-			if($type === 'topic')
+			if(isValidEntry('topic', $mix))
 			{
 				$topic = $mix;
 				$topicEntry = readEntry('topic', $topic);
