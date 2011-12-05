@@ -16,10 +16,10 @@ function message($msg)
 	$out['content'] .= '<div class="msg">' .$msg. '</div>';
 }
 
-function password()
+function password($name)
 {
 	global $lang;
-	return $lang['password']. ' <input type="password" name="password"/>  <input type="password" name="password2"/>';
+	return $lang[$name]. ' <input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>';
 }
 
 function text($name, $default = '')
@@ -28,11 +28,11 @@ function text($name, $default = '')
 	return $lang[$name]. ' <input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>';
 }
 
-function textarea($default = '')
+function textarea($name, $default = '')
 {
 	global $lang;
-	return $lang['content']. '
-	<textarea name="content" cols="80" rows="10">' .(isPOST('content')? clean($_POST['content']) : $default). '</textarea>';
+	return $lang[$name]. '
+	<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>';
 }
 
 function submit()
@@ -69,9 +69,9 @@ function check($name, $min = 1, $max = 40)
 	return false;
 }
 
-function checkPass()
+function checkPass($name)
 {
-	return check('password') && isPOST('password2') && $_POST['password'] === $_POST['password2'];
+	return check($name) && isPOST($name. 'Confirm') && $_POST[$name] === $_POST[$name. 'Confirm'];
 }
 
 function checkBot()

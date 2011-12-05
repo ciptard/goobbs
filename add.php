@@ -33,7 +33,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		$out['content'] .= '<form action="add.php?topic=' .$_GET['topic']. '" method="post">
 		<p>' .text('title'). '</p>
 		<p>' .text('name'). '</p>
-		<p>' .textarea(). '</p>
+		<p>' .textarea('content'). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
 		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');
@@ -77,7 +77,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 		require 'include/parser.inc.php';
 		$out['content'] .= '<form action="add.php?reply=' .$_GET['reply']. '" method="post">
 		<p>' .text('name'). '</p>
-		<p>' .textarea($quote). '</p>
+		<p>' .textarea('content', $quote). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
 		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');

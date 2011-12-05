@@ -3,7 +3,7 @@ $(document).ready(function(){
 });
 
 function bbcode() {
-	var ta = $('textarea')[0];
+	var ta = $('textarea[name="content"]');
 
 	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block', 'cut'];
 	var e = $('<div id="bbcode"></div>');

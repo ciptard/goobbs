@@ -7,7 +7,7 @@ if(isGET('login'))
 {
 	$out['subtitle'] = $lang['login'];
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
-	if(checkBot() && checkPass() && login($_POST['password']))
+	if(checkBot() && checkPass('password') && login($_POST['password']))
 	{
 		session_regenerate_id(true);
 		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
@@ -15,7 +15,7 @@ if(isGET('login'))
 	else
 	{
 		$out['content'] .= '<form action="auth.php?login" method="post">
-		<p>' .password(). '</p>
+		<p>' .password('password'). '</p>
 		<p>' .submit(). '</p>
 		</form>';
 	}
