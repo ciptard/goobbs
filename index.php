@@ -68,10 +68,15 @@ else if(isGET('forum'))
 		$out['content'] .= '<p>' .$lang['none']. '</p>';
 	}
 }
+else if(isGET('404'))
+{
+	$out['subtitle'] = 'HTTP 404';
+	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
+	<p>That is an error :(</p>';
+}
 else
 {
-	header('Location: index.php?new');
-	exit;
+	redirect('index.php?new');
 }
 
 require 'footer.php';

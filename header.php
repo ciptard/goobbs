@@ -6,11 +6,11 @@ if(!isset($template))
 }
 
 require 'include/flatfile.inc.php';
+require 'include/ui.inc.php';
 
 if(!isValidEntry('config', 'config'))
 {
-	header('Location: install.php');
-	exit;
+	redirect('install.php');
 }
 
 session_start();
@@ -24,7 +24,6 @@ $config = readEntry('config', 'config');
 
 require 'lang/' .$config['lang']. '.lng.php';
 require 'include/user.inc.php';
-require 'include/ui.inc.php';
 require 'include/plugin.inc.php';
 
 $plugins = fdir('plugin');

@@ -104,4 +104,10 @@ function part($do, $arr, $limit)
 	return array_slice($arr, 0, $limit);
 }
 
+function redirect($loc)
+{
+	header('Location: '. $loc);
+	exit;
+}
+
 ?>

@@ -96,7 +96,7 @@ else if(isGET('plugin') && function_exists($_GET['plugin']. '_view'))
 }
 else
 {
-	exit;
+	redirect('index.php?404');
 }
 
 require 'footer.php';

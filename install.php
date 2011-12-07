@@ -1,6 +1,7 @@
 <?php
 
 require 'include/flatfile.inc.php';
+require 'include/ui.inc.php';
 
 if(!isValidEntry('config', 'config'))
 {
@@ -22,6 +23,6 @@ if(!isValidEntry('config', 'config'))
 	$_SESSION['role'] = 'admin';
 }
 
-header('Location: index.php?forum');
+redirect('index.php?forum');
 
 ?>
