@@ -44,5 +44,6 @@ $lang['errorBot'] = '驗證碼不正確';
 $lang['pinned'] = '釘選';
 $lang['replied'] = '回覆';
 $lang['started'] = '開始';
+$lang['notFound'] = '糟糕! 這個頁面不存在 :(';
 
 ?>

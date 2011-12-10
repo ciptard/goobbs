@@ -72,7 +72,7 @@ else if(isGET('404'))
 {
 	$out['subtitle'] = 'HTTP 404';
 	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
-	<p>That is an error :(</p>';
+	<p>' .$lang['notFound']. '</p>';
 }
 else
 {

@@ -44,5 +44,6 @@ $lang['errorBot'] = 'Incorrect CAPTCHA';
 $lang['pinned'] = 'Pinned';
 $lang['replied'] = 'replied to';
 $lang['started'] = 'started';
+$lang['notFound'] = 'Oops! The page does not exist :(';
 
 ?>
