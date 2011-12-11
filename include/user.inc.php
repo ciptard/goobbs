@@ -38,7 +38,7 @@ function trip($name)
 	return $parts[0].(isset($parts[1])? '#' .substr(md5($parts[1]), -5) : '');
 }
 
-function permalink($reply)
+function quote($reply)
 {
 	if(isValidEntry('reply', $reply))
 	{

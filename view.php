@@ -8,6 +8,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 {
 	require 'include/parser.inc.php';
 	require 'include/page.inc.php';
+	
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$forumEntry = readEntry('forum', $topicEntry['forum']);
 
@@ -19,21 +20,21 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$out['content'] .= '<table>
 	<tr class="th"><td colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
 	<tr><td class="w2"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
-	<p>' .entryDate($_GET['topic']). '</p></td>
+	<p>' .toDate($_GET['topic']). '</p></td>
 	<td><p>' .content($topicEntry['content']). '</p>'.
 	(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']).'</td></tr>
 	</table>';
-	$total = countPage($topicEntry['reply']);
-	$p = pageNum($total);
+	$total = totalPage($topicEntry['reply']);
+	$p = pid($total);
 	if($total > 0)
 	{
 		$out['content'] .= '<table>';
-		foreach(getPage($topicEntry['reply'], $p) as $reply)
+		foreach(viewPage($topicEntry['reply'], $p) as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
-			<p>' .entryDate($reply). '</p></td>
+			<p>' .toDate($reply). '</p></td>
 			<td><p>' .content($replyEntry['content']). '</p>'.
 			(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '&amp;q=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 			hook('afterReply', $reply). '</td></tr>';
@@ -68,20 +69,20 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	'</td></tr>
 	</table>';
 	$topics = array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic'])));
-	$total = countPage($topics);
-	$p = pageNum($total);
+	$total = totalPage($topics);
+	$p = pid($total);
 	if($total > 0)
 	{
 		$out['content'] .= '<table>
 		<tr class="th"><td>' .$lang['topic']. '</td>
 		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
-		foreach(getPage($topics, $p) as $topic)
+		foreach(viewPage($topics, $p) as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
 			$out['content'] .= '<tr><td>' .manageTopic($topic).(isset($forumEntry['pinnedTopic'][$topic])? '<span class="pinned">' .$lang['pinned']. '</span>':'').($topicEntry['locked']? '<span class="locked">' .$lang['locked']. '</span>':'').$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
 			<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
-			<td>' .entryDate($topic). '</td></tr>';
+			<td>' .toDate($topic). '</td></tr>';
 		}
 		$out['content'] .= '</table>';
 	}

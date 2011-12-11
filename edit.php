@@ -49,10 +49,6 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 	else
 	{
 		require 'include/parser.inc.php';
-		
-		$options['yes'] = $lang['yes'];
-		$options['no'] = $lang['no'];
-
 		foreach(listEntry('forum') as $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);
@@ -62,7 +58,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 		$out['content'] .= '<form action="edit.php?topic=' .$_GET['topic']. '" method="post">
 		<p>' .text('title', $topicEntry['title']). '</p>
 		<p>' .textarea('content', $topicEntry['content']). '</p>'.
-		(isWorker()? '<p>' .select('locked', $options, $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
+		(isWorker()? '<p>' .select('locked', array('yes' => $lang['yes'], 'no' => $lang['no']), $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', $options, isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
 		'<p>' .submit(). '</p>
 		</form>'.
 		(isPOST('content')? '<p class="box">' .content(clean($_POST['content'])). '</p>' : '');

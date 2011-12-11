@@ -21,7 +21,7 @@ if(isGET('topic'))
 			$out['content'] .= '<entry>
 			<id>' .$url. '</id>
 			<title>' .$topicEntry['trip']. ' ' .$lang['started']. ' ' .$topicEntry['title']. '</title>
-			<updated>' .entryDate($topic, 'c'). '</updated>
+			<updated>' .toDate($topic, 'c'). '</updated>
 			<link href="' .$url. '"/>
 			<summary type="html">' .htmlspecialchars(summary($topicEntry['content']), ENT_QUOTES). '</summary>
 			</entry>';
@@ -43,7 +43,7 @@ else if(isGET('reply'))
 			$out['content'] .= '<entry>
 			<id>' .$url. '</id>
 			<title>' .$replyEntry['trip']. ' ' .$lang['replied']. ' ' .$topicEntry['title']. '</title>
-			<updated>' .entryDate($reply, 'c'). '</updated>
+			<updated>' .toDate($reply, 'c'). '</updated>
 			<link href="' .$url. '"/>
 			<summary type="html">' .htmlspecialchars(summary($replyEntry['content']), ENT_QUOTES). '</summary>
 			</entry>';
