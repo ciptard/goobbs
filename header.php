@@ -27,7 +27,6 @@ require 'include/user.inc.php';
 require 'include/ui.inc.php';
 
 $plugins = fdir('plugin');
-
 foreach($plugins as $plugin)
 {
 	require 'plugin/' .$plugin. '/' .$plugin. '.plg.php';

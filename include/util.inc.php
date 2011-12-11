@@ -1,13 +1,5 @@
 <?php
 
-function shortNum($int)
-{
-	if($int < 1000)
-		return $int;
-	else
-		return round($int/1000, 1). 'K';
-}
-
 function part($do, $arr, $limit)
 {
 	$do($arr);
@@ -18,6 +10,19 @@ function redirect($loc)
 {
 	header('Location: '. $loc);
 	exit;
+}
+
+function onPage($item, $items)
+{
+	return (int) (array_search($item, array_values($items), true) / 8) + 1;
+}
+
+function shortNum($int)
+{
+	if($int < 1000)
+		return $int;
+	else
+		return round($int/1000, 1). 'K';
 }
 
 function toDate($id, $pattern = 'Y/m/d H:i')
@@ -43,9 +48,7 @@ function toDate($id, $pattern = 'Y/m/d H:i')
 function clean($text)
 {
 	if(get_magic_quotes_gpc())
-	{
 		$text = stripslashes($text);
-	}
 	return htmlspecialchars(trim($text), ENT_QUOTES);
 }
 
@@ -83,16 +86,9 @@ function hook($name, $param = null)
 	{
 		$hookName = $plugin. '_' .$name;
 		if(function_exists($hookName))
-		{
 			$out .= $hookName($param);
-		}
 	}
 	return $out;
-}
-
-function onPage($item, $items)
-{
-	return (int) (array_search($item, array_values($items), true) / 8) + 1;
 }
 
 ?>
