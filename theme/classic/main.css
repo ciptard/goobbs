@@ -136,3 +136,12 @@ table {
 #page {
 	text-align: center;
 }
+.entryRight {
+	float: right;
+	width: 680px;
+}
+.entryLeft {
+	float: left;
+	width: 160px;
+	word-wrap: break-word;
+}
