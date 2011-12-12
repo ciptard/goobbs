@@ -2,18 +2,21 @@
 
 function pageControl($p, $total, $loc)
 {
-	return '<div id="page"><ul>' .
-	($p > 1? '<li><a href="?' .$loc. '&amp;p=1">| ←</a></li>
-	<li><a href="?' .$loc. '&amp;p=' .($p-1). '">← ' .($p-1). '</a></li>' : '').
-	'<li>' .$p. ' / ' .$total. '</li>' .
-	($p < $total? '<li><a href="?' .$loc. '&amp;p=' .($p+1). '">' .($p+1). ' →</a></li>
-	<li><a href="?' .$loc. '&amp;p=' .$total. '">→ |</a></li>' : '').
-	'</ul></div>';
+	$out = '<div id="page"><ul>';
+	foreach(range(1, $total) as $i)
+	{
+		if($p === $i)
+			$out .= '<li>' .$i. '</li>';
+		else
+			$out .= '<li><a href="?' .$loc. '&amp;p=' .$i. '">' .$i. '</a></li>';	
+	}
+	$out .= '</ul></div>';
+	return $out;
 }
 
 function totalPage($items)
 {
-	return ceil(count($items) / 8);
+	return (int) ceil(count($items) / 8);
 }
 
 function viewPage($items, $p)
@@ -23,7 +26,7 @@ function viewPage($items, $p)
 
 function pid($total)
 {
-	return isGET('p') && $_GET['p'] >= 1 && $_GET['p'] <= $total? $_GET['p'] : 1;
+	return isGET('p') && $_GET['p'] >= 1 && $_GET['p'] <= $total? (int) $_GET['p'] : 1;
 }
 
 ?>
