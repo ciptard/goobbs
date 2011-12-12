@@ -17,29 +17,27 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	saveEntry('topic', $_GET['topic'], $topicEntry);
 
 	$out['subtitle'] = $topicEntry['title'];
-	$out['content'] .= '<table>
-	<tr class="th"><td colspan="2"><h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. '</h1></td></tr>
-	<tr><td class="w2"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
-	<p>' .toDate($_GET['topic']). '</p></td>
-	<td><p>' .content($topicEntry['content']). '</p>'.
+	$out['content'] .= '<h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. ' » ' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</h1>
+	<div class="box">
+	<p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. ' - ' .toDate($_GET['topic']). '</p>
+	<p>' .content($topicEntry['content']). '</p>'.
 	(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
-	hook('afterTopic', $_GET['topic']).'</td></tr>
-	</table>';
+	hook('afterTopic', $_GET['topic']).
+	'</div>';
 	$total = totalPage($topicEntry['reply']);
 	$p = pid($total);
 	if($total > 0)
 	{
-		$out['content'] .= '<table>';
 		foreach(viewPage($topicEntry['reply'], $p) as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
-			$out['content'] .= '<tr id="' .$reply. '"><td class="w2"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
-			<p>' .toDate($reply). '</p></td>
-			<td><p>' .content($replyEntry['content']). '</p>'.
+			$out['content'] .= '<div id="' .$reply. '" class="box">
+			<p class="user">' .manageReply($reply).$replyEntry['trip']. ' - ' .toDate($reply). '</p>
+			<p>' .content($replyEntry['content']). '</p>'.
 			(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '&amp;q=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
-			hook('afterReply', $reply). '</td></tr>';
+			hook('afterReply', $reply).
+			'</div>';
 		}
-		$out['content'] .= '</table>';
 	}
 	$out['content'] .= pageControl($p, $total, 'topic=' .$_GET['topic']).
 	'<table>
@@ -61,13 +59,12 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	require 'include/page.inc.php';
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $forumEntry['name'];
-	$out['content'] .= '<table>
-	<tr class="th"><td><h1>' .manageForum($_GET['forum']).$out['subtitle']. '</h1></td></tr>
-	<tr><td><p>' .$forumEntry['info']. '</p>
+	$out['content'] .= '<div class="box">
+	<h1>' .manageForum($_GET['forum']).$out['subtitle']. '</h1>
+	<p>' .$forumEntry['info']. '</p>
 	<p><a class="button" href="add.php?topic=' .$_GET['forum']. '">' .$lang['add'].$lang['topic']. '</a></p>'.
 	hook('afterForum', $_GET['forum']).
-	'</td></tr>
-	</table>';
+	'</div>';
 	$topics = array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic'])));
 	$total = totalPage($topics);
 	$p = pid($total);

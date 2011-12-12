@@ -98,18 +98,18 @@ img {
 td{
 	border: 1px solid #CCC;
 	padding: 4px 14px;
-	vertical-align: top;
 }
 table {
 	width: 100%;
 	margin: 7px 0;
 	border-collapse: collapse;
 }
-tr:target {
+:target {
 	background-color: #FFD;
 }
 .box {
-	padding: 7px;
+	margin: 7px 0;
+	padding: 7px 14px;
 	border: 1px solid #CCC;
 }
 .w1 {

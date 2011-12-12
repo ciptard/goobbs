@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$('a.quote[href]').hover(
 		function(e) {
 			var link = $(this).attr('href').split('#');
-			var target = link[0] + ' #' + link[1] + ' td:eq(1) p:eq(0)';
+			var target = link[0] + ' #' + link[1] + ' p:lt(2)';
 			$('<div id="reply" class="box"></div>').hide().appendTo('body').load(target, function() {
 				$(this).css({
 					'width': '600px',
