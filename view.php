@@ -17,8 +17,8 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	saveEntry('topic', $_GET['topic'], $topicEntry);
 
 	$out['subtitle'] = $topicEntry['title'];
-	$out['content'] .= '<h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. ' » ' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</h1>
-	<div class="box">
+	$out['content'] .= '<div class="box">
+	<h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. ' » ' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</h1>
 	<div class="entryLeft"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
 	<p>' .toDate($_GET['topic']). '</p></div>
 	<div class="entryRight"><p>' .content($topicEntry['content']). '</p>'.
