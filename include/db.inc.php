@@ -3,7 +3,7 @@
 function _json_decode($json)
 {
 	$quote = false;
-	$php = '$tmp=';
+	$php = '';
 	for($i=0; $i<strlen($json); $i++)
 	{
 		if($quote)
@@ -27,8 +27,7 @@ function _json_decode($json)
 		if ($json[$i-1] !== '\\' && $json[$i] === '"')
 			$quote = !$quote;
 	}
-	eval($php. ';');
-	return $tmp;
+	return eval('return ' .$php. ';');
 }
 
 function _json_encode($var)
