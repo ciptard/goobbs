@@ -9,7 +9,10 @@ function _json_decode($json)
 	{
 		if($quote)
 		{
-			$php .= $json[$i];
+			if ($json[$i] === '$')
+				$php .= '\$';
+			else
+				$php .= $json[$i];
 		}
 		else
 		{
@@ -22,7 +25,7 @@ function _json_decode($json)
 			else
 				$php .= $json[$i];
 		}
-		if ($json[$i] === '\'' && $json[$i-1] !== '\\')
+		if ($json[$i] === '"' && $json[$i-1] !== '\\')
 			$quote = !$quote;
 	}
 	return eval('return ' .$php. ';');
@@ -33,12 +36,15 @@ function _json_encode($var)
 	$list = array();
 	foreach($var as $key => $value)
 	{
-		list($key, $value) = str_replace('\'', '\\\'', array($key, $value));
-		$tmp = '\'' .$key. '\':';
+		list($key, $value) = str_replace(
+			array('"', "\r", "\n", "\t"), 
+			array('\"', '\r', '\n', '\t'), 
+			array($key, $value));
+		$tmp = '"' .$key. '":';
 		if(is_array($value))
 			$tmp .= _json_encode($value);
 		else
-			$tmp .= '\'' .$value. '\'';
+			$tmp .= '"' .$value. '"';
 		$list[] = $tmp;
 	}
 	return '{' .implode(',', $list). '}';
@@ -51,7 +57,7 @@ function readEntry($type, $file)
 
 function saveEntry($type, $file, $data)
 {
-	file_put_contents('data/' .$type. '/' .$file. '.dat.php', '<?php exit;?>' . "\n" ._json_encode($data));
+	file_put_contents('data/' .$type. '/' .$file. '.dat.php', "<?php exit;?>\n" ._json_encode($data));
 }
 
 function deleteEntry($type, $file)
