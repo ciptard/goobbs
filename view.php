@@ -27,7 +27,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	<div style="clear: both;"></div></div>';
 	$total = totalPage($topicEntry['reply']);
 	$p = pid($total);
-	if($total > 0)
+	if($topicEntry['reply'])
 	{
 		foreach(viewPage($topicEntry['reply'], $p) as $reply)
 		{
@@ -72,7 +72,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	$topics = array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic'])));
 	$total = totalPage($topics);
 	$p = pid($total);
-	if($total > 0)
+	if($topics)
 	{
 		$out['content'] .= '<table>
 		<tr class="th"><td>' .$lang['topic']. '</td>
