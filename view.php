@@ -19,9 +19,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$out['subtitle'] = $topicEntry['title'];
 	$out['content'] .= '<div class="box">
 	<h1><a href="view.php?forum=' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. ' » ' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</h1>
-	<div class="entryLeft"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
+	<div class="left"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
 	<p>' .toDate($_GET['topic']). '</p></div>
-	<div class="entryRight"><p>' .content($topicEntry['content']). '</p>'.
+	<div class="right"><p>' .content($topicEntry['content']). '</p>'.
 	(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']). '</div>
 	<div style="clear: both;"></div></div>';
@@ -33,9 +33,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$out['content'] .= '<div id="' .$reply. '" class="box">
-			<div class="entryLeft"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
+			<div class="left"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
 			<p>' .toDate($reply). '</p></div>
-			<div class="entryRight"><p>' .content($replyEntry['content']). '</p>'.
+			<div class="right"><p>' .content($replyEntry['content']). '</p>'.
 			(!$topicEntry['locked']? '<p><a class="button" href="add.php?reply=' .$_GET['topic']. '&amp;q=' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 			hook('afterReply', $reply). '</div>
 			<div style="clear: both;"></div></div>';
