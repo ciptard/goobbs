@@ -10,8 +10,7 @@ function _max($arr, $limit)
 	{
 		if($rest[$i] > $out[$min])
 		{
-			unset($out[$min]);
-			$out[] = $value;
+			$out[$min] = $rest[$i];
 			$min = minIndex($out);
 		}
 	}
