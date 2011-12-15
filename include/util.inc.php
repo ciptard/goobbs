@@ -4,13 +4,11 @@ function _max($arr, $limit)
 {
 	$out = array_slice($arr, 0, $limit);
 	$min = minIndex($out);
-	$rest = array_slice($arr, $limit-1);
-	$end = count($rest);
-	for($i=0; $i< $end; $i++)
+	foreach(array_slice($arr, $limit) as $value)
 	{
-		if($rest[$i] > $out[$min])
+		if($value > $out[$min])
 		{
-			$out[$min] = $rest[$i];
+			$out[$min] = $value;
 			$min = minIndex($out);
 		}
 	}
