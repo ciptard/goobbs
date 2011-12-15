@@ -1,9 +1,34 @@
 <?php
 
-function part($do, $arr, $limit)
+function _max($arr, $limit)
 {
-	$do($arr);
-	return array_slice($arr, 0, $limit);
+	$out = array_slice($arr, 0, $limit);
+	$min = minIndex($out);
+	$rest = array_slice($arr, $limit-1);
+	$end = count($rest);
+	for($i=0; $i< $end; $i++)
+	{
+		if($rest[$i] > $out[$min])
+		{
+			unset($out[$min]);
+			$out[] = $value;
+			$min = minIndex($out);
+		}
+	}
+	rsort($out);
+	return $out;
+}
+
+function minIndex($arr)
+{
+	$end = count($arr);
+	$key = 0;
+	for($i=1; $i<$end; $i++)
+	{
+		if ($arr[$i] < $arr[$key])
+			$key = $i;
+	}
+	return $key;
 }
 
 function redirect($loc)

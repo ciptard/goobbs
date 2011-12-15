@@ -46,7 +46,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	<tr class="th"><td>' .$lang['more'].$lang['topic']. '</td>
 	<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
 	<td class="w2">' .$lang['forum']. '</td></tr>';
-	foreach(part('shuffle', listEntry('topic'), 4) as $topic)
+	$topics = listEntry('topic');
+	shuffle($topics);
+	foreach(array_slice($topics, 0, 4) as $topic)
 	{
 		$topicEntry = readEntry('topic', $topic);
 		$forumEntry = readEntry('forum', $topicEntry['forum']);

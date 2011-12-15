@@ -3,7 +3,7 @@
 function pageControl($p, $total, $loc)
 {
 	$out = '<div id="page"><ul>';
-	foreach(range(1, $total) as $i)
+	for($i=1; $i<=$total; $i++)
 	{
 		if($p === $i)
 			$out .= '<li>' .$i. '</li>';
