@@ -84,7 +84,13 @@ else if(isGET('forum') && isAdmin())
 		$forumEntry['info'] = clean($_POST['info']);
 		$forumEntry['topic'] = array();
 		$forumEntry['pinnedTopic'] = array();
-		saveEntry('forum', newEntry(), $forumEntry);
+		$forum = newEntry();
+		saveEntry('forum', $forum, $forumEntry);
+		
+		$forums = readEntry('config', 'forumOrder');
+		$forums[$forum] = $forum;
+		saveEntry('config', 'forumOrder', $forums);
+		
 		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else

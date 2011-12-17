@@ -18,6 +18,7 @@ if(!isValidEntry('config', 'config'))
 	$config['admin'] = hide('demo');
 	$config['worker'] = array();
 	saveEntry('config', 'config', $config);
+	saveEntry('config', 'forumOrder', array());
 
 	session_start();
 	$_SESSION['role'] = 'admin';

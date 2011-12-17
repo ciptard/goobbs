@@ -60,6 +60,10 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 	if(checkBot())
 	{
 		deleteEntry('forum', $_GET['forum']);
+		$forums = readEntry('config', 'forumOrder');
+		unset($forums[$_GET['forum']]);
+		saveEntry('config', 'forumOrder', $forums);
+		
 		foreach($forumEntry['topic'] as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);

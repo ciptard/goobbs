@@ -47,9 +47,21 @@ else if(isGET('forum'))
 {
 	$out['subtitle'] = $lang['forum'];
 	$out['content'] .= '<h1>' .(isAdmin()? '<a href="add.php?forum">[+]</a>' : '').$out['subtitle']. '</h1>';
-	$forums = listEntry('forum');
+	$forums = readEntry('config', 'forumOrder');
 	if($forums)
 	{
+		if(isAdmin() && checkBot())
+		{
+			foreach($forums as $forum)
+			{
+				$order[$forum] = isPOST($forum)? $_POST[$forum] : '';	
+			}
+			asort($order);
+			$order = array_keys($order);
+			$forums = array_combine($order, $order);
+			saveEntry('config', 'forumOrder', $forums);
+		}
+		
 		$out['content'] .= '<table>
 		<tr class="th"><td>' .$lang['forum']. '</td>
 		<td class="w1">' .$lang['topic']. '</td>
@@ -57,11 +69,23 @@ else if(isGET('forum'))
 		foreach($forums as $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);
+			$lang[$forum] = $forumEntry['name'];
 			$out['content'] .= '<tr><td>' .manageForum($forum). '<a href="view.php?forum=' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
 			<td>' .count($forumEntry['topic']). '</td>
 			<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td></tr>';
 		}
 		$out['content'] .= '</table>';
+		
+		if(isAdmin())
+		{
+			$out['content'] .= '<form action="index.php?forum" method="post">';
+			foreach(array_values($forums) as $key => $forum)
+			{
+				$out['content'] .= '<p>' .text($forum, $key). '</p>';	
+			}
+			$out['content'] .= '<p>' .submit(). '</p>
+			</form>';
+		}
 	}
 	else
 	{
