@@ -8,7 +8,7 @@ function pageControl($p, $total, $loc)
 		if($p === $i)
 			$out .= '<li>' .$i. '</li>';
 		else
-			$out .= '<li><a href="/' .$loc. '/p/' .$i. '">' .$i. '</a></li>';	
+			$out .= '<li><a href="' .$loc. '/p/' .$i. '">' .$i. '</a></li>';	
 	}
 	$out .= '</ul></div>';
 	return $out;

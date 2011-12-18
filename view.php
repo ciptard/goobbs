@@ -41,7 +41,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			<div style="clear: both;"></div></div>';
 		}
 	}
-	$out['content'] .= pageControl($p, $total, 'topic/' .$_GET['topic']).
+	$out['content'] .= pageControl($p, $total, 'view.php/topic/' .$_GET['topic']).
 	'<table>
 	<tr class="th"><td>' .$lang['more'].$lang['topic']. '</td>
 	<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
@@ -87,7 +87,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 		}
 		$out['content'] .= '</table>';
 	}
-	$out['content'] .= pageControl($p, $total, 'forum/' .$_GET['forum']);
+	$out['content'] .= pageControl($p, $total, 'view.php/forum/' .$_GET['forum']);
 }
 else if(isGET('plugin') && function_exists($_GET['plugin']. '_view'))
 {
