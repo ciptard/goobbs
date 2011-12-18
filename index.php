@@ -54,7 +54,7 @@ else if(isGET('forum'))
 		{
 			foreach($forums as $forum)
 			{
-				$order[$forum] = isPOST($forum)? $_POST[$forum] : '';	
+				$order[$forum] = isPOST($forum)? $_POST[$forum] : '0';	
 			}
 			asort($order);
 			$order = array_keys($order);
@@ -62,30 +62,24 @@ else if(isGET('forum'))
 			saveEntry('config', 'forumOrder', $forums);
 		}
 		
-		$out['content'] .= '<table>
+		$num = range(1, count($forums));
+		$options = array_combine($num, $num);
+		
+		$out['content'] .= (isAdmin()? '<form action="index.php?forum" method="post">' : ''). '<table>
 		<tr class="th"><td>' .$lang['forum']. '</td>
 		<td class="w1">' .$lang['topic']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
-		foreach($forums as $forum)
+		foreach(array_values($forums) as $key => $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);
-			$lang[$forum] = $forumEntry['name'];
-			$out['content'] .= '<tr><td>' .manageForum($forum). '<a href="view.php?forum=' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
+			$lang[$forum] = '';
+			$out['content'] .= '<tr><td>' .(isAdmin()? select($forum, $options, $key+1) : '').manageForum($forum). '<a href="view.php?forum=' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
 			<td>' .count($forumEntry['topic']). '</td>
 			<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td></tr>';
 		}
-		$out['content'] .= '</table>';
-		
-		if(isAdmin())
-		{
-			$out['content'] .= '<form action="index.php?forum" method="post">';
-			foreach(array_values($forums) as $key => $forum)
-			{
-				$out['content'] .= '<p>' .text($forum, $key). '</p>';	
-			}
-			$out['content'] .= '<p>' .submit(). '</p>
-			</form>';
-		}
+		$out['content'] .= '</table>'.
+		(isAdmin()? '<p>' .submit(). '</p>
+		</form>' : '');
 	}
 	else
 	{

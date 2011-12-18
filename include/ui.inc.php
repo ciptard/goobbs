@@ -51,7 +51,7 @@ function select($name, $options, $default = '')
 	$out = $lang[$name]. ' <select name="' .$name. '">';
 	foreach($options as $value => $option)
 	{
-		$out .= '<option value="' .$value. '"' .($value === $selected? ' selected="selected"' : ''). '>' .$option. '</option>';
+		$out .= '<option value="' .$value. '"' .($value == $selected? ' selected="selected"' : ''). '>' .$option. '</option>';
 	}
 	$out .= '</select>';
 	return $out;
