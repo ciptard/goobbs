@@ -52,7 +52,7 @@ function minIndex($arr)
 
 function redirect($loc)
 {
-	header('Location: '. $loc);
+	header('Location: ' .baseURL().$loc);
 	exit;
 }
 
