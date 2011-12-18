@@ -4,9 +4,6 @@ $template = 'feed';
 require 'header.php';
 require 'include/parser.inc.php';
 
-$dir = dirname($_SERVER['SCRIPT_NAME']);
-$out['url'] = 'http://' .$_SERVER['SERVER_NAME'].$dir.($dir === '/'? '' : '/');
-
 if(isGET('topic'))
 {
 	$out['subtitle'] = $lang['topic'];
@@ -17,7 +14,7 @@ if(isGET('topic'))
 		foreach($topics as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
-			$url = $out['url']. 'view.php?topic=' .$topic;
+			$url = 'view.php/topic/' .$topic;
 			$out['content'] .= '<entry>
 			<id>' .$url. '</id>
 			<title>' .$topicEntry['trip']. ' ' .$lang['started']. ' ' .$topicEntry['title']. '</title>
@@ -39,7 +36,7 @@ else if(isGET('reply'))
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$topicEntry = readEntry('topic', $replyEntry['topic']);
-			$url = $out['url']. 'view.php?topic=' .$replyEntry['topic']. '&amp;p='. onPage($reply, $topicEntry['reply']). '#' .$reply;
+			$url = 'view.php/topic/' .$replyEntry['topic']. '/p/'. onPage($reply, $topicEntry['reply']). '#' .$reply;
 			$out['content'] .= '<entry>
 			<id>' .$url. '</id>
 			<title>' .$replyEntry['trip']. ' ' .$lang['replied']. ' ' .$topicEntry['title']. '</title>

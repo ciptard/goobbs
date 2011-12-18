@@ -22,7 +22,7 @@ if(isGET('new'))
 			{
 				$topic = $mix;
 				$topicEntry = readEntry('topic', $topic);
-				$out['content'] .= '<tr><td>' .manageTopic($topic).$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php?topic=' .$topic. '">' .$topicEntry['title']. '</a></td>
+				$out['content'] .= '<tr><td>' .manageTopic($topic).$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php/topic/' .$topic. '">' .$topicEntry['title']. '</a></td>
 				<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
 				<td>' .toDate($topic). '</td></tr>';
 			}
@@ -31,7 +31,7 @@ if(isGET('new'))
 				$reply = $mix;
 				$replyEntry = readEntry('reply', $reply);
 				$topicEntry = readEntry('topic', $replyEntry['topic']);
-				$out['content'] .= '<tr><td>' .manageReply($reply).$replyEntry['trip']. ' ' .$lang['replied']. ' <a href="view.php?topic=' .$replyEntry['topic']. '&amp;p='. onPage($reply, $topicEntry['reply']). '#' .$reply. '">' .$topicEntry['title']. '</a></td>
+				$out['content'] .= '<tr><td>' .manageReply($reply).$replyEntry['trip']. ' ' .$lang['replied']. ' <a href="view.php/topic/' .$replyEntry['topic']. '/p/'. onPage($reply, $topicEntry['reply']). '#' .$reply. '">' .$topicEntry['title']. '</a></td>
 				<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
 				<td>' .toDate($reply). '</td></tr>';
 			}
@@ -46,7 +46,7 @@ if(isGET('new'))
 else if(isGET('forum'))
 {
 	$out['subtitle'] = $lang['forum'];
-	$out['content'] .= '<h1>' .(isAdmin()? '<a href="add.php?forum">[+]</a>' : '').$out['subtitle']. '</h1>';
+	$out['content'] .= '<h1>' .(isAdmin()? '<a href="add.php/forum">[+]</a>' : '').$out['subtitle']. '</h1>';
 	$forums = readEntry('config', 'forumOrder');
 	if($forums)
 	{
@@ -65,7 +65,7 @@ else if(isGET('forum'))
 		$num = range(1, count($forums));
 		$options = array_combine($num, $num);
 		
-		$out['content'] .= (isAdmin()? '<form action="index.php?forum" method="post">' : ''). '<table>
+		$out['content'] .= (isAdmin()? '<form action="index.php/forum" method="post">' : ''). '<table>
 		<tr class="th"><td>' .$lang['forum']. '</td>
 		<td class="w1">' .$lang['topic']. '</td>
 		<td class="w2">' .$lang['date']. '</td></tr>';
@@ -73,7 +73,7 @@ else if(isGET('forum'))
 		{
 			$forumEntry = readEntry('forum', $forum);
 			$lang[$forum] = '';
-			$out['content'] .= '<tr><td>' .(isAdmin()? select($forum, $options, $key+1) : '').manageForum($forum). '<a href="view.php?forum=' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
+			$out['content'] .= '<tr><td>' .(isAdmin()? select($forum, $options, $key+1) : '').manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
 			<td>' .count($forumEntry['topic']). '</td>
 			<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td></tr>';
 		}
@@ -94,7 +94,7 @@ else if(isGET('404'))
 }
 else
 {
-	redirect('index.php?new');
+	redirect('index.php/new');
 }
 
 require 'footer.php';

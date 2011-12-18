@@ -12,7 +12,7 @@ if($template === 'main')
 	foreach(listEntry('forum') as $forum)
 	{
 		$forumEntry = readEntry('forum', $forum);
-		$out['content'] .= '<li><a href="view.php?forum=' .$forum. '">' .$forumEntry['name']. '</a></li>';
+		$out['content'] .= '<li><a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a></li>';
 	}
 	$out['content'] .= '</ul></div>';
 }

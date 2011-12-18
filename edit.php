@@ -44,7 +44,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 			saveEntry('forum', $topicEntry['forum'], $forumEntry);
 		}
 		saveEntry('topic', $_GET['topic'], $topicEntry);
-		$out['content'] .= '<p><a href="view.php?topic=' .$_GET['topic']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php/topic/' .$_GET['topic']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
@@ -55,7 +55,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 			$forumOptions[$forum] = $forumEntry['name'];
 		}
 		$forumEntry = readEntry('forum', $topicEntry['forum']);
-		$out['content'] .= '<form action="edit.php?topic=' .$_GET['topic']. '" method="post">
+		$out['content'] .= '<form action="edit.php/topic/' .$_GET['topic']. '" method="post">
 		<p>' .text('title', $topicEntry['title']). '</p>
 		<p>' .textarea('content', $topicEntry['content']). '</p>'.
 		(isWorker()? '<p>' .select('locked', array('yes' => $lang['yes'], 'no' => $lang['no']), $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', array('yes' => $lang['yes'], 'no' => $lang['no']), isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
@@ -74,12 +74,12 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 		$replyEntry['content'] = clean($_POST['content']);
 		saveEntry('reply', $_GET['reply'], $replyEntry);
 		$topicEntry = readEntry('topic', $replyEntry['topic']);
-		$out['content'] .= '<p><a href="view.php?topic=' .$replyEntry['topic']. '&amp;p='. onPage($_GET['reply'], $topicEntry['reply']). '#' .$_GET['reply']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php/topic/' .$replyEntry['topic']. '/p/'. onPage($_GET['reply'], $topicEntry['reply']). '#' .$_GET['reply']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
 		require 'include/parser.inc.php';
-		$out['content'] .= '<form action="edit.php?reply=' .$_GET['reply']. '" method="post">
+		$out['content'] .= '<form action="edit.php/reply/' .$_GET['reply']. '" method="post">
 		<p>' .textarea('content', $replyEntry['content']). '</p>
 		<p>' .submit(). '</p>
 		</form>'.
@@ -96,11 +96,11 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 		$forumEntry['name'] = clean($_POST['name']);
 		$forumEntry['info'] = clean($_POST['info']);
 		saveEntry('forum', $_GET['forum'], $forumEntry);
-		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php/forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="edit.php?forum=' .$_GET['forum']. '" method="post">
+		$out['content'] .= '<form action="edit.php/forum/' .$_GET['forum']. '" method="post">
 		<p>' .text('name', $forumEntry['name']). '</p>
 		<p>' .text('info', $forumEntry['info']). '</p>
 		<p>' .submit(). '</p>

@@ -26,6 +26,8 @@ require 'lang/' .$config['lang']. '.lng.php';
 require 'include/user.inc.php';
 require 'include/ui.inc.php';
 
+$_GET = fURL();
+
 $plugins = fdir('plugin');
 foreach($plugins as $plugin)
 {
@@ -33,5 +35,6 @@ foreach($plugins as $plugin)
 }
 
 $out['content'] = '';
+$out['baseURL'] = baseURL();
 
 ?>

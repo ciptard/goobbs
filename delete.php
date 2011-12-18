@@ -21,11 +21,11 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 		{
 			deleteEntry('reply', $reply);
 		}
-		$out['content'] .= '<p><a href="view.php?forum=' .$topicEntry['forum']. '">← ' .$lang['redirect']. ' : ' .$forumEntry['name']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php/forum/' .$topicEntry['forum']. '">← ' .$lang['redirect']. ' : ' .$forumEntry['name']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php?topic=' .$_GET['topic']. '" method="post">
+		$out['content'] .= '<form action="delete.php/topic/' .$_GET['topic']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -43,11 +43,11 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 		unset($topicEntry['reply'][$_GET['reply']]);
 		saveEntry('topic', $replyEntry['topic'], $topicEntry);
 
-		$out['content'] .= '<p><a href="view.php?topic=' .$replyEntry['topic']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php/topic/' .$replyEntry['topic']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php?reply=' .$_GET['reply']. '" method="post">
+		$out['content'] .= '<form action="delete.php/reply/' .$_GET['reply']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -74,11 +74,11 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 				deleteEntry('reply', $reply);
 			}
 		}
-		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php/forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php?forum=' .$_GET['forum']. '" method="post">
+		$out['content'] .= '<form action="delete.php/forum/' .$_GET['forum']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}
@@ -91,11 +91,11 @@ else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]
 	{
 		unset($config['worker'][$_GET['worker']]);
 		saveEntry('config', 'config', $config);
-		$out['content'] .= '<p><a href="config.php?worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
+		$out['content'] .= '<p><a href="config.php/worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php?worker=' .$_GET['worker']. '" method="post">
+		$out['content'] .= '<form action="delete.php/worker/' .$_GET['worker']. '" method="post">
 		<p>' .submit(). '</p>
 		</form>';
 	}

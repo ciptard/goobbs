@@ -16,13 +16,13 @@ if(isGET('main') && isAdmin())
 		$config['theme'] = $_POST['theme'];
 		$config['lang'] = $_POST['lang'];
 		saveEntry('config', 'config', $config);
-		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php/forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
 		$themes = fdir('theme');
 		$langs = fdir('lang');
-		$out['content'] .= '<form action="config.php?main" method="post">
+		$out['content'] .= '<form action="config.php/main" method="post">
 		<p>' .password('password'). '</p>
 		<p>' .text('title', $config['title']). '</p>
 		<p>' .select('theme', array_combine($themes, $themes), $config['theme']). ' ' .select('lang', array_combine($langs, $langs), $config['lang']). '</p>
@@ -33,13 +33,13 @@ if(isGET('main') && isAdmin())
 else if(isGET('worker') && isAdmin())
 {
 	$out['subtitle'] = $lang['worker'];
-	$out['content'] .= '<h1><a href="add.php?worker">[+]</a>' .$out['subtitle']. '</h1>
+	$out['content'] .= '<h1><a href="add.php/worker">[+]</a>' .$out['subtitle']. '</h1>
 	<ul>';
 	if($config['worker'])
 	{
 		foreach($config['worker'] as $key => $password)
 		{
-			$out['content'] .= '<li><a href="delete.php?worker=' .$key. '">[x]</a>' .$password. '</li>';
+			$out['content'] .= '<li><a href="delete.php/worker/' .$key. '">[x]</a>' .$password. '</li>';
 		}
 	}
 	else
@@ -66,7 +66,7 @@ else if(isGET('plugin') && isAdmin())
 		{
 			foreach($plugins as $plugin)
 			{
-				$out['content'] .= '<li>' .$plugin.(function_exists($plugin. '_config')? ' - <a href="config.php?plugin=' .$plugin. '">' .$lang['config']. '</a>' : ''). '</li>';
+				$out['content'] .= '<li>' .$plugin.(function_exists($plugin. '_config')? ' - <a href="config.php/plugin/' .$plugin. '">' .$lang['config']. '</a>' : ''). '</li>';
 			}
 		}
 		else

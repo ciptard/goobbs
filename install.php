@@ -24,6 +24,6 @@ if(!isValidEntry('config', 'config'))
 	$_SESSION['role'] = 'admin';
 }
 
-redirect('index.php?forum');
+redirect('index.php/forum');
 
 ?>

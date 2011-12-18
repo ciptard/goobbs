@@ -1,5 +1,27 @@
 <?php
 
+function fURL()
+{
+	$out = array();
+	if(isset($_SERVER['PATH_INFO']))
+	{
+		$info = explode('/', $_SERVER['PATH_INFO']);
+		$infoNum = count($info);
+		for($i=1; $i<$infoNum; $i+=2)
+		{
+			if(strlen($info[$i]) > 0)
+				$out[$info[$i]] = isset($info[$i+1])? $info[$i+1] : '';
+		}
+	}
+	return $out;
+}
+
+function baseURL()
+{
+	$dir = dirname($_SERVER['SCRIPT_NAME']);
+	return 'http://' .$_SERVER['SERVER_NAME'].$dir.($dir === '/'? '' : '/');
+}
+
 function _max($arr, $limit)
 {
 	$out = array_slice($arr, 0, $limit);

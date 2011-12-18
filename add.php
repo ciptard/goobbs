@@ -25,12 +25,12 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		
 		$_SESSION[$topic] = $topic;
 
-		$out['content'] .= '<p><a href="view.php?topic=' .$topic. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php/topic/' .$topic. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
 		require 'include/parser.inc.php';
-		$out['content'] .= '<form action="add.php?topic=' .$_GET['topic']. '" method="post">
+		$out['content'] .= '<form action="add.php/topic/' .$_GET['topic']. '" method="post">
 		<p>' .text('title'). '</p>
 		<p>' .text('name'). '</p>
 		<p>' .textarea('content'). '</p>
@@ -61,12 +61,12 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 		
 		$_SESSION[$reply] = $reply;
 
-		$out['content'] .= '<p><a href="view.php?topic=' .$_GET['reply']. '&amp;p='. onPage($reply, $topicEntry['reply']). '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
+		$out['content'] .= '<p><a href="view.php/topic/' .$_GET['reply']. '/p/' .onPage($reply, $topicEntry['reply']). '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
 		require 'include/parser.inc.php';
-		$out['content'] .= '<form action="add.php?reply=' .$_GET['reply']. '" method="post">
+		$out['content'] .= '<form action="add.php/reply/' .$_GET['reply']. '" method="post">
 		<p>' .text('name'). '</p>
 		<p>' .textarea('content', isGET('q') && isValidEntry('reply', $_GET['q'])? '[quote]' .$_GET['q']. '[/quote]' : ''). '</p>
 		<p>' .submit(). '</p>
@@ -91,11 +91,11 @@ else if(isGET('forum') && isAdmin())
 		$forums[$forum] = $forum;
 		saveEntry('config', 'forumOrder', $forums);
 		
-		$out['content'] .= '<p><a href="index.php?forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
+		$out['content'] .= '<p><a href="index.php/forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="add.php?forum" method="post">
+		$out['content'] .= '<form action="add.php/forum" method="post">
 		<p>' .text('name'). '</p>
 		<p>' .text('info'). '</p>
 		<p>' .submit(). '</p>
@@ -110,11 +110,11 @@ else if(isGET('worker') && isAdmin())
 	{
 		$config['worker'][hide($_POST['password'])] = clean($_POST['password']);
 		saveEntry('config', 'config', $config);
-		$out['content'] .= '<p><a href="config.php?worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
+		$out['content'] .= '<p><a href="config.php/worker">← ' .$lang['redirect']. ' : ' .$lang['worker']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= '<form action="add.php?worker" method="post">
+		$out['content'] .= '<form action="add.php/worker" method="post">
 		<p>' .text('password'). '</p>
 		<p>' .submit(). '</p>
 		</form>';

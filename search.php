@@ -25,7 +25,7 @@ if(checkBot() && check('topic'))
 		
 		foreach($foundTopics as $topic => $title)
 		{
-			$out['content'] .= '<li>' .manageTopic($topic). '<a href="view.php?topic=' .$topic. '">' .$title. '</a></li>';
+			$out['content'] .= '<li>' .manageTopic($topic). '<a href="view.php/topic/' .$topic. '">' .$title. '</a></li>';
 		}
 	}
 	else
