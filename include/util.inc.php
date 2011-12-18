@@ -9,7 +9,7 @@ function fURL()
 		$infoNum = count($info);
 		for($i=1; $i<$infoNum; $i+=2)
 		{
-			if(strlen($info[$i]) > 0)
+			if($info[$i]) !== '')
 				$out[$info[$i]] = isset($info[$i+1])? $info[$i+1] : '';
 		}
 	}
