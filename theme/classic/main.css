@@ -43,7 +43,6 @@ img {
 	border: 0;
 }
 .block {
-	display: block;
 	padding: 5px 10px;
 	margin: 5px;
 	color: #777;
@@ -91,6 +90,9 @@ img {
 }
 .user {
 	font-weight: bold;
+}
+.content {
+	padding: 7px 0;
 }
 .quote {
 	color: #789922;

@@ -6,7 +6,7 @@ function bbcode($text)
 	//the replacement
 
 	$pattern[] = '%\[block\]([^\a]+?)\[/block\]%e';
-	$replace[] = '\'<span class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</span>\'';
+	$replace[] = '\'<div class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</div>\'';
 
 	$pattern[] = '%\[b\]([^\a]+?)\[/b\]%';
 	$replace[] = '<b>$1</b>';
@@ -21,7 +21,7 @@ function bbcode($text)
 	$replace[] = '<del>$1</del>';
 
 	$pattern[] = '%\[img\]([^\r\n\[]+?)\[/img\]%';
-	$replace[] = '<img src="$1" alt=""/>';
+	$replace[] = '<img class="img" src="$1" alt=""/>';
 
 	$pattern[] = '%\[url=([^\r\n\[]+?)\]([^\a]+?)\[/url\]%';
 	$replace[] = '<a target="_blank" href="$1">$2</a>';
