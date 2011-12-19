@@ -4,7 +4,7 @@ html {
 	font-size: 14px;
 	color: #555;
 }
-ul, p, .content {
+ul, p, .content, table, .box {
 	margin: 7px 0;
 }
 ul {
@@ -100,14 +100,12 @@ td{
 }
 table {
 	width: 100%;
-	margin: 7px 0;
 	border-collapse: collapse;
 }
 :target {
 	background-color: #FFD;
 }
 .box {
-	margin: 7px 0;
 	padding: 7px 14px;
 	border: 1px solid #CCC;
 }
