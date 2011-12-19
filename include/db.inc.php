@@ -36,18 +36,19 @@ function _json_encode($var)
 	$list = array();
 	foreach($var as $key => $value)
 	{
-		list($key, $value) = str_replace(
-			array('"', "\r", "\n", "\t"), 
-			array('\"', '\r', '\n', '\t'), 
-			array($key, $value));
-		$tmp = '"' .$key. '":';
+		$tmp = '"' .jsonEsc($key). '":';
 		if(is_array($value))
 			$tmp .= _json_encode($value);
 		else
-			$tmp .= '"' .$value. '"';
+			$tmp .= '"' .jsonEsc($value). '"';
 		$list[] = $tmp;
 	}
 	return '{' .implode(',', $list). '}';
+}
+
+function jsonEsc($str)
+{
+	return str_replace(array('"', "\r", "\n", "\t"), array('\"', '\r', '\n', '\t'), $str);
 }
 
 function readEntry($type, $file)
