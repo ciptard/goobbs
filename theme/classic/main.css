@@ -4,7 +4,7 @@ html {
 	font-size: 14px;
 	color: #555;
 }
-ul, p {
+ul, p, .content {
 	margin: 7px 0;
 }
 ul {
@@ -90,9 +90,6 @@ input[type="text"] {
 }
 .user {
 	font-weight: bold;
-}
-.content {
-	padding: 7px 0;
 }
 .quote {
 	color: #789922;
