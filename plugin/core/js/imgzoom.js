@@ -8,7 +8,7 @@ $(document).ready(function(){
 				'max-width': '800px',
 				'top': offset.top,
 				'left': offset.left,
-				'box-shadow': '0 0 100px #ccc'
+				'box-shadow': '0 0 100px #777'
 			}).appendTo('body').hide().fadeIn()
 			.click(function() {
 				$('#zoom').remove();
