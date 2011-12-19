@@ -37,7 +37,7 @@ textarea {
 input[type="text"] {
 	width: 50%;
 }
-img {
+.img {
 	max-width: 320px;
 	max-height: 320px;
 	border: 0;
