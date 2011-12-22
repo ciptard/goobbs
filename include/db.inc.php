@@ -2,7 +2,7 @@
 
 function readEntry($type, $file)
 {
-	return eval('return ' .substr(file_get_contents('data/' .$type. '/' .$file. '.dat.php'), 14));
+	return eval('return ' .substr(file_get_contents('data/' .$type. '/' .$file. '.dat.php'), 14). ';');
 }
 
 function saveEntry($type, $file, $data)
