@@ -16,7 +16,11 @@ function pageControl($p, $total, $loc)
 
 function totalPage($items)
 {
-	return (int) (count($items) / 8) + 1;
+	$itemNum = count($items);
+	if($itemNum === 0)
+		return 1;
+	else
+		return (int) ceil($itemNum / 8);
 }
 
 function viewPage($items, $p)
