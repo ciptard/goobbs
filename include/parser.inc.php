@@ -1,12 +1,10 @@
 <?php
 
-hook('bbcode');
-
 function bbcode($text)
 {
 	//the pattern to be matched
 	//the replacement
-	global $pattern, $replace;
+	list($pattern, $replace) = hook('bbcode');
 
 	$pattern[] = '%\[block\]([^\a]+?)\[/block\]%e';
 	$replace[] = '\'<div class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</div>\'';
