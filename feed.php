@@ -1,6 +1,6 @@
 <?php
 
-$template = 'feed';
+$out['self'] = 'feed';
 require 'header.php';
 require 'include/parser.inc.php';
 

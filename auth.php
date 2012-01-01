@@ -1,6 +1,6 @@
 <?php
 
-$template = 'main';
+$out['self'] = 'auth';
 require 'header.php';
 
 if(isGET('login'))

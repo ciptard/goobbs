@@ -1,6 +1,6 @@
 <?php
 
-$template = 'main';
+$out['self'] = 'delete';
 require 'header.php';
 
 if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('topic', $_GET['topic']))

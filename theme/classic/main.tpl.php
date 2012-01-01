@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($template))
+if(!isset($out))
 {
 	exit;
 }
@@ -18,7 +18,7 @@ header('Content-Type: text/html; charset=UTF-8');
 	<link rel="alternate" type="application/atom+xml" href="feed.php/topic" title="<?php echo $lang['topic'];?> - <?php echo $config['title'];?>"/>
 	<link rel="alternate" type="application/atom+xml" href="feed.php/reply" title="<?php echo $lang['reply'];?> - <?php echo $config['title'];?>"/>
 	<script src="http://code.jquery.com/jquery.min.js"></script>
-	<?php echo hook('head');?>
+	<?php echo hook('head', $out['self']);?>
 </head>
 <body>
 	<div id="container">
@@ -28,7 +28,7 @@ header('Content-Type: text/html; charset=UTF-8');
 			<li><a href="index.php/new"><?php echo $lang['new'];?></a></li>
 			<li><a href="index.php/forum"><?php echo $lang['forum'];?></a></li>
 			<li><a href="search.php"><?php echo $lang['search'];?></a></li>
-			<?php echo hook('menu').
+			<?php echo hook('menu', $out['self']).
 			(isAdmin()? '<li><a href="config.php/main">' .$lang['config']. '</a></li>
 			<li><a href="config.php/plugin">' .$lang['plugin']. '</a></li>
 			<li><a href="config.php/worker">' .$lang['worker']. '</a></li>' : '').
@@ -36,16 +36,16 @@ header('Content-Type: text/html; charset=UTF-8');
 			'<li><a href="auth.php/logout">' .$lang['logout']. ' (' .$lang[$_SESSION['role']]. ')</a></li>' :
 			'<li><a href="auth.php/login">' .$lang['login']. '</a></li>');?>
 			</ul>
-			<?php echo hook('beforeMain');?>
+			<?php echo hook('beforeMain', $out['self']);?>
 		</div>
 		<div id="main"><?php echo $out['content'];?></div>
 		<div id="footer">
-			<?php echo hook('afterMain');?>
+			<?php echo hook('afterMain', $out['self']);?>
 			<ul>
 			<li><?php echo $lang['poweredBy'];?> <a href="http://github.com/taylorchu/goobbs">goobbs</a></li>
 			<li><a href="feed.php/topic"><?php echo $lang['feed'];?> (<?php echo $lang['topic'];?>)</a></li>
 			<li><a href="feed.php/reply"><?php echo $lang['feed'];?> (<?php echo $lang['reply'];?>)</a></li>
-			<?php echo hook('footer');?>
+			<?php echo hook('footer', $out['self']);?>
 			</ul>
 		</div>
 	</div>

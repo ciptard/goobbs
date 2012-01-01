@@ -1,6 +1,6 @@
 <?php
 
-$template = 'main';
+$out['self'] = 'add';
 require 'header.php';
 
 if(isGET('topic') && isValidEntry('forum', $_GET['topic']))

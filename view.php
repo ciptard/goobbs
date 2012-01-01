@@ -1,6 +1,6 @@
 <?php
 
-$template = 'main';
+$out['self'] = 'view';
 require 'header.php';
 require 'include/manage.inc.php';
 

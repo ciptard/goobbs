@@ -1,6 +1,6 @@
 <?php
 
-$template = 'main';
+$out['self'] = 'edit';
 require 'header.php';
 
 if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('topic', $_GET['topic']))

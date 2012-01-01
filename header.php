@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($template))
+if(!isset($out))
 {
 	exit;
 }

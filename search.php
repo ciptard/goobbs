@@ -1,6 +1,6 @@
 <?php
 
-$template = 'main';
+$out['self'] = 'search';
 require 'header.php';
 
 $out['subtitle'] = $lang['search'];

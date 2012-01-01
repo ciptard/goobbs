@@ -1,6 +1,6 @@
 <?php
 
-$template = 'main';
+$out['self'] = 'config';
 require 'header.php';
 
 if(isGET('main') && isAdmin())
