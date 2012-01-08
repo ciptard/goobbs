@@ -39,11 +39,12 @@ $lang['minute'] = '分';
 $lang['second'] = '秒';
 $lang['plural'] = '';
 $lang['ago'] = '前';
-$lang['errorLength'] = '太短或太長';
-$lang['errorBot'] = '驗證碼不正確';
+$lang['errLen'] = '太短或太長';
+$lang['errBot'] = '驗證碼不正確';
 $lang['pinned'] = '釘選';
 $lang['replied'] = '回覆';
 $lang['started'] = '開始';
 $lang['notFound'] = '糟糕! 這個頁面不存在 :(';
+$lang['errNotMatch'] = 'Mismatched password';
 
 ?>

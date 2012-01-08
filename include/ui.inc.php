@@ -10,29 +10,41 @@ function isPOST($name)
 	return isset($_POST[$name]) && is_string($_POST[$name]);
 }
 
-function message($msg)
-{
-	global $out;
-	$out['content'] .= '<div class="msg">' .$msg. '</div>';
-}
-
 function password($name)
 {
 	global $lang;
-	return $lang[$name]. ' <input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>';
+	$out = $lang[$name]. ' <input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>';
+	if (isset($_SESSION[$name. 'ErrNotMatch'])
+	{
+		$out += '<span class="msg">' .$lang['errNotMatch']. '</span>';
+		unset($_SESSION[$name. 'ErrNotMatch']);
+	}
+	return $out;
 }
 
 function text($name, $default = '')
 {
 	global $lang;
-	return $lang[$name]. ' <input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>';
+	$out = $lang[$name]. ' <input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>';
+	if (isset($_SESSION[$name. 'ErrLen'])
+	{
+		$out += '<span class="msg">' .$lang['errLen']. '</span>';
+		unset($_SESSION[$name. 'ErrLen']);
+	}
+	return $out;
 }
 
 function textarea($name, $default = '')
 {
 	global $lang;
-	return $lang[$name]. '
+	$out = $lang[$name]. '
 	<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>';
+	if (isset($_SESSION[$name. 'ErrLen'])
+	{
+		$out += '<span class="msg">' .$lang['errLen']. '</span>';
+		unset($_SESSION[$name. 'ErrLen']);
+	}
+	return $out;
 }
 
 function submit()
@@ -41,7 +53,13 @@ function submit()
 	$num1 = rand(1, 10);
 	$num2 = rand(1, 10);
 	$_SESSION['captcha'] = (string) ($num1 * $num2);
-	return $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> <input type="submit" value="' .$lang['confirm']. '"/>';
+	$out = $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> <input type="submit" value="' .$lang['confirm']. '"/>';
+	if (isset($_SESSION['ErrBot'])
+	{
+		$out += '<span class="msg">' .$lang['errBot']. '</span>';
+		unset($_SESSION['ErrBot']);
+	}
+	return $out;
 }
 
 function select($name, $options, $default = '')
@@ -59,29 +77,30 @@ function select($name, $options, $default = '')
 
 function check($name, $min = 1, $max = 40)
 {
-	global $lang;
 	if(!isPOST($name))
 		return false;
 	$len = strlen(trim($_POST[$name]));
 	if($len >= $min && $len <= $max)
 		return true;
-	message($lang[$name].$lang['errorLength']);
+	$_SESSION[$name. 'ErrLen'] = '';
 	return false;
 }
 
 function checkPass($name)
 {
-	return check($name) && isPOST($name. 'Confirm') && $_POST[$name] === $_POST[$name. 'Confirm'];
+	if(check($name) && isPOST($name. 'Confirm') && $_POST[$name] === $_POST[$name. 'Confirm'])
+		return true;
+	$_SESSION[$name. 'ErrNotMatch'] = '';
+	return false;
 }
 
 function checkBot()
 {
-	global $lang;
 	if(!isPOST('captcha'))
 		return false;
 	if(isset($_SESSION['captcha']) && $_POST['captcha'] === $_SESSION['captcha'])
 		return true;
-	message($lang['errorBot']);
+	$_SESSION['ErrBot'] = '';
 	return false;
 }
 
