@@ -35,8 +35,8 @@ function text($name, $default = '')
 function textarea($name, $default = '')
 {
 	global $lang;
-	return $lang[$name]. '
-	<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>' .err($name. 'ErrLen', $lang['errLen']);
+	return $lang[$name].err($name. 'ErrLen', $lang['errLen']). '
+	<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>';
 }
 
 function submit()
@@ -45,7 +45,7 @@ function submit()
 	$num1 = rand(1, 10);
 	$num2 = rand(1, 10);
 	$_SESSION['captcha'] = (string) ($num1 * $num2);
-	return $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> <input type="submit" value="' .$lang['confirm']. '"/>' .err('ErrBot', $lang['errbot']);
+	return $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> <input type="submit" value="' .$lang['confirm']. '"/>' .err('ErrBot', $lang['errBot']);
 }
 
 function select($name, $options, $default = '')
