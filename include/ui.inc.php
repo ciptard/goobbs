@@ -10,41 +10,33 @@ function isPOST($name)
 	return isset($_POST[$name]) && is_string($_POST[$name]);
 }
 
+function err($eid, $msg)
+{
+	if (isset($_SESSION[$eid]))
+	{
+		unset($_SESSION[$eid]);
+		return '<span class="msg">' .$msg. '</span>';
+	}
+	return '';
+}
+
 function password($name)
 {
 	global $lang;
-	$out = $lang[$name]. ' <input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>';
-	if (isset($_SESSION[$name. 'ErrNotMatch'])
-	{
-		$out += '<span class="msg">' .$lang['errNotMatch']. '</span>';
-		unset($_SESSION[$name. 'ErrNotMatch']);
-	}
-	return $out;
+	return $lang[$name]. ' <input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>' .err($name. 'ErrNotMatch', $lang['errNotMatch']);
 }
 
 function text($name, $default = '')
 {
 	global $lang;
-	$out = $lang[$name]. ' <input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>';
-	if (isset($_SESSION[$name. 'ErrLen'])
-	{
-		$out += '<span class="msg">' .$lang['errLen']. '</span>';
-		unset($_SESSION[$name. 'ErrLen']);
-	}
-	return $out;
+	return $lang[$name]. ' <input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>' .err($name. 'ErrLen', $lang['errLen']);
 }
 
 function textarea($name, $default = '')
 {
 	global $lang;
-	$out = $lang[$name]. '
-	<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>';
-	if (isset($_SESSION[$name. 'ErrLen'])
-	{
-		$out += '<span class="msg">' .$lang['errLen']. '</span>';
-		unset($_SESSION[$name. 'ErrLen']);
-	}
-	return $out;
+	return $lang[$name]. '
+	<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>' .err($name. 'ErrLen', $lang['errLen']);
 }
 
 function submit()
@@ -53,13 +45,7 @@ function submit()
 	$num1 = rand(1, 10);
 	$num2 = rand(1, 10);
 	$_SESSION['captcha'] = (string) ($num1 * $num2);
-	$out = $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> <input type="submit" value="' .$lang['confirm']. '"/>';
-	if (isset($_SESSION['ErrBot'])
-	{
-		$out += '<span class="msg">' .$lang['errBot']. '</span>';
-		unset($_SESSION['ErrBot']);
-	}
-	return $out;
+	return $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> <input type="submit" value="' .$lang['confirm']. '"/>' .err('ErrBot', $lang['errbot']);
 }
 
 function select($name, $options, $default = '')
