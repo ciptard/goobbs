@@ -2,9 +2,9 @@ $(document).ready(function() {
 	bbcode();
 });
 
-$('#form').is(':visible') {
+$('textarea[name="content"]').focusin(function () {
 	bbcode();
-}
+});
 
 function bbcode() {
 	var ta = $('textarea[name="content"]')[0];
