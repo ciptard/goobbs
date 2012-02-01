@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 	$('.img').click(function() {
 		if($('#zoom').length == 0) {
 			var offset = $(this).offset();
@@ -8,7 +8,7 @@ $(document).ready(function(){
 				'max-width': '800px',
 				'top': offset.top,
 				'left': offset.left,
-				'box-shadow': '0 0 100px #777'
+				'border': '20px solid #CCC'
 			}).appendTo('body').hide().fadeIn()
 			.click(function() {
 				$('#zoom').remove();

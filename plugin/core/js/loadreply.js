@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 	$('a.quote[href]').hover(
 		function(e) {
 			var link = $(this).attr('href').split('#');
