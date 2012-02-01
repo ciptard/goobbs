@@ -1,6 +1,10 @@
-$(document).ready(function(){
+$(document).ready(function() {
 	bbcode();
 });
+
+$('#form').is(':visible') {
+	bbcode();
+}
 
 function bbcode() {
 	var ta = $('textarea[name="content"]')[0];
