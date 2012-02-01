@@ -41,6 +41,7 @@ input[type="text"] {
 	max-width: 320px;
 	max-height: 320px;
 	border: 0;
+	margin: 10px;
 }
 .block {
 	padding: 5px 10px;
