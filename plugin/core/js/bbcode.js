@@ -2,10 +2,6 @@ $(document).ready(function() {
 	bbcode();
 });
 
-$('textarea[name="content"]').focusin(function () {
-	bbcode();
-});
-
 function bbcode() {
 	var ta = $('textarea[name="content"]')[0];
 
