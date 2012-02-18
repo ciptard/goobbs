@@ -2,12 +2,12 @@
 
 function readEntry($type, $file)
 {
-	return eval('return ' .substr(file_get_contents('data/' .$type. '/' .$file. '.dat.php'), 14). ';');
+	return eval('return ' .file_get_contents('data/' .$type. '/' .$file. '.dat.php', false, NULL, 14). ';');
 }
 
 function saveEntry($type, $file, $data)
 {
-	file_put_contents('data/' .$type. '/' .$file. '.dat.php', "<?php exit;?>\n" .var_export($data, true));
+	file_put_contents('data/' .$type. '/' .$file. '.dat.php', "<?php exit;?>\n" .var_export($data, true), LOCK_EX);
 }
 
 function deleteEntry($type, $file)
