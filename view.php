@@ -17,14 +17,14 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	saveEntry('topic', $_GET['topic'], $topicEntry);
 
 	$out['subtitle'] = $topicEntry['title'];
-	$out['content'] .= '<div class="box">
+	$out['content'] .= '<div class="box row-fluid">
 	<h1><a href="view.php/forum/' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. ' » ' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</h1>
-	<div class="left"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
+	<div class="span3"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
 	<p>' .toDate($_GET['topic']). '</p></div>
-	<div class="right"><div class="content">' .content($topicEntry['content']). '</div>'.
+	<div class="span9"><div class="content">' .content($topicEntry['content']). '</div>'.
 	(!$topicEntry['locked']? '<p><a class="button" href="add.php/reply/' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']). '</div>
-	<div style="clear: both;"></div></div>';
+	</div>';
 	$total = totalPage($topicEntry['reply']);
 	$p = pid($total);
 	if($topicEntry['reply'])
@@ -32,13 +32,13 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		foreach(viewPage($topicEntry['reply'], $p) as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
-			$out['content'] .= '<div id="' .$reply. '" class="box">
-			<div class="left"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
+			$out['content'] .= '<div id="' .$reply. '" class="box row-fluid">
+			<div class="span3"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
 			<p>' .toDate($reply). '</p></div>
-			<div class="right"><div class="content">' .content($replyEntry['content']). '</div>'.
+			<div class="span9"><div class="content">' .content($replyEntry['content']). '</div>'.
 			(!$topicEntry['locked']? '<p><a class="button" href="add.php/reply/' .$_GET['topic']. '/q/' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 			hook('afterReply', $reply). '</div>
-			<div style="clear: both;"></div></div>';
+			</div>';
 		}
 	}
 	$out['content'] .= pageControl($p, $total, 'view.php/topic/' .$_GET['topic']).

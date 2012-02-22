@@ -6,21 +6,13 @@ function bbcode() {
 	var ta = $('textarea[name="content"]')[0];
 
 	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block', 'cut'];
-	var e = $('<div id="bbcode"></div>');
+	var e = $('<div id="bbcode" class="btn-group"></div>');
 	for(var i in tags) {
-		$('<input type="button"/>').attr('value', tags[i]).appendTo(e);
+		$('<input class="btn" type="button"/>').attr('value', tags[i]).appendTo(e);
 	}
 	$(e).insertBefore(ta);
 
-	$('#bbcode input').css('margin', 5)
-	.hover(
-		function() {
-			$(this).fadeTo('slow', 0.5);
-		},
-		function() {
-			$(this).fadeTo('slow', 1);
-		}
-	)
+	$('#bbcode input')
 	.click(function() {
 		var tag = $(this).attr('value');
 		var start = '['+tag+']';

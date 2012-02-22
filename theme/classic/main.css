@@ -26,7 +26,7 @@ input[type="text"], input[type="password"], textarea {
 	border-radius: 4px;
 }
 textarea {
-	width: 100%;
+	width: 80%;
 }
 input[type="text"] {
 	width: 50%;
@@ -46,14 +46,6 @@ input[type="text"] {
 	font-family: monospace;
 	font-size: 10px;
 	white-space: pre-wrap;
-}
-#menu {
-	border-bottom: 1px dotted #777;
-	text-align: right;
-}
-#container {
-	width: 900px;
-	margin: auto;
 }
 #footer ul {
 	padding: 0;
@@ -124,13 +116,4 @@ table {
 }
 #page {
 	text-align: center;
-}
-.right {
-	float: right;
-	width: 680px;
-}
-.left {
-	float: left;
-	width: 160px;
-	word-wrap: break-word;
 }
