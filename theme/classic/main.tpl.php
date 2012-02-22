@@ -22,26 +22,30 @@ header('Content-Type: text/html; charset=UTF-8');
 	<?php echo hook('head', $out['self']);?>
 </head>
 <body>
-	<div id="container">
-		<div id="header"><h2><?php echo $config['title'];?></h2></div>
-		<div id="menu">
-			<ul>
-			<li><a href="index.php/new"><?php echo $lang['new'];?></a></li>
-			<li><a href="index.php/forum"><?php echo $lang['forum'];?></a></li>
-			<li><a href="search.php"><?php echo $lang['search'];?></a></li>
-			<?php echo hook('menu', $out['self']).
-			(isAdmin()? '<li><a href="config.php/main">' .$lang['config']. '</a></li>
-			<li><a href="config.php/plugin">' .$lang['plugin']. '</a></li>
-			<li><a href="config.php/worker">' .$lang['worker']. '</a></li>' : '').
-			(isWorker()?
-			'<li><a href="auth.php/logout">' .$lang['logout']. ' (' .$lang[$_SESSION['role']]. ')</a></li>' :
-			'<li><a href="auth.php/login">' .$lang['login']. '</a></li>');?>
-			</ul>
-			<?php echo hook('beforeMain', $out['self']);?>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#"><?php echo $config['title'];?></a>		
+				<ul class="nav">
+				<li><a href="index.php/new"><?php echo $lang['new'];?></a></li>
+				<li><a href="index.php/forum"><?php echo $lang['forum'];?></a></li>
+				<li><a href="search.php"><?php echo $lang['search'];?></a></li>
+				<?php echo hook('menu', $out['self']).
+				(isAdmin()? '<li><a href="config.php/main">' .$lang['config']. '</a></li>
+				<li><a href="config.php/plugin">' .$lang['plugin']. '</a></li>
+				<li><a href="config.php/worker">' .$lang['worker']. '</a></li>' : '').
+				(isWorker()?
+				'<li><a href="auth.php/logout">' .$lang['logout']. ' (' .$lang[$_SESSION['role']]. ')</a></li>' :
+				'<li><a href="auth.php/login">' .$lang['login']. '</a></li>');?>
+				</ul>
+			</div>
 		</div>
+	</div>
+	<div class="container">
+		<?php echo hook('beforeMain', $out['self']);?>
 		<div id="main"><?php echo $out['content'];?></div>
+		<?php echo hook('afterMain', $out['self']);?>
 		<div id="footer">
-			<?php echo hook('afterMain', $out['self']);?>
 			<ul>
 			<li><?php echo $lang['poweredBy'];?> <a href="http://github.com/taylorchu/goobbs">goobbs</a></li>
 			<li><a href="feed.php/topic"><?php echo $lang['feed'];?> (<?php echo $lang['topic'];?>)</a></li>
