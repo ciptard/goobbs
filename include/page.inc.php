@@ -2,7 +2,7 @@
 
 function pageControl($p, $total, $loc)
 {
-	$out = '<div id="page"><ul>';
+	$out = '<div class="pagination"><ul>';
 	for($i=1; $i<=$total; $i++)
 	{
 		if($p === $i)
