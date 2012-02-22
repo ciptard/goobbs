@@ -14,6 +14,7 @@ header('Content-Type: text/html; charset=UTF-8');
 	<meta name="description" content="<?php echo $out['subtitle'];?>"/>
 	<title><?php echo $out['subtitle'];?> - <?php echo $config['title'];?></title>
 	<base href="<?php echo $out['baseURL'];?>"/>
+	<link rel="stylesheet" type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
 	<link rel="stylesheet" type="text/css" href="theme/<?php echo $config['theme'];?>/main.css"/>
 	<link rel="alternate" type="application/atom+xml" href="feed.php/topic" title="<?php echo $lang['topic'];?> - <?php echo $config['title'];?>"/>
 	<link rel="alternate" type="application/atom+xml" href="feed.php/reply" title="<?php echo $lang['reply'];?> - <?php echo $config['title'];?>"/>
