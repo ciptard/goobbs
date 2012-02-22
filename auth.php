@@ -14,10 +14,9 @@ if(isGET('login'))
 	}
 	else
 	{
-		$out['content'] .= '<form action="auth.php/login" method="post">
-		<p>' .password('password'). '</p>
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('auth.php/login',
+			password('password').
+			submit());
 	}
 }
 else if(isGET('logout') && isWorker())

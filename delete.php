@@ -25,9 +25,8 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php/topic/' .$_GET['topic']. '" method="post">
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('delete.php/topic/' .$_GET['topic'],
+			submit());
 	}
 }
 else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEntry('reply', $_GET['reply']))
@@ -47,9 +46,8 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php/reply/' .$_GET['reply']. '" method="post">
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('delete.php/reply/' .$_GET['reply'],
+			submit());
 	}
 }
 else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
@@ -78,9 +76,8 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php/forum/' .$_GET['forum']. '" method="post">
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('delete.php/forum/' .$_GET['forum'],
+			submit());
 	}
 }
 else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]))
@@ -95,9 +92,8 @@ else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]
 	}
 	else
 	{
-		$out['content'] .= '<form action="delete.php/worker/' .$_GET['worker']. '" method="post">
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('delete.php/worker/' .$_GET['worker'],
+			submit());
 	}
 }
 else

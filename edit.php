@@ -55,12 +55,14 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 			$forumOptions[$forum] = $forumEntry['name'];
 		}
 		$forumEntry = readEntry('forum', $topicEntry['forum']);
-		$out['content'] .= '<form action="edit.php/topic/' .$_GET['topic']. '" method="post">
-		<p>' .text('title', $topicEntry['title']). '</p>
-		<p>' .textarea('content', $topicEntry['content']). '</p>'.
-		(isWorker()? '<p>' .select('locked', array('yes' => $lang['yes'], 'no' => $lang['no']), $topicEntry['locked']? 'yes' : 'no'). ' ' .select('pinned', array('yes' => $lang['yes'], 'no' => $lang['no']), isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no'). ' ' .select('forum', $forumOptions, $topicEntry['forum']). '</p>' : '').
-		'<p>' .submit(). '</p>
-		</form>'.
+		$out['content'] .= form('edit.php/topic/' .$_GET['topic'],
+			text('title', $topicEntry['title']).
+			textarea('content', $topicEntry['content']).
+			(isWorker()? 
+				select('locked', array('yes' => $lang['yes'], 'no' => $lang['no']), $topicEntry['locked']? 'yes' : 'no').
+				select('pinned', array('yes' => $lang['yes'], 'no' => $lang['no']), isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no').
+				select('forum', $forumOptions, $topicEntry['forum']) : '').
+			submit()).
 		(isPOST('content')? '<div class="alert">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
@@ -79,10 +81,10 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 	else
 	{
 		require 'include/parser.inc.php';
-		$out['content'] .= '<form action="edit.php/reply/' .$_GET['reply']. '" method="post">
-		<p>' .textarea('content', $replyEntry['content']). '</p>
-		<p>' .submit(). '</p>
-		</form>'.
+		$out['content'] .= form('edit.php/reply/' .$_GET['reply'],
+			textarea('content', $replyEntry['content']).
+			submit())
+.
 		(isPOST('content')? '<div class="alert">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
@@ -100,11 +102,10 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 	}
 	else
 	{
-		$out['content'] .= '<form action="edit.php/forum/' .$_GET['forum']. '" method="post">
-		<p>' .text('name', $forumEntry['name']). '</p>
-		<p>' .text('info', $forumEntry['info']). '</p>
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('edit.php/forum/' .$_GET['forum'],
+			text('name', $forumEntry['name']).
+			text('info', $forumEntry['info']).
+			submit());
 	}
 }
 else

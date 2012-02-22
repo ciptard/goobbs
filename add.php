@@ -30,12 +30,11 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 	else
 	{
 		require 'include/parser.inc.php';
-		$out['content'] .= '<form action="add.php/topic/' .$_GET['topic']. '" method="post">
-		<p>' .text('title'). '</p>
-		<p>' .text('name'). '</p>
-		<p>' .textarea('content'). '</p>
-		<p>' .submit(). '</p>
-		</form>'.
+		$out['content'] .= form('add.php/topic/' .$_GET['topic'], 
+			text('title').
+			text('name').
+			textarea('content').
+			submit()).
 		(isPOST('content')? '<div class="alert">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
@@ -66,11 +65,10 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	else
 	{
 		require 'include/parser.inc.php';
-		$out['content'] .= '<form action="add.php/reply/' .$_GET['reply']. '" method="post">
-		<p>' .text('name'). '</p>
-		<p>' .textarea('content', isGET('q') && isValidEntry('reply', $_GET['q'])? '[quote]' .$_GET['q']. '[/quote]' : ''). '</p>
-		<p>' .submit(). '</p>
-		</form>'.
+		$out['content'] .= form('add.php/reply/' .$_GET['reply'],
+			text('name').
+			textarea('content', isGET('q') && isValidEntry('reply', $_GET['q'])? '[quote]' .$_GET['q']. '[/quote]' : '').
+			submit()).
 		(isPOST('content')? '<div class="alert">' .content(clean($_POST['content'])). '</div>' : '');
 	}
 }
@@ -95,11 +93,10 @@ else if(isGET('forum') && isAdmin())
 	}
 	else
 	{
-		$out['content'] .= '<form action="add.php/forum" method="post">
-		<p>' .text('name'). '</p>
-		<p>' .text('info'). '</p>
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('add.php/forum',
+			text('name').
+			text('info').
+			submit());
 	}
 }
 else if(isGET('worker') && isAdmin())
@@ -114,10 +111,9 @@ else if(isGET('worker') && isAdmin())
 	}
 	else
 	{
-		$out['content'] .= '<form action="add.php/worker" method="post">
-		<p>' .text('password'). '</p>
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('add.php/worker',
+			text('password').
+			submit());
 	}
 }
 else

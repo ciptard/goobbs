@@ -24,22 +24,36 @@ function password($name)
 {
 	global $lang;
 	return err($name. 'ErrNotMatch', $lang['errNotMatch']).
-	$lang[$name]. ' <input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>';
+	'<div class="control-group">
+		<label class="control-label">' .$lang[$name]. '</label>
+		<div class="controls">
+			<input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>
+		</div>
+	</div>';
 }
 
 function text($name, $default = '')
 {
 	global $lang;
 	return err($name. 'ErrLen', $lang['errLen']).
-	$lang[$name]. ' <input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>';
+	'<div class="control-group">
+		<label class="control-label">' .$lang[$name]. '</label>
+		<div class="controls">
+			<input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>
+		</div>
+	</div>';
 }
 
 function textarea($name, $default = '')
 {
 	global $lang;
 	return err($name. 'ErrLen', $lang['errLen']).
-	$lang[$name]. '
-	<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>';
+	'<div class="control-group">
+		<label class="control-label">' .$lang[$name]. '</label>
+		<div class="controls">
+			<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>
+		</div>
+	</div>';
 }
 
 function submit()
@@ -49,21 +63,41 @@ function submit()
 	$num2 = rand(1, 10);
 	$_SESSION['captcha'] = (string) ($num1 * $num2);
 	return err('ErrBot', $lang['errBot']).
-	$num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> '.
-	'<br/><input class="btn" type="submit" value="' .$lang['confirm']. '"/>';
+	'<div class="control-group">
+		<label class="control-label">' .$num1. ' x ' .$num2. ' = ?</label>
+		<div class="controls">
+			<input type="text" name="captcha" style="width: 50px;"/>
+		</div>
+	</div>
+	<div class="form-actions">
+		<input class="btn btn-primary" type="submit" value="' .$lang['confirm']. '"/>
+	</div>';
 }
 
 function select($name, $options, $default = '')
 {
 	global $lang;
 	$selected = isPOST($name) && isset($options[$_POST[$name]])? $_POST[$name] : $default;
-	$out = $lang[$name]. ' <select name="' .$name. '">';
-	foreach($options as $value => $option)
-	{
-		$out .= '<option value="' .$value. '"' .($value == $selected? ' selected="selected"' : ''). '>' .$option. '</option>';
-	}
-	$out .= '</select>';
+	$out = 
+	'<div class="control-group">
+		<label class="control-label">' .$lang[$name]. '</label>
+		<div class="controls">
+			<select name="' .$name. '">';
+			foreach($options as $value => $option)
+			{
+				$out .= '<option value="' .$value. '"' .($value == $selected? ' selected="selected"' : ''). '>' .$option. '</option>';
+			}
+			$out .= '</select>
+		</div>
+	</div>';
 	return $out;
+}
+
+function form($action, $controls)
+{
+	return '<form action="' .$action. '" method="post" class="form-horizontal">
+		<fieldset>' .$controls. '</fieldset>
+	</form>';
 }
 
 function check($name, $min = 1, $max = 40)

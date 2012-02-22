@@ -39,13 +39,16 @@ function core_config()
 		
 		$core = readEntry('plugin', 'core');
 		$options = array('yes' => $lang['yes'], 'no' => $lang['no']);
-		$out = '<form action="config.php/plugin/core" method="post">';
+		
+		$controlStr = '';
 		foreach(array('bbcode', 'loadreply', 'loadform', 'imgzoom') as $feature)
 		{
-			$out .= '<p>' .select($feature, $options, $core[$feature]? 'yes' : 'no'). '</p>';
+			$controlStr .= select($feature, $options, $core[$feature]? 'yes' : 'no');
 		}
-		$out .= '<p>' .submit(). '</p>
-		</form>';
+		$out = form('config.php/plugin/core',
+			$controlStr.
+			submit()
+			);
 	}
 	return $out;
 }

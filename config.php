@@ -22,12 +22,12 @@ if(isGET('main') && isAdmin())
 	{
 		$themes = fdir('theme');
 		$langs = fdir('lang');
-		$out['content'] .= '<form action="config.php/main" method="post">
-		<p>' .password('password'). '</p>
-		<p>' .text('title', $config['title']). '</p>
-		<p>' .select('theme', array_combine($themes, $themes), $config['theme']). ' ' .select('lang', array_combine($langs, $langs), $config['lang']). '</p>
-		<p>' .submit(). '</p>
-		</form>';
+		$out['content'] .= form('config.php/main',
+			password('password').
+			text('title', $config['title']).
+			select('theme', array_combine($themes, $themes), $config['theme']).
+			select('lang', array_combine($langs, $langs), $config['lang']).
+			submit());
 	}
 }
 else if(isGET('worker') && isAdmin())
