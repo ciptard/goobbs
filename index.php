@@ -46,7 +46,7 @@ if(isGET('new'))
 else if(isGET('forum'))
 {
 	$out['subtitle'] = $lang['forum'];
-	$out['content'] .= '<h1>' .(isAdmin()? '<a href="add.php/forum">[+]</a>' : '').$out['subtitle']. '</h1>';
+	$out['content'] .= '<h1>' .(isAdmin()? '<a href="add.php/forum"><i class="icon-plus"></i></a>' : '').$out['subtitle']. '</h1>';
 	$forums = readEntry('config', 'forumOrder');
 	if($forums)
 	{

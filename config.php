@@ -33,13 +33,13 @@ if(isGET('main') && isAdmin())
 else if(isGET('worker') && isAdmin())
 {
 	$out['subtitle'] = $lang['worker'];
-	$out['content'] .= '<h1><a href="add.php/worker">[+]</a>' .$out['subtitle']. '</h1>
+	$out['content'] .= '<h1><a href="add.php/worker"><i class="icon-plus"></i></a>' .$out['subtitle']. '</h1>
 	<ul>';
 	if($config['worker'])
 	{
 		foreach($config['worker'] as $key => $password)
 		{
-			$out['content'] .= '<li><a href="delete.php/worker/' .$key. '">[x]</a>' .$password. '</li>';
+			$out['content'] .= '<li><a href="delete.php/worker/' .$key. '"><i class="icon-remove"></i></a>' .$password. '</li>';
 		}
 	}
 	else
