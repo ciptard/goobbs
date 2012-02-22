@@ -20,16 +20,8 @@ h1 {
 h2 {
 	font-size: 20px;
 }
-input[type="text"], input[type="password"], textarea {
-	border: 1px solid #CCC;
-	color: #555;
-	border-radius: 4px;
-}
 textarea {
 	width: 80%;
-}
-input[type="text"] {
-	width: 50%;
 }
 .img {
 	max-width: 320px;
@@ -37,36 +29,17 @@ input[type="text"] {
 	border: 0;
 	margin: 10px;
 }
-.block {
-	padding: 5px 10px;
-	margin: 5px;
-	color: #777;
-	border: 1px dashed #777;
-	background-color: #EEE;
-	font-family: monospace;
-	font-size: 10px;
-	white-space: pre-wrap;
-}
 #footer ul {
 	padding: 0;
 }
-.button, .msg, #menu ul li, #footer ul li, #page ul li, #jump ul li {
+#footer ul li, #jump ul li {
 	padding: 2px 4px;
 	margin: 4px;
 	display: inline-block;
 	border-radius: 4px;
 }
-.msg, #menu ul li a {
-	color: #FFF;
-}
-.button, #page ul li {
-	background-color: #E0EAF1;
-}
 #jump ul li {
 	background-color: #FFEFC6;
-}
-.msg {
-	background-color: #9A4444;
 }
 .th {
 	background-color: #F0D5B7;
@@ -89,31 +62,9 @@ table {
 :target {
 	background-color: #FFD;
 }
-.box {
-	padding: 7px 14px;
-	border: 1px solid #CCC;
-}
 .w1 {
-	width: 15%;
+	width: 15%
 }
 .w2 {
 	width: 20%;
-}
-.pinned, .locked {
-	padding: 1px 2px;
-	font-size: 10px;
-	font-weight: bold;
-	margin-right: 4px;
-	border-radius: 4px;
-}
-.pinned {
-	background-color: #DAEDE2;
-	color: #528F6C;
-}
-.locked {
-	background-color: #EAD7D7;
-	color: #8E5252;
-}
-#page {
-	text-align: center;
 }

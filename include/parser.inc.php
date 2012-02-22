@@ -9,7 +9,7 @@ function bbcode($text)
 	global $pattern, $replace;
 
 	$pattern[] = '%\[block\]([^\a]+?)\[/block\]%e';
-	$replace[] = '\'<div class="block">\'.str_replace(\'<br />\', \'\', \'$1\').\'</div>\'';
+	$replace[] = '\'<pre class="pre-scrollable">\'.str_replace(\'<br />\', \'\', \'$1\').\'</pre>\'';
 
 	$pattern[] = '%\[b\]([^\a]+?)\[/b\]%';
 	$replace[] = '<b>$1</b>';
