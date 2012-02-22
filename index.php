@@ -67,7 +67,8 @@ else if(isGET('forum'))
 		$num = range(1, count($forums));
 		$options = array_combine($num, $num);
 		
-		$controlStr = '<table>
+		$controlStr = '';
+		$out['content'] .= '<table>
 		<tr class="th">
 			<td class="span7">' .$lang['forum']. '</td>
 			<td class="span2">' .$lang['topic']. '</td>
@@ -76,17 +77,18 @@ else if(isGET('forum'))
 		foreach(array_values($forums) as $key => $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);
-			$lang[$forum] = manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info'];
-			$controlStr .= '<tr><td>' .(isAdmin()? select($forum, $options, $key+1) : $lang[$forum]). '</td>
+			$lang[$forum] = $forumEntry['name'];
+			$controlStr .= select($forum, $options, $key+1);
+			$out['content'] .= '<tr><td>' .manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
 			<td>' .count($forumEntry['topic']). '</td>
 			<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td></tr>';
 		}
-		$controlStr .= '</table>';
+		$out['content'] .= '</table>';
 		
-		$out['content'] .= form('index.php/forum', 
+		$out['content'] .= isAdmin()? form('index.php/forum', 
 			$controlStr.
-			(isAdmin()? submit() : '')
-			);
+			submit()
+			) : '';
 	}
 	else
 	{
