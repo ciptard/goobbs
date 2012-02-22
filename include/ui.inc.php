@@ -50,7 +50,7 @@ function submit()
 	$_SESSION['captcha'] = (string) ($num1 * $num2);
 	return err('ErrBot', $lang['errBot']).
 	$num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> '.
-	'<hr/><input class="btn" type="submit" value="' .$lang['confirm']. '"/>';
+	'<br/><input class="btn" type="submit" value="' .$lang['confirm']. '"/>';
 }
 
 function select($name, $options, $default = '')
