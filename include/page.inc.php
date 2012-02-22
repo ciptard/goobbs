@@ -2,11 +2,11 @@
 
 function pageControl($p, $total, $loc)
 {
-	$out = '<div class="pagination"><ul>';
+	$out = '<div class="pagination pagination-centered"><ul>';
 	for($i=1; $i<=$total; $i++)
 	{
 		if($p === $i)
-			$out .= '<li>' .$i. '</li>';
+			$out .= '<li class="active"><a href="#">' .$i. '</a></li>';
 		else
 			$out .= '<li><a href="' .$loc. '/p/' .$i. '">' .$i. '</a></li>';	
 	}
