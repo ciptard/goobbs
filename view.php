@@ -17,7 +17,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	saveEntry('topic', $_GET['topic'], $topicEntry);
 
 	$out['subtitle'] = $topicEntry['title'];
-	$out['content'] .= '<div class="box row-fluid">
+	$out['content'] .= '<div class="box row">
 	<h1><a href="view.php/forum/' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> » ' .$out['subtitle']. ' » ' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</h1>
 	<div class="span3"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
 	<p>' .toDate($_GET['topic']). '</p></div>
@@ -32,7 +32,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		foreach(viewPage($topicEntry['reply'], $p) as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
-			$out['content'] .= '<div id="' .$reply. '" class="box row-fluid">
+			$out['content'] .= '<div id="' .$reply. '" class="box row">
 			<div class="span3"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
 			<p>' .toDate($reply). '</p></div>
 			<div class="span9"><div class="content">' .content($replyEntry['content']). '</div>'.
