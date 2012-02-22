@@ -15,7 +15,7 @@ function err($eid, $msg)
 	if (isset($_SESSION[$eid]))
 	{
 		unset($_SESSION[$eid]);
-		return '<span class="msg">' .$msg. '</span>';
+		return '<div class="alert alert-error">' .$msg. '</div>';
 	}
 	return '';
 }
@@ -23,19 +23,22 @@ function err($eid, $msg)
 function password($name)
 {
 	global $lang;
-	return $lang[$name]. ' <input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>' .err($name. 'ErrNotMatch', $lang['errNotMatch']);
+	return err($name. 'ErrNotMatch', $lang['errNotMatch']).
+	$lang[$name]. ' <input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>';
 }
 
 function text($name, $default = '')
 {
 	global $lang;
-	return $lang[$name]. ' <input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>' .err($name. 'ErrLen', $lang['errLen']);
+	return err($name. 'ErrLen', $lang['errLen']).
+	$lang[$name]. ' <input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>';
 }
 
 function textarea($name, $default = '')
 {
 	global $lang;
-	return $lang[$name].err($name. 'ErrLen', $lang['errLen']). '
+	return err($name. 'ErrLen', $lang['errLen']).
+	$lang[$name]. '
 	<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>';
 }
 
@@ -45,7 +48,9 @@ function submit()
 	$num1 = rand(1, 10);
 	$num2 = rand(1, 10);
 	$_SESSION['captcha'] = (string) ($num1 * $num2);
-	return $num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> <input type="submit" value="' .$lang['confirm']. '"/>' .err('ErrBot', $lang['errBot']);
+	return err('ErrBot', $lang['errBot']).
+	$num1. ' x ' .$num2. ' = ? <input type="text" name="captcha" style="width: 50px;"/> '.
+	'<hr/><input class="btn" type="submit" value="' .$lang['confirm']. '"/>';
 }
 
 function select($name, $options, $default = '')
