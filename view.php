@@ -22,7 +22,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	<div class="span3"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
 	<p>' .toDate($_GET['topic']). '</p></div>
 	<div class="span8"><div class="content">' .content($topicEntry['content']). '</div>'.
-	(!$topicEntry['locked']? '<p><a class="button" href="add.php/reply/' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+	(!$topicEntry['locked']? '<p><a class="btn" href="add.php/reply/' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 	hook('afterTopic', $_GET['topic']). '</div>
 	</div>';
 	$total = totalPage($topicEntry['reply']);
@@ -36,7 +36,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			<div class="span3"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
 			<p>' .toDate($reply). '</p></div>
 			<div class="span8"><div class="content">' .content($replyEntry['content']). '</div>'.
-			(!$topicEntry['locked']? '<p><a class="button" href="add.php/reply/' .$_GET['topic']. '/q/' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+			(!$topicEntry['locked']? '<p><a class="btn" href="add.php/reply/' .$_GET['topic']. '/q/' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
 			hook('afterReply', $reply). '</div>
 			</div>';
 		}
@@ -66,7 +66,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	$out['content'] .= '<div class="box">
 	<h1>' .manageForum($_GET['forum']).$out['subtitle']. '</h1>
 	<p>' .$forumEntry['info']. '</p>
-	<p><a class="button" href="add.php/topic/' .$_GET['forum']. '">' .$lang['add'].$lang['topic']. '</a></p>'.
+	<p><a class="btn" href="add.php/topic/' .$_GET['forum']. '">' .$lang['add'].$lang['topic']. '</a></p>'.
 	hook('afterForum', $_GET['forum']).
 	'</div>';
 	$topics = array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic'])));

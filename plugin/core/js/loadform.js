@@ -1,5 +1,5 @@
 $(function(){
-	$('a.button[href^="add.php"]').click(function(event) {
+	$('a.btn[href^="add.php"]').click(function(event) {
 		event.preventDefault();
 		if($(this).siblings('#form').length > 0) {
 			$(this).siblings('#form').slideUp('slow', function(){ $(this).remove(); });
