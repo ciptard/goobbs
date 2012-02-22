@@ -13,9 +13,11 @@ if(isGET('new'))
 	if($mixes)
 	{
 		$out['content'] .= '<table>
-		<tr class="th"><td>' .$lang['topic']. '</td>
-		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class="w2">' .$lang['date']. '</td></tr>';
+		<tr class="th">
+			<td class="span7">' .$lang['topic']. '</td>
+			<td class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</td>
+			<td class="span3">' .$lang['date']. '</td>
+		</tr>';
 		foreach($mixes as $mix)
 		{
 			if(isValidEntry('topic', $mix))
@@ -66,9 +68,11 @@ else if(isGET('forum'))
 		$options = array_combine($num, $num);
 		
 		$out['content'] .= (isAdmin()? '<form action="index.php/forum" method="post">' : ''). '<table>
-		<tr class="th"><td>' .$lang['forum']. '</td>
-		<td class="w1">' .$lang['topic']. '</td>
-		<td class="w2">' .$lang['date']. '</td></tr>';
+		<tr class="th">
+			<td class="span7">' .$lang['forum']. '</td>
+			<td class="span2">' .$lang['topic']. '</td>
+			<td class="span3">' .$lang['date']. '</td>
+		</tr>';
 		foreach(array_values($forums) as $key => $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);

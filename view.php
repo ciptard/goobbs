@@ -48,9 +48,11 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	}
 	$out['content'] .= pageControl($p, $total, 'view.php/topic/' .$_GET['topic']).
 	'<table>
-	<tr class="th"><td>' .$lang['more'].$lang['topic']. '</td>
-	<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-	<td class="w2">' .$lang['forum']. '</td></tr>';
+	<tr class="th">
+		<td class="span7">' .$lang['more'].$lang['topic']. '</td>
+		<td class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</td>
+		<td class="span3">' .$lang['forum']. '</td>
+	</tr>';
 	$topics = listEntry('topic');
 	shuffle($topics);
 	foreach(array_slice($topics, 0, 4) as $topic)
@@ -81,9 +83,11 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	if($topics)
 	{
 		$out['content'] .= '<table>
-		<tr class="th"><td>' .$lang['topic']. '</td>
-		<td class="w1">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class="w2">' .$lang['date']. '</td></tr>';
+		<tr class="th">
+			<td class="span7">' .$lang['topic']. '</td>
+			<td class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</td>
+			<td class="span3">' .$lang['date']. '</td>
+		</tr>';
 		foreach(viewPage($topics, $p) as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
