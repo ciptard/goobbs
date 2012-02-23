@@ -11,14 +11,14 @@ if($out['self'] === 'feed')
 }
 else
 {
-	$out['content'] .= '<div id="jump"><ul>
-	<li>' .$lang['count']. ' : ' .count(array_merge(listEntry('topic'), listEntry('reply'))). '</li>';
+	$out['content'] .= '<div>
+	<a class="label label-warning" href="#">' .$lang['count']. ' : ' .count(array_merge(listEntry('topic'), listEntry('reply'))). '</a>';
 	foreach(listEntry('forum') as $forum)
 	{
 		$forumEntry = readEntry('forum', $forum);
-		$out['content'] .= '<li><a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a></li>';
+		$out['content'] .= '<a class="label label-warning" href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a>';
 	}
-	$out['content'] .= '</ul></div>';
+	$out['content'] .= '</div>';
 	
 	require 'theme/' .$config['theme']. '/main.tpl.php';
 }
