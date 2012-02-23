@@ -23,12 +23,16 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		<li>' .$out['subtitle']. ' <span class="divider">/</span></li>
 		<li>' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</li>
 	</ul>
-	<div class="topic">
-	<div class="span3"><p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
-	<p>' .toDate($_GET['topic']). '</p></div>
-	<div class="span8"><div class="content">' .content($topicEntry['content']). '</div>'.
-	(!$topicEntry['locked']? '<p><a class="btn" href="add.php/reply/' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
-	hook('afterTopic', $_GET['topic']). '</div>
+	<div class="topic well">
+		<div class="span3">
+			<p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
+			<p>' .toDate($_GET['topic']). '</p>
+		</div>
+		<div class="span8">
+			<div class="content">' .content($topicEntry['content']). '</div>'.
+			(!$topicEntry['locked']? '<p><a class="btn" href="add.php/reply/' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+			hook('afterTopic', $_GET['topic']).
+		'</div>
 	</div>';
 	$total = totalPage($topicEntry['reply']);
 	$p = pid($total);
@@ -37,12 +41,17 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		foreach(viewPage($topicEntry['reply'], $p) as $reply)
 		{
 			$replyEntry = readEntry('reply', $reply);
-			$out['content'] .= '<div id="' .$reply. '" class="reply">
-			<div class="span3"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
-			<p>' .toDate($reply). '</p></div>
-			<div class="span8"><div class="content">' .content($replyEntry['content']). '</div>'.
-			(!$topicEntry['locked']? '<div><a class="btn" href="add.php/reply/' .$_GET['topic']. '/q/' .$reply. '">' .$lang['add'].$lang['reply']. '</a></div>' : '').
-			hook('afterReply', $reply). '</div>
+			$out['content'] .= '
+			<div id="' .$reply. '" class="reply well">
+				<div class="span3">
+					<p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
+					<p>' .toDate($reply). '</p>
+				</div>
+				<div class="span8">
+					<div class="content">' .content($replyEntry['content']). '</div>'.
+					(!$topicEntry['locked']? '<p><a class="btn" href="add.php/reply/' .$_GET['topic']. '/q/' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+					hook('afterReply', $reply).
+				'</div>
 			</div>';
 		}
 	}
