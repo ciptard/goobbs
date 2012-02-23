@@ -29,14 +29,13 @@ h2 {
 textarea {
 	width: 100%;
 }
-#footer ul {
-	padding: 0;
+#footer {
+	margin-top: 45px;
+	padding: 35px 0 36px;
+	border-top: 1px solid #e5e5e5;
 }
-#footer ul li {
-	padding: 2px 4px;
-	margin: 4px;
-	display: inline-block;
-	border-radius: 4px;
+#footer span {
+	margin-right: 20px;
 }
 th {
 	background-color: #F0D5B7;

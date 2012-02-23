@@ -46,12 +46,10 @@ header('Content-Type: text/html; charset=UTF-8');
 		<div id="main"><?php echo $out['content'];?></div>
 		<?php echo hook('afterMain', $out['self']);?>
 		<div id="footer">
-			<ul>
-			<li><?php echo $lang['poweredBy'];?> <a href="http://github.com/taylorchu/goobbs">goobbs</a></li>
-			<li><a href="feed.php/topic"><?php echo $lang['feed'];?> (<?php echo $lang['topic'];?>)</a></li>
-			<li><a href="feed.php/reply"><?php echo $lang['feed'];?> (<?php echo $lang['reply'];?>)</a></li>
+			<span><?php echo $lang['poweredBy'];?> <a href="http://github.com/taylorchu/goobbs">goobbs</a></span>
+			<span><a href="feed.php/topic"><?php echo $lang['feed'];?> (<?php echo $lang['topic'];?>)</a></span>
+			<span><a href="feed.php/reply"><?php echo $lang['feed'];?> (<?php echo $lang['reply'];?>)</a></span>
 			<?php echo hook('footer', $out['self']);?>
-			</ul>
 		</div>
 	</div>
 </body>
