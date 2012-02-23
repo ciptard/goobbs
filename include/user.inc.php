@@ -44,11 +44,11 @@ function quote($reply)
 	{
 		$replyEntry = readEntry('reply', $reply);
 		$topicEntry = readEntry('topic', $replyEntry['topic']);
-		return '<a class="quote" href="view.php/topic/' .$replyEntry['topic']. '/p/' .onPage($reply, $topicEntry['reply']). '#' .$reply. '">&gt; ' .$replyEntry['trip']. '</a>';
+		return '<a class="label label-info" href="view.php/topic/' .$replyEntry['topic']. '/p/' .onPage($reply, $topicEntry['reply']). '#' .$reply. '">' .$replyEntry['trip']. '</a>';
 	}
 	else
 	{
-		return '<a class="quote">&gt; [?]</a>';
+		return '<a class="label label-info">[?]</a>';
 	}
 }
 

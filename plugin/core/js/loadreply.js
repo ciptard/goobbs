@@ -1,5 +1,5 @@
 $(function(){
-	$('a.quote[href]').hover(
+	$('a.label-info[href^="view.php"]').hover(
 		function(e) {
 			var link = $(this).attr('href').split('#');
 			var target = link[0] + ' #' + link[1] + ' .content';

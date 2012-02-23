@@ -16,6 +16,9 @@ h1, h2 {
 .thumbnail {
 	max-width: 320px;
 }
+.label {
+	margin: 4px 4px 4px 0;
+}
 h1 {
 	color: #777;
 	font-size: 16px;
@@ -44,9 +47,6 @@ textarea {
 }
 .user {
 	font-weight: bold;
-}
-.quote {
-	color: #789922;
 }
 td{
 	border: 1px solid #CCC;
