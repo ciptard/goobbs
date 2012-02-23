@@ -35,10 +35,6 @@ th {
 	font-weight: bold;
 	margin: 14px 0;
 }
-.topic, .reply {
-	margin: 14px 0;
-	padding: 7px;
-}
 .topic:after, .reply:after {
 	clear: both;
 	display: table;
