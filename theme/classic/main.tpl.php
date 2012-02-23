@@ -43,7 +43,10 @@ header('Content-Type: text/html; charset=UTF-8');
 	</div>
 	<div class="container">
 		<?php echo hook('beforeMain', $out['self']);?>
-		<div id="main"><?php echo $out['content'];?></div>
+		<div id="main">
+			<div class="page-header"><h1><?php echo $out['sub_prefix'].$out['subtitle'];?></h1></div>
+			<?php echo $out['content'];?>
+		</div>
 		<?php echo hook('afterMain', $out['self']);?>
 		<div id="footer">
 			<span><?php echo $lang['poweredBy'];?> <a href="http://github.com/taylorchu/goobbs">goobbs</a></span>

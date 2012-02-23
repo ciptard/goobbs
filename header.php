@@ -35,6 +35,7 @@ foreach($plugins as $plugin)
 }
 
 $out['content'] = '';
+$out['sub_prefix'] = '';
 $out['baseURL'] = baseURL();
 
 ?>

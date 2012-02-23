@@ -7,7 +7,6 @@ require 'include/manage.inc.php';
 if(isGET('new'))
 {
 	$out['subtitle'] = $lang['new'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 
 	$mixes = _max(array_merge(listEntry('topic'), listEntry('reply')), 8);
 	if($mixes)
@@ -52,7 +51,7 @@ if(isGET('new'))
 else if(isGET('forum'))
 {
 	$out['subtitle'] = $lang['forum'];
-	$out['content'] .= '<h1>' .(isAdmin()? '<a href="add.php/forum"><i class="icon-plus"></i></a>' : '').$out['subtitle']. '</h1>';
+	$out['sub_prefix'] = isAdmin()? '<a href="add.php/forum"><i class="icon-plus"></i></a>' : '';
 	$forums = readEntry('config', 'forumOrder');
 	if($forums)
 	{
@@ -104,8 +103,7 @@ else if(isGET('forum'))
 else if(isGET('404'))
 {
 	$out['subtitle'] = 'HTTP 404';
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
-	<p>' .$lang['notFound']. '</p>';
+	$out['content'] .= '<p>' .$lang['notFound']. '</p>';
 }
 else
 {

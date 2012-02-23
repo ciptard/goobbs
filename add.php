@@ -7,7 +7,6 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 {
 	$forumEntry = readEntry('forum', $_GET['topic']);
 	$out['subtitle'] = $lang['add'].$lang['topic']. ' : ' .$forumEntry['name'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('name', 0, 20) && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
@@ -46,7 +45,6 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 		exit;
 	}
 	$out['subtitle'] = $lang['add'].$lang['reply']. ' : ' .$topicEntry['title'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('name', 0, 20) && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = clean($_POST['content']);
@@ -75,7 +73,6 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 else if(isGET('forum') && isAdmin())
 {
 	$out['subtitle'] = $lang['add'].$lang['forum'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('name') && check('info', 1, 80))
 	{
 		$forumEntry['name'] = clean($_POST['name']);
@@ -102,7 +99,6 @@ else if(isGET('forum') && isAdmin())
 else if(isGET('worker') && isAdmin())
 {
 	$out['subtitle'] = $lang['add'].$lang['worker'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('password'))
 	{
 		$config['worker'][hide($_POST['password'])] = clean($_POST['password']);

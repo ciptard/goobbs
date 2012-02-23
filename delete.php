@@ -7,7 +7,6 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$out['subtitle'] = $lang['delete'].$lang['topic']. ' : ' .$topicEntry['title'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
 	{
 		deleteEntry('topic', $_GET['topic']);
@@ -33,7 +32,6 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
 	$out['subtitle'] = $lang['delete'].$lang['reply'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
 	{
 		deleteEntry('reply', $_GET['reply']);
@@ -54,7 +52,6 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 {
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $lang['delete'].$lang['forum']. ' : ' .$forumEntry['name'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
 	{
 		deleteEntry('forum', $_GET['forum']);
@@ -83,7 +80,6 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]))
 {
 	$out['subtitle'] = $lang['delete'].$lang['worker']. ' : ' .$config['worker'][$_GET['worker']];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot())
 	{
 		unset($config['worker'][$_GET['worker']]);

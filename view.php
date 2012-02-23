@@ -41,7 +41,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			<div class="span3"><p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
 			<p>' .toDate($reply). '</p></div>
 			<div class="span8"><div class="content">' .content($replyEntry['content']). '</div>'.
-			(!$topicEntry['locked']? '<p><a class="btn" href="add.php/reply/' .$_GET['topic']. '/q/' .$reply. '">' .$lang['add'].$lang['reply']. '</a></p>' : '').
+			(!$topicEntry['locked']? '<div><a class="btn" href="add.php/reply/' .$_GET['topic']. '/q/' .$reply. '">' .$lang['add'].$lang['reply']. '</a></div>' : '').
 			hook('afterReply', $reply). '</div>
 			</div>';
 		}
@@ -74,9 +74,9 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	require 'include/page.inc.php';
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $forumEntry['name'];
+	$out['sub_prefix'] = manageForum($_GET['forum']);
 	$out['content'] .= '
-	<div class="hero-unit">
-		<h1>' .manageForum($_GET['forum']).$out['subtitle']. '</h1>
+	<div class="well">
 		<p>' .$forumEntry['info']. '</p>
 		<p><a class="btn btn-primary btn-large" href="add.php/topic/' .$_GET['forum']. '">' .$lang['add'].$lang['topic']. '</a></p>'.
 		hook('afterForum', $_GET['forum']).
@@ -111,8 +111,7 @@ else if(isGET('plugin') && function_exists($_GET['plugin']. '_view'))
 {
 	$misc = $_GET['plugin']. '_view';
 	$out['subtitle'] = strtolower($_GET['plugin']);
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>'.
-	$misc();
+	$out['content'] .= $misc();
 }
 else
 {

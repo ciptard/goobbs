@@ -7,7 +7,6 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$out['subtitle'] = $lang['edit'].$lang['topic']. ' : ' .$topicEntry['title'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
@@ -70,7 +69,6 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
 	$out['subtitle'] = $lang['edit'].$lang['reply'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = clean($_POST['content']);
@@ -92,7 +90,6 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 {
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $lang['edit'].$lang['forum']. ' : ' .$forumEntry['name'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && check('name') && check('info', 1, 80))
 	{
 		$forumEntry['name'] = clean($_POST['name']);

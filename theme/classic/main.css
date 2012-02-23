@@ -1,5 +1,5 @@
-p, .content {
-	margin: 7px 0;
+.content {
+	margin: 14px 0;
 }
 .thumbnail {
 	max-width: 320px;
@@ -27,16 +27,18 @@ h2 {
 :target {
 	background-color: #FFD;
 }
-//
+/* sp */
 th {
 	background-color: #F0D5B7;
 }
 .user {
 	font-weight: bold;
+	margin: 14px 0;
 }
 .topic, .reply {
 	border: 1px solid #CCC;
 	margin: 14px 0;
+	padding: 7px;
 }
 .topic:after, .reply:after {
 	clear: both;

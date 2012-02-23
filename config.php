@@ -6,7 +6,6 @@ require 'header.php';
 if(isGET('main') && isAdmin())
 {
 	$out['subtitle'] = $lang['config'];
-	$out['content'] .= '<h1>' .$out['subtitle']. '</h1>';
 	if(checkBot() && checkPass('password') && check('title') &&
 		isPOST('theme') && indir($_POST['theme'], 'theme') &&
 		isPOST('lang') && indir($_POST['lang'], 'lang', '.lng.php'))
@@ -33,8 +32,8 @@ if(isGET('main') && isAdmin())
 else if(isGET('worker') && isAdmin())
 {
 	$out['subtitle'] = $lang['worker'];
-	$out['content'] .= '<h1><a href="add.php/worker"><i class="icon-plus"></i></a>' .$out['subtitle']. '</h1>
-	<ul>';
+	$out['sub_prefix'] = '<a href="add.php/worker"><i class="icon-plus"></i></a>';
+	$out['content'] .= '<ul>';
 	if($config['worker'])
 	{
 		foreach($config['worker'] as $key => $password)
@@ -54,14 +53,12 @@ else if(isGET('plugin') && isAdmin())
 	{
 		$misc = $_GET['plugin']. '_config';
 		$out['subtitle'] = $lang['config'].strtolower($_GET['plugin']);
-		$out['content'] .= '<h1>' .$out['subtitle']. '</h1>'.
-		$misc();
+		$out['content'] .= $misc();
 	}
 	else
 	{
 		$out['subtitle'] = $lang['plugin'];
-		$out['content'] .= '<h1>' .$out['subtitle']. '</h1>
-		<ul>';
+		$out['content'] .= '<ul>';
 		if($plugins)
 		{
 			foreach($plugins as $plugin)
