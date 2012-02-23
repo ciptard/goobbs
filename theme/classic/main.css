@@ -1,17 +1,5 @@
-ul, p, .content, table {
+p, .content {
 	margin: 7px 0;
-}
-ul {
-	list-style: none;
-	padding-left: 14px;
-}
-a {
-	color: #036;
-	margin: 0 1px;
-	text-decoration: none;
-}
-h1, h2 {
-	text-shadow: 1px 1px 2px #AAA;
 }
 .thumbnail {
 	max-width: 320px;
@@ -19,15 +7,14 @@ h1, h2 {
 .label {
 	margin: 4px 4px 4px 0;
 }
-h1 {
-	color: #777;
-	font-size: 16px;
-}
-h2 {
-	font-size: 20px;
-}
 textarea {
 	width: 100%;
+}
+h1 {
+	font-size: 18px;
+}
+h2 {
+	font-size: 16px;
 }
 #footer {
 	margin-top: 45px;
@@ -37,6 +24,10 @@ textarea {
 #footer span {
 	margin-right: 20px;
 }
+:target {
+	background-color: #FFD;
+}
+//
 th {
 	background-color: #F0D5B7;
 }
@@ -51,7 +42,4 @@ th {
 	clear: both;
 	display: table;
 	content: "";
-}
-:target {
-	background-color: #FFD;
 }
