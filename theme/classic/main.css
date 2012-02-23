@@ -1,4 +1,4 @@
-ul, p, .content, table, .box {
+ul, p, .content, table {
 	margin: 7px 0;
 }
 ul {
@@ -41,20 +41,11 @@ textarea {
 #jump ul li {
 	background-color: #FFEFC6;
 }
-.th {
+th {
 	background-color: #F0D5B7;
-	text-align: center;
 }
 .user {
 	font-weight: bold;
-}
-td{
-	border: 1px solid #CCC;
-	padding: 4px 14px;
-}
-table {
-	width: 100%;
-	border-collapse: collapse;
 }
 .topic, .reply {
 	border: 1px solid #CCC;

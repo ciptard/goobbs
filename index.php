@@ -12,12 +12,15 @@ if(isGET('new'))
 	$mixes = _max(array_merge(listEntry('topic'), listEntry('reply')), 8);
 	if($mixes)
 	{
-		$out['content'] .= '<table>
-		<tr class="th">
-			<td class="span7">' .$lang['topic']. '</td>
-			<td class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-			<td class="span3">' .$lang['date']. '</td>
-		</tr>';
+		$out['content'] .= '<table class="table table-striped table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th class="span7">' .$lang['topic']. '</th>
+				<th class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</th>
+				<th class="span3">' .$lang['date']. '</th>
+			</tr>
+		</thead>
+		<tbody>';
 		foreach($mixes as $mix)
 		{
 			if(isValidEntry('topic', $mix))
@@ -38,7 +41,8 @@ if(isGET('new'))
 				<td>' .toDate($reply). '</td></tr>';
 			}
 		}
-		$out['content'] .= '</table>';
+		$out['content'] .= '</tbody>
+		</table>';
 	}
 	else
 	{
@@ -68,12 +72,15 @@ else if(isGET('forum'))
 		$options = array_combine($num, $num);
 		
 		$controlStr = '';
-		$out['content'] .= '<table>
-		<tr class="th">
-			<td class="span7">' .$lang['forum']. '</td>
-			<td class="span2">' .$lang['topic']. '</td>
-			<td class="span3">' .$lang['date']. '</td>
-		</tr>';
+		$out['content'] .= '<table class="table table-striped table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th class="span7">' .$lang['forum']. '</th>
+				<th class="span2">' .$lang['topic']. '</th>
+				<th class="span3">' .$lang['date']. '</th>
+			</tr>
+		</thead>
+		<tbody>';
 		foreach(array_values($forums) as $key => $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);
@@ -83,12 +90,11 @@ else if(isGET('forum'))
 			<td>' .count($forumEntry['topic']). '</td>
 			<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td></tr>';
 		}
-		$out['content'] .= '</table>';
-		
-		$out['content'] .= isAdmin()? form('index.php/forum', 
+		$out['content'] .= '</tbody>
+		</table>'.
+		(isAdmin()? form('index.php/forum', 
 			$controlStr.
-			submit()
-			) : '';
+			submit()) : '');
 	}
 	else
 	{

@@ -47,12 +47,15 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		}
 	}
 	$out['content'] .= pageControl($p, $total, 'view.php/topic/' .$_GET['topic']).
-	'<table>
-	<tr class="th">
-		<td class="span7">' .$lang['more'].$lang['topic']. '</td>
-		<td class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-		<td class="span3">' .$lang['forum']. '</td>
-	</tr>';
+	'<table class="table table-striped table-bordered table-condensed">
+	<thead>
+		<tr>
+			<th class="span7">' .$lang['more'].$lang['topic']. '</th>
+			<th class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</th>
+			<th class="span3">' .$lang['forum']. '</th>
+		</tr>
+	</thead>
+	<tbody>';
 	$topics = listEntry('topic');
 	shuffle($topics);
 	foreach(array_slice($topics, 0, 4) as $topic)
@@ -63,7 +66,8 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
 		<td><a href="view.php/forum/' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a></td></tr>';
 	}
-	$out['content'] .= '</table>';
+	$out['content'] .= '</tbody>
+	</table>';
 }
 else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 {
@@ -82,12 +86,15 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	$p = pid($total);
 	if($topics)
 	{
-		$out['content'] .= '<table>
-		<tr class="th">
-			<td class="span7">' .$lang['topic']. '</td>
-			<td class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</td>
-			<td class="span3">' .$lang['date']. '</td>
-		</tr>';
+		$out['content'] .= '<table class="table table-striped table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th class="span7">' .$lang['topic']. '</th>
+				<th class="span2">' .$lang['view']. ' / ' .$lang['reply']. '</th>
+				<th class="span3">' .$lang['date']. '</th>
+			</tr>
+		</thead>
+		<tbody>';
 		foreach(viewPage($topics, $p) as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
@@ -95,7 +102,8 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 			<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
 			<td>' .toDate($topic). '</td></tr>';
 		}
-		$out['content'] .= '</table>';
+		$out['content'] .= '</tbody>
+		</table>';
 	}
 	$out['content'] .= pageControl($p, $total, 'view.php/forum/' .$_GET['forum']);
 }
