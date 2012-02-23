@@ -7,6 +7,9 @@
 .label {
 	margin: 4px 4px 4px 0;
 }
+.popover-inner {
+	width: 600px;
+}
 textarea {
 	width: 100%;
 }

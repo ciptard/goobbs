@@ -19,6 +19,8 @@ header('Content-Type: text/html; charset=UTF-8');
 	<link rel="alternate" type="application/atom+xml" href="feed.php/topic" title="<?php echo $lang['topic'];?> - <?php echo $config['title'];?>"/>
 	<link rel="alternate" type="application/atom+xml" href="feed.php/reply" title="<?php echo $lang['reply'];?> - <?php echo $config['title'];?>"/>
 	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
 	<?php echo hook('head', $out['self']);?>
 </head>
 <body>
