@@ -24,7 +24,7 @@ function bbcode($text)
 	$replace[] = '<del>$1</del>';
 
 	$pattern[] = '%\[img\]([^\r\n\[]+?)\[/img\]%';
-	$replace[] = '<img class="img" src="$1" alt=""/>';
+	$replace[] = '<img class="thumbnail" src="$1" alt=""/>';
 
 	$pattern[] = '%\[url=([^\r\n\[]+?)\]([^\a]+?)\[/url\]%';
 	$replace[] = '<a target="_blank" href="$1">$2</a>';

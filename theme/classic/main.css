@@ -13,6 +13,9 @@ a {
 h1, h2 {
 	text-shadow: 1px 1px 2px #AAA;
 }
+.thumbnail {
+	max-width: 320px;
+}
 h1 {
 	color: #777;
 	font-size: 16px;
@@ -22,12 +25,6 @@ h2 {
 }
 textarea {
 	width: 100%;
-}
-.img {
-	max-width: 320px;
-	max-height: 320px;
-	border: 0;
-	margin: 10px;
 }
 #footer ul {
 	padding: 0;
