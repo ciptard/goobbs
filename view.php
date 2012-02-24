@@ -23,7 +23,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		<li>' .$out['subtitle']. ' <span class="divider">/</span></li>
 		<li>' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</li>
 	</ul>
-	<div class="topic well">
+	<div class="topic well clearfix">
 		<div class="span2">
 			<p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
 			<p>' .toDate($_GET['topic']). '</p>
@@ -42,7 +42,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		{
 			$replyEntry = readEntry('reply', $reply);
 			$out['content'] .= '
-			<div id="' .$reply. '" class="reply well">
+			<div id="' .$reply. '" class="reply well clearfix">
 				<div class="span2">
 					<p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
 					<p>' .toDate($reply). '</p>

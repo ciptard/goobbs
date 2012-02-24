@@ -38,8 +38,3 @@ th {
 	font-weight: bold;
 	margin: 14px 0;
 }
-.topic:after, .reply:after {
-	clear: both;
-	display: table;
-	content: "";
-}
