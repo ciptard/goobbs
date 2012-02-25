@@ -26,18 +26,22 @@ if(isGET('new'))
 			{
 				$topic = $mix;
 				$topicEntry = readEntry('topic', $topic);
-				$out['content'] .= '<tr><td>' .manageTopic($topic).$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php/topic/' .$topic. '">' .$topicEntry['title']. '</a></td>
-				<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
-				<td>' .toDate($topic). '</td></tr>';
+				$out['content'] .= '<tr>
+					<td>' .manageTopic($topic).$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php/topic/' .$topic. '">' .$topicEntry['title']. '</a></td>
+					<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
+					<td>' .toDate($topic). '</td>
+				</tr>';
 			}
 			else
 			{
 				$reply = $mix;
 				$replyEntry = readEntry('reply', $reply);
 				$topicEntry = readEntry('topic', $replyEntry['topic']);
-				$out['content'] .= '<tr><td>' .manageReply($reply).$replyEntry['trip']. ' ' .$lang['replied']. ' <a href="view.php/topic/' .$replyEntry['topic']. '/p/'. onPage($reply, $topicEntry['reply']). '#' .$reply. '">' .$topicEntry['title']. '</a></td>
-				<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
-				<td>' .toDate($reply). '</td></tr>';
+				$out['content'] .= '<tr>
+					<td>' .manageReply($reply).$replyEntry['trip']. ' ' .$lang['replied']. ' <a href="view.php/topic/' .$replyEntry['topic']. '/p/'. onPage($reply, $topicEntry['reply']). '#' .$reply. '">' .$topicEntry['title']. '</a></td>
+					<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
+					<td>' .toDate($reply). '</td>
+				</tr>';
 			}
 		}
 		$out['content'] .= '</tbody>
@@ -85,9 +89,11 @@ else if(isGET('forum'))
 			$forumEntry = readEntry('forum', $forum);
 			$lang[$forum] = $forumEntry['name'];
 			$controlStr .= select($forum, $options, $key+1);
-			$out['content'] .= '<tr><td>' .manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
-			<td>' .count($forumEntry['topic']). '</td>
-			<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td></tr>';
+			$out['content'] .= '<tr>
+				<td>' .manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
+				<td>' .count($forumEntry['topic']). '</td>
+				<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td>
+			</tr>';
 		}
 		$out['content'] .= '</tbody>
 		</table>'.
