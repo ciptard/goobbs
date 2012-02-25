@@ -5,7 +5,7 @@ $(function(){
 			var link = $(this).attr('href').split('#');
 			var target = link[0] + ' #' + link[1] + ' .content';
 			$.ajaxSetup({async:false});
-			return $('<div></div>').load(target).html();
+			return $('<div></div>').load(target).children(':first').html();
 		}
 	});
 });
