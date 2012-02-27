@@ -100,6 +100,11 @@ function form($action, $controls)
 	</form>';
 }
 
+function preview($name)
+{
+	return isPOST($name)? '<div class="alert">' .content(clean($_POST[$name])). '</div>' : '';
+}
+
 function check($name, $min = 1, $max = 40)
 {
 	if(!isPOST($name))
