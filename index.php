@@ -108,7 +108,7 @@ else if(isGET('forum'))
 			$lang[$forum] = $forumEntry['name'];
 			$controlStr .= select($forum, $options, $key+1);
 			$out['content'] .= '<tr>
-				<td>' .manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> Â» ' .$forumEntry['info']. '</td>
+				<td>' .manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
 				<td>' .count($forumEntry['topic']). '</td>
 				<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td>
 			</tr>';
