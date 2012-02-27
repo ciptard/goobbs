@@ -62,7 +62,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 				select('pinned', array('yes' => $lang['yes'], 'no' => $lang['no']), isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no').
 				select('forum', $forumOptions, $topicEntry['forum']) : '').
 			submit()).
-		(isPOST('content')? '<div class="alert">' .content(clean($_POST['content'])). '</div>' : '');
+		preview('content');
 	}
 }
 else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEntry('reply', $_GET['reply']))
@@ -82,7 +82,7 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 		$out['content'] .= form('edit.php/reply/' .$_GET['reply'],
 			textarea('content', $replyEntry['content']).
 			submit()).
-		(isPOST('content')? '<div class="alert">' .content(clean($_POST['content'])). '</div>' : '');
+		preview('content');
 	}
 }
 else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
