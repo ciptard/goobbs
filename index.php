@@ -11,7 +11,25 @@ if(isGET('new'))
 	$mixes = _max(array_merge(listEntry('topic'), listEntry('reply')), 8);
 	if($mixes)
 	{
-		$out['content'] .= '<table class="table table-striped table-bordered table-condensed">
+		require 'include/parser.inc.php';
+		$topic = $mixes[0];
+		if(!isValidEntry('topic', $topic))
+		{
+			$replyEntry = readEntry('reply', $topic);
+			$topic = $replyEntry['topic'];
+		}
+		$topicEntry = readEntry('topic', $topic);
+		$out['content'] .= '<div class="hero-unit">
+			<h1>' .$topicEntry['title']. '</h1>';
+			shuffle($topicEntry['reply']);
+			foreach(array_slice($topicEntry['reply'], 0 ,4) as $reply)
+			{
+				$replyEntry = readEntry('reply', $reply);
+				$out['content'] .= '<p>' .$replyEntry['trip']. ' : ' .strip_tags(summary($replyEntry['content'])). '</p>';
+			}
+			$out['content'] .= '<a class="btn btn-primary btn-large" href="view.php/topic/' .$topic. '">' .$lang['more']. '</a>
+		</div>
+		<table class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
 				<th class="span7">' .$lang['topic']. '</th>
@@ -90,7 +108,7 @@ else if(isGET('forum'))
 			$lang[$forum] = $forumEntry['name'];
 			$controlStr .= select($forum, $options, $key+1);
 			$out['content'] .= '<tr>
-				<td>' .manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> » ' .$forumEntry['info']. '</td>
+				<td>' .manageForum($forum). '<a href="view.php/forum/' .$forum. '">' .$forumEntry['name']. '</a> Â» ' .$forumEntry['info']. '</td>
 				<td>' .count($forumEntry['topic']). '</td>
 				<td>' .($forumEntry['topic']? toDate(end($forumEntry['topic'])) : $lang['none']). '</td>
 			</tr>';
