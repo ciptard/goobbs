@@ -5,7 +5,7 @@ function pageControl($p, $total, $loc)
 	$start = ($p-4) >= 1? $p-4 : 1;
 	$end = ($p+4) <= $total? $p+4 : $total;
 	$out = '<div class="pagination pagination-centered"><ul>'.
-		($p === 1? '' : '<li><a href="' .$loc. '/p/' .($i-1). '">«</a></li>').
+		($p === 1? '' : '<li><a href="' .$loc. '/p/' .($p-1). '">«</a></li>').
 		($start === 1? '' : '<li class="active"><a href="#">...</a></li>');
 		for($i=$start; $i<=$total; $i++)
 		{
@@ -15,7 +15,7 @@ function pageControl($p, $total, $loc)
 				$out .= '<li><a href="' .$loc. '/p/' .$i. '">' .$i. '</a></li>';	
 		}
 		$out .= ($end === $total? '' : '<li class="active"><a href="#">...</a></li>').
-		($p === $total? '' : '<li><a href="' .$loc. '/p/' .($i+1). '">»</a></li>').
+		($p === $total? '' : '<li><a href="' .$loc. '/p/' .($p+1). '">»</a></li>').
 	'</ul></div>';
 	return $out;
 }
