@@ -2,15 +2,21 @@
 
 function pageControl($p, $total, $loc)
 {
-	$out = '<div class="pagination pagination-centered"><ul>';
-	for($i=1; $i<=$total; $i++)
-	{
-		if($p === $i)
-			$out .= '<li class="active"><a href="#">' .$i. '</a></li>';
-		else
-			$out .= '<li><a href="' .$loc. '/p/' .$i. '">' .$i. '</a></li>';	
-	}
-	$out .= '</ul></div>';
+	$start = ($p-4) >= 1? $p-4 : 1;
+	$end = ($p+4) <= $total? $p+4 : $total;
+	$out = '<div class="pagination pagination-centered"><ul>'.
+		($p === 1? '' : '<li><a href="' .$loc. '/p/' .($i-1). '">«</a></li>').
+		($start === 1? '' : '<li class="active"><a href="#">...</a></li>');
+		for($i=$start; $i<=$total; $i++)
+		{
+			if($p === $i)
+				$out .= '<li class="active"><a href="#">' .$i. '</a></li>';
+			else
+				$out .= '<li><a href="' .$loc. '/p/' .$i. '">' .$i. '</a></li>';	
+		}
+		$out .= ($end === $total? '' : '<li class="active"><a href="#">...</a></li>').
+		($p === $total? '' : '<li><a href="' .$loc. '/p/' .($i+1). '">»</a></li>').
+	'</ul></div>';
 	return $out;
 }
 
@@ -30,7 +36,13 @@ function viewPage($items, $p)
 
 function pid($total)
 {
-	return isGET('p') && $_GET['p'] >= 1 && $_GET['p'] <= $total? (int) $_GET['p'] : 1;
+	if(!isGET('p'))
+		return 1;
+	$p = (int) $_GET['p'];
+	if($p >= 1 && $p <= $total)
+		return $p;
+	else
+		return 1;
 }
 
 ?>
