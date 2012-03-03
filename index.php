@@ -21,14 +21,15 @@ if(isGET('new'))
 		$topicEntry = readEntry('topic', $topic);
 		$out['content'] .= '<div class="hero-unit">
 			<h1>' .$topicEntry['title']. '</h1>
-			<p>' .$topicEntry['trip']. ' : ' .strip_tags(summary($topicEntry['content'])). '</p>';
+			<p>' .strip_tags(summary($topicEntry['content'])). ' / ';
 			shuffle($topicEntry['reply']);
 			foreach(array_slice($topicEntry['reply'], 0, 3) as $reply)
 			{
 				$replyEntry = readEntry('reply', $reply);
-				$out['content'] .= '<p>' .$replyEntry['trip']. ' : ' .strip_tags(summary($replyEntry['content'])). '</p>';
+				$out['content'] .= strip_tags(summary($replyEntry['content'])). ' / ';
 			}
-			$out['content'] .= '<a class="btn btn-primary btn-large" href="view.php/topic/' .$topic. '">' .$lang['more']. '</a>
+			$out['content'] .= '</p>
+			<p><a class="btn btn-primary btn-large" href="view.php/topic/' .$topic. '">' .$lang['more']. '</a></p>
 		</div>
 		<table class="table table-striped table-bordered table-condensed">
 		<thead>
