@@ -35,7 +35,7 @@ function core_config()
 		$lang['bbcode'] = 'bbcode editor';
 		$lang['loadreply'] = 'hover to read reply';
 		$lang['loadform'] = 'quick reply';
-		$lang['imgzoom'] = 'zoom image on click';
+		$lang['imgzoom'] = 'image preview';
 		
 		$core = readEntry('plugin', 'core');
 		$options = array('yes' => $lang['yes'], 'no' => $lang['no']);
