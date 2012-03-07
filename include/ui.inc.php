@@ -15,7 +15,7 @@ function err($eid, $msg)
 	if (isset($_SESSION[$eid]))
 	{
 		unset($_SESSION[$eid]);
-		return '<div class="alert alert-error">' .$msg. '</div>';
+		return '<div class="alert alert-error"><i class="icon-arrow-down"></i> ' .$msg. '</div>';
 	}
 	return '';
 }
