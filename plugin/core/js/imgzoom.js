@@ -1,8 +1,9 @@
 $(function(){
-	$('.thumbnail').popover({
-		'title': 'preview',
-		'content': function() {
-			return $('<div></div>').append($('<img>').css('max-width', 540).attr('src', $(this).attr('src'))).html();
+	$('.thumbnail').click(function(){
+		if($(this).css('max-width') == '100%') {
+			$(this).css('max-width', '320px');
+		} else {
+			$(this).css('max-width', '100%');
 		}
 	});
 });
