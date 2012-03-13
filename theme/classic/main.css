@@ -7,6 +7,9 @@
 .label {
 	margin: 0 9px 0 0;
 }
+body {
+	padding-top: 60px;
+}
 textarea {
 	width: 100%;
 }
@@ -18,7 +21,7 @@ h2 {
 }
 #footer {
 	margin-top: 45px;
-	padding: 35px 0 36px;
+	padding: 35px 0 60px;
 	border-top: 1px solid #e5e5e5;
 }
 #footer span {
