@@ -24,7 +24,7 @@ header('Content-Type: text/html; charset=UTF-8');
 	<?php echo hook('head', $out['self']);?>
 </head>
 <body>
-	<div class="navbar">
+	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="brand" href="#"><?php echo $config['title'];?></a>		
