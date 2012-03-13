@@ -18,6 +18,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 
 	$out['subtitle'] = $topicEntry['title'];
 	$out['content'] .= '<ul class="breadcrumb">
+		<li><a href="index.php/forum">' .$lang['forum']. '</a> <span class="divider">/</span></li>
 		<li><a href="view.php/forum/' .$topicEntry['forum']. '">' .$forumEntry['name']. '</a> <span class="divider">/</span></li>
 		<li>' .$out['subtitle']. ' <span class="divider">/</span></li>
 		<li>' .$lang['count']. ' (' .(count($topicEntry['reply']) + 1). ')</li>
