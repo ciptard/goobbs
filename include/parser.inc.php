@@ -32,9 +32,6 @@ function bbcode($text)
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
 	$replace[] = '<iframe width="320" height="240" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
 	
-	$pattern[] = '%\[cut\]%';
-	$replace[] = '';
-	
 	$pattern[] = '%\[quote\](\d{4}-\d{2}-\d{8}[a-z\d]{5})\[/quote\]%e';
 	$replace[] = 'quote(\'$1\')';
 
@@ -43,7 +40,7 @@ function bbcode($text)
 
 function summary($text)
 {
-	$parts = explode('[cut]', $text, 2);
+	$parts = explode("\n\n", $text, 2);
 	return content($parts[0]);
 }
 

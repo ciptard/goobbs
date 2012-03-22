@@ -10,7 +10,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 	if(checkBot() && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
-		$topicEntry['content'] = clean($_POST['content']);
+		$topicEntry['content'] = transNL(clean($_POST['content']));
 		if(isWorker() &&
 			isPOST('locked') && ($_POST['locked'] === 'yes' || $_POST['locked'] === 'no') &&
 			isPOST('pinned') && ($_POST['pinned'] === 'yes' || $_POST['pinned'] === 'no') &&
@@ -71,7 +71,7 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 	$out['subtitle'] = $lang['edit'].$lang['reply'];
 	if(checkBot() && check('content', 1, 2000))
 	{
-		$replyEntry['content'] = clean($_POST['content']);
+		$replyEntry['content'] = transNL(clean($_POST['content']));
 		saveEntry('reply', $_GET['reply'], $replyEntry);
 		$topicEntry = readEntry('topic', $replyEntry['topic']);
 		$out['content'] .= '<p><a href="view.php/topic/' .$replyEntry['topic']. '/p/'. onPage($_GET['reply'], $topicEntry['reply']). '#' .$_GET['reply']. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';

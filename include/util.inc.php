@@ -96,6 +96,11 @@ function clean($text)
 	return htmlspecialchars(trim($text), ENT_QUOTES);
 }
 
+function transNL($text)
+{
+	return str_replace(array("\r\n", "\r"), "\n", $text);
+}
+
 function hide($text)
 {
 	return md5($text.md5($text));

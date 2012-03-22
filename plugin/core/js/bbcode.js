@@ -5,7 +5,7 @@ $(function() {
 function bbcode() {
 	var ta = $('textarea[name="content"]')[0];
 
-	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block', 'cut'];
+	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block'];
 	var e = $('<div id="bbcode" class="btn-group"></div>');
 	for(var i in tags) {
 		$('<input class="btn" type="button"/>').attr('value', tags[i]).appendTo(e);

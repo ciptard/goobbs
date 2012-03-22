@@ -10,7 +10,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 	if(checkBot() && check('name', 0, 20) && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
-		$topicEntry['content'] = clean($_POST['content']);
+		$topicEntry['content'] = transNL(clean($_POST['content']));
 		$topicEntry['view'] = 0;
 		$topicEntry['forum'] = $_GET['topic'];
 		$topicEntry['reply'] = array();
@@ -47,7 +47,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	$out['subtitle'] = $lang['add'].$lang['reply']. ' : ' .$topicEntry['title'];
 	if(checkBot() && check('name', 0, 20) && check('content', 1, 2000))
 	{
-		$replyEntry['content'] = clean($_POST['content']);
+		$replyEntry['content'] = transNL(clean($_POST['content']));
 		$replyEntry['topic'] = $_GET['reply'];
 		$reply = newEntry();
 		$replyEntry['trip'] = $_POST['name'] === ''? substr($reply, -5) : trip(clean($_POST['name']));
