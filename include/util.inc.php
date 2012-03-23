@@ -24,27 +24,29 @@ function baseURL()
 
 function _max($arr, $limit)
 {
-	$out = array_slice($arr, 0, $limit);
-	$min = minIndex($out);
-	foreach(array_slice($arr, $limit) as $value)
+	$size = count($arr);
+	if($size <= $limit)
 	{
-		if($value > $out[$min])
-		{
-			$out[$min] = $value;
-			$min = minIndex($out);
-		}
+		rsort($arr);
+		return $arr;
 	}
-	rsort($out);
+	$out = array();
+	for($i=0; $i<$limit; $i++)
+	{
+		$maxI = maxIndex($arr, $size);
+		$out[] = $arr[$maxI];
+		unset($arr[$maxI]);
+		$size--;
+	}
 	return $out;
 }
 
-function minIndex($arr)
+function maxIndex($arr, $size)
 {
-	$end = count($arr);
 	$key = 0;
-	for($i=1; $i<$end; $i++)
+	for($i=1; $i<$size; $i++)
 	{
-		if ($arr[$i] < $arr[$key])
+		if ($arr[$i] > $arr[$key])
 			$key = $i;
 	}
 	return $key;
