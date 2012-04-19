@@ -47,7 +47,6 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 	}
 	else
 	{
-		require 'include/parser.inc.php';
 		foreach(listEntry('forum') as $forum)
 		{
 			$forumEntry = readEntry('forum', $forum);
@@ -78,7 +77,6 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 	}
 	else
 	{
-		require 'include/parser.inc.php';
 		$out['content'] .= form('edit.php/reply/' .$_GET['reply'],
 			textarea('content', $replyEntry['content']).
 			submit()).

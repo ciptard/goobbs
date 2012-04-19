@@ -1,7 +1,5 @@
 <?php
 
-hook('bbcode');
-
 function bbcode($text)
 {
 	//the pattern to be matched

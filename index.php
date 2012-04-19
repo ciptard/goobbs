@@ -2,7 +2,6 @@
 
 $out['self'] = 'index';
 require 'header.php';
-require 'include/manage.inc.php';
 
 if(isGET('new'))
 {
@@ -11,7 +10,6 @@ if(isGET('new'))
 	$mixes = _max(array_merge(listEntry('topic'), listEntry('reply')), 8);
 	if($mixes)
 	{
-		require 'include/parser.inc.php';
 		$topic = $mixes[0];
 		if(!isValidEntry('topic', $topic))
 		{

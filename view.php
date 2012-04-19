@@ -2,13 +2,9 @@
 
 $out['self'] = 'view';
 require 'header.php';
-require 'include/manage.inc.php';
 
 if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
-{
-	require 'include/parser.inc.php';
-	require 'include/page.inc.php';
-	
+{	
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$forumEntry = readEntry('forum', $topicEntry['forum']);
 
@@ -81,7 +77,6 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 }
 else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 {
-	require 'include/page.inc.php';
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $forumEntry['name'];
 	$out['sub_prefix'] = manageForum($_GET['forum']);

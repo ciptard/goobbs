@@ -5,8 +5,8 @@ if(!isset($out))
 	exit;
 }
 
-require 'include/db.inc.php';
-require 'include/util.inc.php';
+require 'lib/db.lib.php';
+require 'lib/util.lib.php';
 
 if(!isValidEntry('config', 'config'))
 {
@@ -23,8 +23,21 @@ if(!isset($_SESSION['role']))
 $config = readEntry('config', 'config');
 
 require 'lang/' .$config['lang']. '.lng.php';
-require 'include/user.inc.php';
-require 'include/ui.inc.php';
+require 'lib/user.lib.php';
+require 'lib/ui.lib.php';
+if(in_array($out['self'], array('add', 'edit', 'feed', 'index', 'view'))
+{
+	hook('bbcode');
+	require 'lib/parser.lib.php';
+}
+if(in_array($out['self'], array('index', 'search', 'view'))
+{
+	require 'lib/manage.lib.php';
+}
+if($out['self'] === 'view')
+{
+	require 'lib/page.lib.php';
+}
 
 $_GET = fURL();
 

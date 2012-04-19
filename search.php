@@ -19,9 +19,7 @@ if(checkBot() && check('topic'))
 	}
 	$out['content'] .= '<ul>';
 	if($foundTopics)
-	{
-		require 'include/manage.inc.php';
-		
+	{		
 		foreach($foundTopics as $topic => $title)
 		{
 			$out['content'] .= '<li>' .manageTopic($topic). '<a href="view.php/topic/' .$topic. '">' .$title. '</a></li>';

@@ -1,7 +1,7 @@
 <?php
 
-require 'include/db.inc.php';
-require 'include/util.inc.php';
+require 'lib/db.lib.php';
+require 'lib/util.lib.php';
 
 if(!isValidEntry('config', 'config'))
 {
