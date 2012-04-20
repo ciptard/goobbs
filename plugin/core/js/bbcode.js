@@ -10,7 +10,25 @@ function bbcode() {
 	for(var i in tags) {
 		$('<input class="btn" type="button"/>').attr('value', tags[i]).appendTo(e);
 	}
+	$('<input id="upload-file" type="file"/>').insertBefore(ta);
 	$(e).insertBefore(ta);
+
+        $('#upload-file').change(function() {
+          var file = document.getElementById("upload-file").files[0];
+
+           if (!file || !file.type.match(/image.*/)) return;
+            
+           var fd = new FormData();
+           fd.append("image", file); // Append the file
+           fd.append("key", "6528448c258cff474ca9701c5bab6927");
+           console.log('start upload');
+           var xhr = new XMLHttpRequest();
+           xhr.open("POST", "http://api.imgur.com/2/upload.json", false); // Boooom!
+           xhr.send(fd);
+           
+           console.log('get respond');
+           ta.value += '[img]' + JSON.parse(xhr.responseText).upload.links.large_thumbnail + '[/img]';
+        });
 
 	$('#bbcode input')
 	.click(function() {
@@ -26,24 +44,21 @@ function bbcode() {
 					start += param;
 				else
 					return;
-				break;
+		      	break;
 			case 'youtube':
 				param = prompt('Enter youtube ID', '3f7l-Z4NF70');
 				if (param)
 					start += param;
 				else
 					return;
-				break;
+	      		break;
 			case 'url':
 				param = prompt('Enter URL', 'http://');
 				if (param)
 					start = '[url=' + param + ']';
 				else
 					return;
-				break;
-			case 'cut':
-				end = '';
-				break;
+      			break;
 		}
 
 		ta.focus();
