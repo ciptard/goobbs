@@ -14,24 +14,25 @@ function bbcode() {
 	$(e).insertBefore(ta);
 
         $('#upload-file').change(function() {
-          var file = document.getElementById("upload-file").files[0];
+           var file = document.getElementById("upload-file").files[0];
 
            if (!file || !file.type.match(/image.*/)) return;
             
            var fd = new FormData();
            fd.append("image", file); // Append the file
            fd.append("key", "6528448c258cff474ca9701c5bab6927");
-           console.log('start upload');
            var xhr = new XMLHttpRequest();
-           xhr.open("POST", "http://api.imgur.com/2/upload.json", false); // Boooom!
+           xhr.onreadystatechange = function () {
+              if(xhr.readyState == 4 && xhr.status == 200) {
+                ta.value += '[img]' + JSON.parse(xhr.responseText).upload.links.large_thumbnail + '[/img]';
+              }
+            }
+           xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
            xhr.send(fd);
            
-           console.log('get respond');
-           ta.value += '[img]' + JSON.parse(xhr.responseText).upload.links.large_thumbnail + '[/img]';
         });
 
-	$('#bbcode input')
-	.click(function() {
+	$('#bbcode input').click(function() {
 		var tag = $(this).attr('value');
 		var start = '['+tag+']';
 		var end = '[/'+tag+']';
