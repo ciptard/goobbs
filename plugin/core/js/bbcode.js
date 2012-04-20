@@ -10,26 +10,28 @@ function bbcode() {
 	for(var i in tags) {
 		$('<input class="btn" type="button"/>').attr('value', tags[i]).appendTo(e);
 	}
-	$('<input id="upload-file" type="file"/>').insertBefore(ta);
+	$('<input id="upload-file" type="file" multiple="multiple"/>').insertBefore(ta);
 	$(e).insertBefore(ta);
 
         $('#upload-file').change(function() {
-           var file = document.getElementById("upload-file").files[0];
-
-           if (!file || !file.type.match(/image.*/)) return;
+          var files = document.getElementById("upload-file").files;
+          if (typeof files != array) return;
+          for (var i in files) {
+            var file = files[i];
+            if (!file.type.match(/image.*/) continue;
             
-           var fd = new FormData();
-           fd.append("image", file); // Append the file
-           fd.append("key", "6528448c258cff474ca9701c5bab6927");
-           var xhr = new XMLHttpRequest();
-           xhr.onreadystatechange = function () {
+            var fd = new FormData();
+            fd.append("image", file); // Append the file
+            fd.append("key", "6528448c258cff474ca9701c5bab6927");
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
               if(xhr.readyState == 4 && xhr.status == 200) {
                 ta.value += '[img]' + JSON.parse(xhr.responseText).upload.links.large_thumbnail + '[/img]';
               }
             }
-           xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
-           xhr.send(fd);
-           
+            xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
+            xhr.send(fd);
+          }
         });
 
 	$('#bbcode input').click(function() {
