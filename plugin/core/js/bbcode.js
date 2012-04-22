@@ -18,7 +18,7 @@ function bbcode() {
           if (typeof files != array) return;
           for (var i in files) {
             var file = files[i];
-            if (!file.type.match(/image.*/) continue;
+            if (!file.type.match(/image.*/)) continue;
             
             var fd = new FormData();
             fd.append("image", file); // Append the file
