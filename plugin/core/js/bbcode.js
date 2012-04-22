@@ -15,7 +15,6 @@ function bbcode() {
 
         $('#upload-file').change(function() {
           var files = document.getElementById("upload-file").files;
-          if (typeof files != array) return;
           for (var i in files) {
             var file = files[i];
             if (!file.type.match(/image.*/)) continue;
