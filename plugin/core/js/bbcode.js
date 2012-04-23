@@ -4,34 +4,30 @@ $(function() {
 
 function bbcode() {
 	var ta = $('textarea[name="content"]')[0];
-
-	var tags = ['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block'];
-	var e = $('<div id="bbcode" class="btn-group"></div>');
-	for(var i in tags) {
-		$('<input class="btn" type="button"/>').attr('value', tags[i]).appendTo(e);
-	}
+	var bar = $('<div id="bbcode" class="btn-group"></div>');
+	$.each(['b', 'i', 'u', 's', 'img', 'url', 'youtube', 'block'], function (i, tag) {
+		$('<input class="btn" type="button"/>').attr('value', tag).appendTo(bar);
+	});
 	$('<input id="upload-file" type="file" multiple="multiple"/>').insertBefore(ta);
-	$(e).insertBefore(ta);
+	$(bar).insertBefore(ta);
 
-        $('#upload-file').change(function() {
-          var files = document.getElementById("upload-file").files;
-          for (var i in files) {
-            var file = files[i];
-            if (!file.type.match(/image.*/)) continue;
-            
-            var fd = new FormData();
-            fd.append("image", file); // Append the file
-            fd.append("key", "6528448c258cff474ca9701c5bab6927");
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-              if(xhr.readyState == 4 && xhr.status == 200) {
-                ta.value += '[img]' + JSON.parse(xhr.responseText).upload.links.large_thumbnail + '[/img]';
-              }
-            }
-            xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
-            xhr.send(fd);
-          }
-        });
+	
+	$('#upload-file').change(function() {
+	  $.each($("#upload-file")[0].files, function(i, file) {
+		var fd = new FormData();
+		fd.append("image", file);
+		fd.append("key", "6528448c258cff474ca9701c5bab6927");
+		
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+		  if(xhr.readyState == 4 && xhr.status == 200) {
+			ta.value += '[img]' + JSON.parse(xhr.responseText).upload.links.large_thumbnail + '[/img]';
+		  }
+		}
+		xhr.open("POST", "http://api.imgur.com/2/upload.json"); // Boooom!
+		xhr.send(fd);
+	  });
+	});
 
 	$('#bbcode input').click(function() {
 		var tag = $(this).attr('value');
