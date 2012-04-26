@@ -16,7 +16,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		$topicEntry['reply'] = array();
 		$topicEntry['locked'] = false;
 		$topic = newEntry();
-		$topicEntry['trip'] = $_POST['name'] === ''? substr($topic, -5) : trip(clean($_POST['name']));
+		$topicEntry['trip'] = trip(clean($_POST['name']), $topic);
 		saveEntry('topic', $topic, $topicEntry);
 
 		$forumEntry['topic'][$topic] = $topic;
@@ -49,7 +49,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 		$replyEntry['content'] = transNL(clean($_POST['content']));
 		$replyEntry['topic'] = $_GET['reply'];
 		$reply = newEntry();
-		$replyEntry['trip'] = $_POST['name'] === ''? substr($reply, -5) : trip(clean($_POST['name']));
+		$replyEntry['trip'] = trip(clean($_POST['name']), $reply);
 		saveEntry('reply', $reply, $replyEntry);
 
 		$topicEntry['reply'][$reply] = $reply;
