@@ -26,7 +26,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 		</div>
 		<div class="span9">
 			<div class="content">' .content($topicEntry['content']). '</div>'.
-			(!$topicEntry['locked']? '<div class="btn-toolbar"><a class="btn" href="add.php/reply/' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></div>' : '').
+			(!$topicEntry['locked']? '<div class="btn-toolbar"><a class="btn btn-primary btn-large" href="add.php/reply/' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></div>' : '').
 			hook('afterTopic', $_GET['topic']).
 		'</div>
 	</div>';
