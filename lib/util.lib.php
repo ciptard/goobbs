@@ -44,10 +44,10 @@ function _max($arr, $limit)
 	for($i=0; $i<$limit; $i++)
 	{	
 		$maxI = 0;
-		for($i=1; $i<$size; $i++)
+		for($j=1; $j<$size; $j++)
 		{
-			if ($arr[$i] > $arr[$maxI])
-				$maxI = $i;
+			if ($arr[$j] > $arr[$maxI])
+				$maxI = $j;
 		}
 		$out[] = $arr[$maxI];
 		unset($arr[$maxI]);
