@@ -24,7 +24,7 @@ $config = readEntry('config', 'config');
 
 require 'lang/' .$config['lang']. '.lng.php';
 require 'lib/user.lib.php';
-require 'lib/ui.lib.php';
+require 'lib/HTMLform.lib.php';
 $plugins = fdir('plugin');
 foreach($plugins as $plugin)
 {
@@ -37,7 +37,7 @@ if(in_array($out['self'], array('add', 'edit', 'feed', 'index', 'view')))
 }
 if(in_array($out['self'], array('index', 'search', 'view')))
 {
-	require 'lib/manage.lib.php';
+	require 'lib/entryLink.lib.php';
 }
 if($out['self'] === 'view')
 {
