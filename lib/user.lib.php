@@ -32,19 +32,6 @@ function login($password)
 	return false;
 }
 
-function trip($name, $id)
-{
-	if ($name === '')
-	{
-		return substr($id, -5);
-	}
-	else
-	{
-		$parts = explode('#', $name, 2);
-		return  $parts[0].(isset($parts[1])? '#' .substr(md5($parts[1]), -5) : '');
-	}
-}
-
 function quote($reply)
 {
 	if(isValidEntry('reply', $reply))

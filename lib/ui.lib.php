@@ -1,13 +1,33 @@
 <?php
 
-function isGET($name)
+function clean($text)
 {
-	return isset($_GET[$name]) && is_string($_GET[$name]);
+	if(get_magic_quotes_gpc())
+		$text = stripslashes($text);
+	return htmlspecialchars(trim($text), ENT_QUOTES);
 }
 
-function isPOST($name)
+function transNL($text)
 {
-	return isset($_POST[$name]) && is_string($_POST[$name]);
+	return str_replace(array("\r\n", "\r"), "\n", $text);
+}
+
+function hide($text)
+{
+	return md5($text.md5($text));
+}
+
+function trip($name, $id)
+{
+	if ($name === '')
+	{
+		return substr($id, -5);
+	}
+	else
+	{
+		$parts = explode('#', $name, 2);
+		return  $parts[0].(isset($parts[1])? '#' .substr(md5($parts[1]), -5) : '');
+	}
 }
 
 function err($eid, $msg)

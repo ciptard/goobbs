@@ -1,5 +1,15 @@
 <?php
 
+function isGET($name)
+{
+	return isset($_GET[$name]) && is_string($_GET[$name]);
+}
+
+function isPOST($name)
+{
+	return isset($_POST[$name]) && is_string($_POST[$name]);
+}
+
 function fURL()
 {
 	$out = array();
@@ -32,24 +42,18 @@ function _max($arr, $limit)
 	}
 	$out = array();
 	for($i=0; $i<$limit; $i++)
-	{
-		$maxI = maxIndex($arr, $size);
+	{	
+		$maxI = 0;
+		for($i=1; $i<$size; $i++)
+		{
+			if ($arr[$i] > $arr[$maxI])
+				$maxI = $i;
+		}
 		$out[] = $arr[$maxI];
 		unset($arr[$maxI]);
 		$size--;
 	}
 	return $out;
-}
-
-function maxIndex($arr, $size)
-{
-	$key = 0;
-	for($i=1; $i<$size; $i++)
-	{
-		if ($arr[$i] > $arr[$key])
-			$key = $i;
-	}
-	return $key;
 }
 
 function redirect($loc)
@@ -89,44 +93,6 @@ function toDate($id, $pattern = 'Y/m/d H:i')
 		}
 	}
 	return date($pattern, $timestamp);
-}
-
-function clean($text)
-{
-	if(get_magic_quotes_gpc())
-		$text = stripslashes($text);
-	return htmlspecialchars(trim($text), ENT_QUOTES);
-}
-
-function transNL($text)
-{
-	return str_replace(array("\r\n", "\r"), "\n", $text);
-}
-
-function hide($text)
-{
-	return md5($text.md5($text));
-}
-
-function fdir($dir)
-{
-	$files = array();
-	$dh = opendir($dir);
-	while(false !== ($file = readdir($dh)))
-	{
-		if($file !== '.' && $file !== '..')
-		{
-			$file = explode('.', $file, 2);
-			$files[] = $file[0];
-		}
-	}
-	closedir($dh);
-	return $files;
-}
-
-function indir($file, $dir, $ext = '')
-{
-	return strpos($file, '/') === false && strpos($file, '.') === false && strpos($file, "\0") === false && file_exists($dir. '/' .$file.$ext);
 }
 
 function hook($name, $param = null)
