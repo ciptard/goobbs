@@ -2,6 +2,7 @@
 
 require 'lib/db.lib.php';
 require 'lib/util.lib.php';
+require 'lib/HTMLform.lib.php';
 
 if(!isValidEntry('config', 'config'))
 {
