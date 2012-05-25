@@ -30,7 +30,7 @@ foreach($plugins as $plugin)
 {
 	require 'plugin/' .$plugin. '/' .$plugin. '.plg.php';
 }
-if(in_array($out['self'], array('add', 'edit', 'feed', 'index', 'view')))
+if(in_array($out['self'], array('add', 'edit', 'feed', 'index', 'view', 'service')))
 {
 	hook('bbcode');
 	require 'lib/parser.lib.php';
