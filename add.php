@@ -7,7 +7,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 {
 	$forumEntry = readEntry('forum', $_GET['topic']);
 	$out['subtitle'] = $lang['add'].$lang['topic']. ' : ' .$forumEntry['name'];
-	if(checkBot() && check('name', 0, 20) && check('title') && check('content', 1, 2000))
+	if(checkBot() && check('trip', 0, 20) && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
 		$topicEntry['content'] = transNL(clean($_POST['content']));
@@ -16,7 +16,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		$topicEntry['reply'] = array();
 		$topicEntry['locked'] = false;
 		$topic = newEntry();
-		$topicEntry['trip'] = trip(clean($_POST['name']), $topic);
+		$topicEntry['trip'] = trip(clean($_POST['trip']), $topic);
 		saveEntry('topic', $topic, $topicEntry);
 
 		$forumEntry['topic'][$topic] = $topic;
@@ -30,7 +30,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 	{
 		$out['content'] .= form('add.php/topic/' .$_GET['topic'], 
 			text('title').
-			text('name').
+			text('trip').
 			textarea('content').
 			submit()).
 		preview('content');
@@ -44,12 +44,12 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 		exit;
 	}
 	$out['subtitle'] = $lang['add'].$lang['reply']. ' : ' .$topicEntry['title'];
-	if(checkBot() && check('name', 0, 20) && check('content', 1, 2000))
+	if(checkBot() && check('trip', 0, 20) && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = transNL(clean($_POST['content']));
 		$replyEntry['topic'] = $_GET['reply'];
 		$reply = newEntry();
-		$replyEntry['trip'] = trip(clean($_POST['name']), $reply);
+		$replyEntry['trip'] = trip(clean($_POST['trip']), $reply);
 		saveEntry('reply', $reply, $replyEntry);
 
 		$topicEntry['reply'][$reply] = $reply;
@@ -62,7 +62,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	else
 	{
 		$out['content'] .= form('add.php/reply/' .$_GET['reply'],
-			text('name').
+			text('trip').
 			textarea('content', isGET('q') && isValidEntry('reply', $_GET['q'])? '[quote]' .$_GET['q']. '[/quote]' : '').
 			submit()).
 		preview('content');

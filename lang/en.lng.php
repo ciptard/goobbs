@@ -13,6 +13,7 @@ $lang['delete'] = 'Delete ';
 $lang['title'] = 'Title';
 $lang['content'] = 'Content';
 $lang['name'] = 'Name';
+$lang['trip'] = 'Your name (optional)';
 $lang['search'] = 'Search';
 $lang['forum'] = 'Forum';
 $lang['password'] = 'Password';
