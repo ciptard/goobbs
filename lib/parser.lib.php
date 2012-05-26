@@ -38,8 +38,15 @@ function bbcode($text)
 
 function summary($text)
 {
-	$parts = explode("\n\n", $text, 2);
-	return content($parts[0]);
+	if (count($text) > 500)
+	{
+		$parts = explode("\n\n", $text, 2);
+		return content($parts[0]);
+	}
+	else
+	{
+		return content($text);
+	}
 }
 
 function content($text)
