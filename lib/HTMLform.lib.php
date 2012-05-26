@@ -9,7 +9,7 @@ function clean($text)
 
 function transNL($text)
 {
-	return str_replace(array("\r\n", "\r"), "\n", $text);
+	return preg_replace('/\n{3,}/', "\n\n", str_replace(array("\r\n", "\r"), "\n", $text));
 }
 
 function hide($text)
@@ -71,7 +71,7 @@ function textarea($name, $default = '')
 	'<div class="control-group">
 		<label class="control-label">' .$lang[$name]. '</label>
 		<div class="controls">
-			<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? clean($_POST[$name]) : $default). '</textarea>
+			<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? transNL(clean($_POST[$name])) : $default). '</textarea>
 		</div>
 	</div>';
 }
@@ -122,7 +122,7 @@ function form($action, $controls)
 
 function preview($name)
 {
-	return isPOST($name)? '<div class="alert">' .content(clean($_POST[$name])). '</div>' : '';
+	return isPOST($name)? '<div class="alert">' .content(transNL(clean($_POST[$name]))). '</div>' : '';
 }
 
 function check($name, $min = 1, $max = 40)
