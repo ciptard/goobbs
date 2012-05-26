@@ -38,7 +38,7 @@ function bbcode($text)
 
 function summary($text)
 {
-	if (count($text) > 500)
+	if (strlen($text) > 500)
 	{
 		$parts = explode("\n\n", $text, 2);
 		return content($parts[0]);
