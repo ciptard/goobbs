@@ -19,6 +19,9 @@ h1 {
 h2 {
 	font-size: 16px;
 }
+i[class] {
+	margin-right: 3px;
+}
 #footer {
 	margin-top: 45px;
 	padding: 35px 0 60px;
