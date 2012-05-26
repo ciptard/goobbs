@@ -22,8 +22,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	<div class="topic well clearfix">
 		<div class="span2">
 			<p class="user">' .manageTopic($_GET['topic']).$topicEntry['trip']. '</p>
-			<p>' .toDate($_GET['topic']). '</p>
-		</div>
+			<p>' .toDate($_GET['topic']). '</p>'.
+			hook('profile', $topicEntry['trip']).
+		'</div>
 		<div class="span9">
 			<div class="content">' .content($topicEntry['content']). '</div>'.
 			(!$topicEntry['locked']? '<div class="btn-toolbar"><a class="btn btn-primary btn-large" href="add.php/reply/' .$_GET['topic']. '">' .$lang['add'].$lang['reply']. '</a></div>' : '').
