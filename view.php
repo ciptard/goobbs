@@ -41,8 +41,9 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 			$out['content'] .= '<div id="' .$reply. '" class="reply well clearfix">
 				<div class="span2">
 					<p class="user">' .manageReply($reply).$replyEntry['trip']. '</p>
-					<p>' .toDate($reply). '</p>
-				</div>
+					<p>' .toDate($reply). '</p>'.
+					hook('profile', $replyEntry['trip']).
+				'</div>
 				<div class="span9">
 					<div class="content">' .content($replyEntry['content']). '</div>'.
 					(!$topicEntry['locked']? '<div class="btn-toolbar"><a class="btn" href="add.php/reply/' .$_GET['topic']. '/q/' .$reply. '">' .$lang['add'].$lang['reply']. '</a></div>' : '').
@@ -106,7 +107,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 			$out['content'] .= '<tr>
 				<td>' .manageTopic($topic).(isset($forumEntry['pinnedTopic'][$topic])? '<span class="label label-success">' .$lang['pinned']. '</span>':'').($topicEntry['locked']? '<span class="label label-warning">' .$lang['locked']. '</span>':'').$topicEntry['trip']. ' ' .$lang['started']. ' <a href="view.php/topic/' .$topic. '">' .$topicEntry['title']. '</a></td>
 				<td>' .shortNum($topicEntry['view']). ' / ' .count($topicEntry['reply']). '</td>
-				<td>' .toDate($topic). '</td>
+				<td>' .($topicEntry['reply']? toDate(end($topicEntry['reply'])) : toDate($topic)). '</td>
 			</tr>';
 		}
 		$out['content'] .= '</tbody>
