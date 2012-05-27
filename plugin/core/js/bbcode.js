@@ -42,21 +42,21 @@ function bbcode() {
 					start += param;
 				else
 					return;
-		      	break;
+		      		break;
 			case 'youtube':
 				param = prompt('Enter youtube ID', '3f7l-Z4NF70');
 				if (param)
 					start += param;
 				else
 					return;
-	      		break;
+	      			break;
 			case 'url':
 				param = prompt('Enter URL', 'http://');
 				if (param)
 					start = '[url=' + param + ']';
 				else
 					return;
-      			break;
+      				break;
 		}
 
 		ta.focus();
