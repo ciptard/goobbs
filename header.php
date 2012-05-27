@@ -22,6 +22,7 @@ if(!isset($_SESSION['role']))
 //load config
 $config = readEntry('config', 'config');
 
+require 'lang/en.lng.php';
 require 'lang/' .$config['lang']. '.lng.php';
 require 'lib/user.lib.php';
 require 'lib/HTMLform.lib.php';

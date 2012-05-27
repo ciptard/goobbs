@@ -1,15 +1,16 @@
 <?php
 
+$lang['useSpace'] = true;
 $lang['topic'] = 'Topic';
 $lang['reply'] = 'Reply';
 $lang['plugin'] = 'Plugin';
-$lang['config'] = 'Config ';
+$lang['config'] = 'Config';
 $lang['logout'] = 'Logout';
 $lang['login'] = 'Login';
 $lang['redirect'] = 'Go back to';
-$lang['add'] = 'Add ';
-$lang['edit'] = 'Edit ';
-$lang['delete'] = 'Delete ';
+$lang['add'] = 'Add';
+$lang['edit'] = 'Edit';
+$lang['delete'] = 'Delete';
 $lang['title'] = 'Title';
 $lang['content'] = 'Content';
 $lang['name'] = 'Name';
@@ -27,7 +28,7 @@ $lang['date'] = 'Date';
 $lang['view'] = 'View';
 $lang['count'] = 'Post';
 $lang['new'] = 'New';
-$lang['more'] = 'More ';
+$lang['more'] = 'More';
 $lang['confirm'] = 'ok';
 $lang['admin'] = 'Admin';
 $lang['worker'] = 'Worker';

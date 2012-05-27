@@ -6,7 +6,7 @@ require 'header.php';
 if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('topic', $_GET['topic']))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
-	$out['subtitle'] = $lang['edit'].$lang['topic']. ' : ' .$topicEntry['title'];
+	$out['subtitle'] = lang('edit topic : %s', $topicEntry['title']);
 	if(checkBot() && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
@@ -30,7 +30,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 				$forumEntry['topic'][$_GET['topic']] = $_GET['topic'];
 				saveEntry('forum', $topicEntry['forum'], $forumEntry);
 			}
-			
+
 			$forumEntry = readEntry('forum', $topicEntry['forum']);
 			if($_POST['pinned'] === 'yes')
 			{
@@ -56,7 +56,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 		$out['content'] .= form('edit.php/topic/' .$_GET['topic'],
 			text('title', $topicEntry['title']).
 			textarea('content', $topicEntry['content']).
-			(isWorker()? 
+			(isWorker()?
 				select('locked', array('yes' => $lang['yes'], 'no' => $lang['no']), $topicEntry['locked']? 'yes' : 'no').
 				select('pinned', array('yes' => $lang['yes'], 'no' => $lang['no']), isset($forumEntry['pinnedTopic'][$_GET['topic']])? 'yes' : 'no').
 				select('forum', $forumOptions, $topicEntry['forum']) : '').
@@ -67,7 +67,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEntry('reply', $_GET['reply']))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
-	$out['subtitle'] = $lang['edit'].$lang['reply'];
+	$out['subtitle'] = lang('edit reply');
 	if(checkBot() && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = transNL(clean($_POST['content']));
@@ -86,7 +86,7 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 {
 	$forumEntry = readEntry('forum', $_GET['forum']);
-	$out['subtitle'] = $lang['edit'].$lang['forum']. ' : ' .$forumEntry['name'];
+	$out['subtitle'] = lang('edit forum : %s', $forumEntry['name']);
 	if(checkBot() && check('name') && check('info', 1, 80))
 	{
 		$forumEntry['name'] = clean($_POST['name']);

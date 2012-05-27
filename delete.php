@@ -6,7 +6,7 @@ require 'header.php';
 if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('topic', $_GET['topic']))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
-	$out['subtitle'] = $lang['delete'].$lang['topic']. ' : ' .$topicEntry['title'];
+	$out['subtitle'] = lang('delete topic : %s', $topicEntry['title']);
 	if(checkBot())
 	{
 		deleteEntry('topic', $_GET['topic']);
@@ -31,7 +31,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEntry('reply', $_GET['reply']))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
-	$out['subtitle'] = $lang['delete'].$lang['reply'];
+	$out['subtitle'] = lang('delete reply');
 	if(checkBot())
 	{
 		deleteEntry('reply', $_GET['reply']);
@@ -51,14 +51,14 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 {
 	$forumEntry = readEntry('forum', $_GET['forum']);
-	$out['subtitle'] = $lang['delete'].$lang['forum']. ' : ' .$forumEntry['name'];
+	$out['subtitle'] = lang('delete forum : %s', $forumEntry['name']);
 	if(checkBot())
 	{
 		deleteEntry('forum', $_GET['forum']);
 		$forums = readEntry('config', 'forumOrder');
 		unset($forums[$_GET['forum']]);
 		saveEntry('config', 'forumOrder', $forums);
-		
+
 		foreach($forumEntry['topic'] as $topic)
 		{
 			$topicEntry = readEntry('topic', $topic);
@@ -79,7 +79,7 @@ else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
 }
 else if(isGET('worker') && isAdmin() && isset($config['worker'][$_GET['worker']]))
 {
-	$out['subtitle'] = $lang['delete'].$lang['worker']. ' : ' .$config['worker'][$_GET['worker']];
+	$out['subtitle'] = lang('delete worker : %s', $config['worker'][$_GET['worker']]);
 	if(checkBot())
 	{
 		unset($config['worker'][$_GET['worker']]);

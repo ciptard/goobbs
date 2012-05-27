@@ -6,7 +6,7 @@ require 'header.php';
 if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 {
 	$forumEntry = readEntry('forum', $_GET['topic']);
-	$out['subtitle'] = $lang['add'].$lang['topic']. ' : ' .$forumEntry['name'];
+	$out['subtitle'] = lang('add topic : %s', $forumEntry['name']);
 	if(checkBot() && check('trip', 0, 20) && check('title') && check('content', 1, 2000))
 	{
 		$topicEntry['title'] = clean($_POST['title']);
@@ -21,14 +21,14 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 
 		$forumEntry['topic'][$topic] = $topic;
 		saveEntry('forum', $topicEntry['forum'], $forumEntry);
-		
+
 		$_SESSION[$topic] = $topic;
 
 		$out['content'] .= '<p><a href="view.php/topic/' .$topic. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
 	}
 	else
 	{
-		$out['content'] .= form('add.php/topic/' .$_GET['topic'], 
+		$out['content'] .= form('add.php/topic/' .$_GET['topic'],
 			text('title').
 			text('trip').
 			textarea('content').
@@ -43,7 +43,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	{
 		exit;
 	}
-	$out['subtitle'] = $lang['add'].$lang['reply']. ' : ' .$topicEntry['title'];
+	$out['subtitle'] = lang('add reply : %s', $topicEntry['title']);
 	if(checkBot() && check('trip', 0, 20) && check('content', 1, 2000))
 	{
 		$replyEntry['content'] = transNL(clean($_POST['content']));
@@ -54,7 +54,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 
 		$topicEntry['reply'][$reply] = $reply;
 		saveEntry('topic', $replyEntry['topic'], $topicEntry);
-		
+
 		$_SESSION[$reply] = $reply;
 
 		$out['content'] .= '<p><a href="view.php/topic/' .$_GET['reply']. '/p/' .onPage($reply, $topicEntry['reply']). '#' .$reply. '">← ' .$lang['redirect']. ' : ' .$topicEntry['title']. '</a></p>';
@@ -70,7 +70,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 }
 else if(isGET('forum') && isAdmin())
 {
-	$out['subtitle'] = $lang['add'].$lang['forum'];
+	$out['subtitle'] = lang('add forum');
 	if(checkBot() && check('name') && check('info', 1, 80))
 	{
 		$forumEntry['name'] = clean($_POST['name']);
@@ -79,11 +79,11 @@ else if(isGET('forum') && isAdmin())
 		$forumEntry['pinnedTopic'] = array();
 		$forum = newEntry();
 		saveEntry('forum', $forum, $forumEntry);
-		
+
 		$forums = readEntry('config', 'forumOrder');
 		$forums[$forum] = $forum;
 		saveEntry('config', 'forumOrder', $forums);
-		
+
 		$out['content'] .= '<p><a href="index.php/forum">← ' .$lang['redirect']. ' : ' .$lang['forum']. '</a></p>';
 	}
 	else
@@ -96,7 +96,7 @@ else if(isGET('forum') && isAdmin())
 }
 else if(isGET('worker') && isAdmin())
 {
-	$out['subtitle'] = $lang['add'].$lang['worker'];
+	$out['subtitle'] = lang('add worker');
 	if(checkBot() && check('password'))
 	{
 		$config['worker'][hide($_POST['password'])] = clean($_POST['password']);

@@ -42,7 +42,7 @@ function _max($arr, $limit)
 	}
 	$out = array();
 	for($i=0; $i<$limit; $i++)
-	{	
+	{
 		$maxI = 0;
 		for($j=1; $j<$size; $j++)
 		{
@@ -106,6 +106,19 @@ function hook($name, $param = null)
 			$out .= $hookName($param);
 	}
 	return $out;
+}
+
+function lang($format)
+{
+	global $lang;
+	$argList = func_get_args();
+	$wordList = array();
+	foreach(explode(' ', $format) as $word)
+	{
+		$wordList[] = isset($lang[$word])? $lang[$word] : $word;
+	}
+
+	return vsprintf(implode($lang['useSpace']? ' ' : '', $wordList), array_slice($argList, 1));
 }
 
 ?>

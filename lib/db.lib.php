@@ -28,7 +28,7 @@ function readEntry($type, $file)
 
 function saveEntry($type, $file, $data)
 {
-	file_put_contents('data/' .$type. '/' .$file. '.dat.php', "<?php exit;?>\n" .var_export($data, true), LOCK_EX);
+	file_put_contents('data/' .$type. '/' .$file. '.dat.php', "<?php exit?>\n" .var_export($data, true), LOCK_EX);
 }
 
 function deleteEntry($type, $file)

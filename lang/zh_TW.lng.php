@@ -1,5 +1,6 @@
 <?php
 
+$lang['useSpace'] = false;
 $lang['topic'] = '主題';
 $lang['reply'] = '回覆';
 $lang['plugin'] = '插件';
@@ -46,6 +47,6 @@ $lang['pinned'] = '釘選';
 $lang['replied'] = '回覆';
 $lang['started'] = '開始';
 $lang['notFound'] = '糟糕! 這個頁面不存在 :(';
-$lang['errNotMatch'] = 'Mismatched password';
+$lang['errNotMatch'] = '兩個密碼不相同';
 
 ?>
