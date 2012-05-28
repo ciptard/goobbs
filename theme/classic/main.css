@@ -33,6 +33,10 @@ i[class] {
 :target {
 	background-color: #FFD;
 }
+.label-info {
+	display: inline-block;
+	margin: 9px;
+}
 /* sp */
 th {
 	background-color: #F0D5B7;
