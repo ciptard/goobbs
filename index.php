@@ -19,15 +19,17 @@ if(isGET('new'))
 		$topicEntry = readEntry('topic', $topic);
 		$out['content'] .= '<div class="hero-unit">
 			<h1>' .$topicEntry['title']. '</h1>
-			<p><span class="meta">' .strip_tags(summary($topicEntry['content'])). '</span> / ';
-			shuffle($topicEntry['reply']);
-			foreach(array_slice($topicEntry['reply'], 0, 3) as $reply)
-			{
-				$replyEntry = readEntry('reply', $reply);
-				$out['content'] .= '<span class="meta">' .strip_tags(summary($replyEntry['content'])). '</span> / ';
-			}
-			$out['content'] .= '</p>
-			<p><a class="btn btn-primary btn-large" href="view.php/topic/' .$topic. '">' .$lang['more']. '</a></p>
+			<hr/>
+			<div class="row-fluid">
+				<div class="span3">' .summary($topicEntry['content']). '</div>';
+				foreach(array_slice($topicEntry['reply'], -3) as $reply)
+				{
+					$replyEntry = readEntry('reply', $reply);
+					$out['content'] .= '<div class="span3">' .summary($replyEntry['content']). '</div>';
+				}
+			$out['content'] .= '</div>
+			<hr/>
+			<div class="btn-toolbar"><a class="btn btn-primary btn-large" href="view.php/topic/' .$topic. '">' .$lang['more']. '</a></div>
 		</div>
 		<table class="table table-striped table-bordered table-condensed">
 		<thead>
