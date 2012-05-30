@@ -7,7 +7,7 @@ function bbcode($text, $summary = true)
 	global $pattern, $replace;
 
 	$pattern[] = '%\[block\]([^\a]+?)\[/block\]%e';
-	$replace[] = $summary? '\'[...]\'' : '\'<pre class="pre-scrollable">\'.str_replace(\'<br />\', \'\', \'$1\').\'</pre>\'';
+	$replace[] = $summary? '\'[...]\'' : '\'<pre class="prettyprint linenums">\'.str_replace(\'<br />\', \'\', \'$1\').\'</pre>\'';
 
 	$pattern[] = '%\[b\]([^\a]+?)\[/b\]%';
 	$replace[] = '<b>$1</b>';
@@ -29,7 +29,7 @@ function bbcode($text, $summary = true)
 
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
 	$replace[] = $summary? '[...]' : '<iframe width="320" height="240" src="http://www.youtube.com/embed/$1?rel=0" frameborder="0"></iframe>';
-	
+
 	$pattern[] = '%\[quote\](\d{4}-\d{2}-\d{8}[a-z\d]{5})\[/quote\]%e';
 	$replace[] = 'quote(\'$1\')';
 

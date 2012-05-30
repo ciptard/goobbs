@@ -21,13 +21,16 @@ header('Content-Type: text/html; charset=UTF-8');
 	<script src="http://code.jquery.com/jquery.min.js"></script>
 	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
 	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+	<script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css"/>
+	<script>$(function () { prettyPrint(); })</script>
 	<?php echo hook('head', $out['self'])?>
 </head>
 <body>
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#"><?php echo $config['title']?></a>
+				<a class="brand"><?php echo $config['title']?></a>
 				<ul class="nav">
 				<li><a href="index.php/new"><?php echo $lang['new']?></a></li>
 				<li><a href="index.php/forum"><?php echo $lang['forum']?></a></li>

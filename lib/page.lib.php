@@ -9,9 +9,9 @@ function pageControl($p, $total, $loc)
 		for($i=$start; $i<=$end; $i++)
 		{
 			if($p === $i)
-				$out .= '<li class="active"><a href="#">' .$i. '</a></li>';
+				$out .= '<li class="active"><a>' .$i. '</a></li>';
 			else
-				$out .= '<li><a href="' .$loc. '/p/' .$i. '">' .$i. '</a></li>';	
+				$out .= '<li><a href="' .$loc. '/p/' .$i. '">' .$i. '</a></li>';
 		}
 		$out .= ($end === $total? '' : '<li><a href="' .$loc. '/p/' .($end+1). '">...</a></li>').
 	'</ul></div>';

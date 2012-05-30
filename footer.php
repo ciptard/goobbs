@@ -12,7 +12,7 @@ if($out['self'] === 'feed')
 else
 {
 	$out['content'] .= '<div>
-	<a class="label" href="#">' .$lang['count']. ' : ' .count(array_merge(listEntry('topic'), listEntry('reply'))). '</a>';
+	<a class="label">' .$lang['count']. ' : ' .count(array_merge(listEntry('topic'), listEntry('reply'))). '</a>';
 	foreach(listEntry('forum') as $forum)
 	{
 		$forumEntry = readEntry('forum', $forum);
