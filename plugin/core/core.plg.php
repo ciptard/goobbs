@@ -1,9 +1,10 @@
 <?php
 
+if(!isValidEntry('plugin', 'core'))
+	core_helperInit();
+
 function core_head()
 {
-	if(!isValidEntry('plugin', 'core'))
-		core_init();
 	$core = readEntry('plugin', 'core');
 	$out = '';
 	foreach(array('bbcode', 'loadreply', 'loadform', 'imgzoom') as $feature)
@@ -13,7 +14,7 @@ function core_head()
 	return $out;
 }
 
-function core_init()
+function core_helperInit()
 {
 	foreach(array('bbcode', 'loadreply', 'loadform', 'imgzoom') as $feature)
 	{
@@ -25,9 +26,9 @@ function core_init()
 function core_config()
 {
 	global $lang;
-	if(checkBot() && core_checkConfig())
+	if(checkBot() && core_helperCheckConfig())
 	{
-		saveEntry('plugin', 'core', core_getConfig());
+		saveEntry('plugin', 'core', core_helperGetConfig());
 		$out = '<p><a href="config.php/plugin">← ' .$lang['redirect']. ' : ' .$lang['config']. '</a></p>';
 	}
 	else
@@ -36,10 +37,10 @@ function core_config()
 		$lang['loadreply'] = 'hover to read reply';
 		$lang['loadform'] = 'quick reply';
 		$lang['imgzoom'] = 'image preview';
-		
+
 		$core = readEntry('plugin', 'core');
 		$options = array('yes' => $lang['yes'], 'no' => $lang['no']);
-		
+
 		$controlStr = '';
 		foreach(array('bbcode', 'loadreply', 'loadform', 'imgzoom') as $feature)
 		{
@@ -53,7 +54,7 @@ function core_config()
 	return $out;
 }
 
-function core_checkConfig()
+function core_helperCheckConfig()
 {
 	foreach(array('bbcode', 'loadreply', 'loadform', 'imgzoom') as $feature)
 	{
@@ -63,7 +64,7 @@ function core_checkConfig()
 	return true;
 }
 
-function core_getConfig()
+function core_helperGetConfig()
 {
 	foreach(array('bbcode', 'loadreply', 'loadform', 'imgzoom') as $feature)
 	{
