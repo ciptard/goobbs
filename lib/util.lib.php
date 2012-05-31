@@ -80,7 +80,7 @@ function toDate($id, $pattern = 'Y/m/d H:i')
 	global $lang;
 	$timestamp = strtotime(substr($id, 0, 16));
 	$diff = time() - $timestamp;
-	if($pattern !== 'c' && $diff < 604800) //1 week
+	if($pattern === 'Y/m/d H:i' && $diff < 604800) //1 week
 	{
 		$periods = array(86400 => $lang['day'], 3600 => $lang['hour'], 60 => $lang['minute'], 1 => $lang['second']);
 		foreach($periods as $key => $value)
@@ -95,19 +95,6 @@ function toDate($id, $pattern = 'Y/m/d H:i')
 	return date($pattern, $timestamp);
 }
 
-function hook($name, $param = null)
-{
-	global $plugins;
-	$out = '';
-	foreach($plugins as $plugin)
-	{
-		$hookName = $plugin. '_' .$name;
-		if(function_exists($hookName))
-			$out .= $hookName($param);
-	}
-	return $out;
-}
-
 function lang($format)
 {
 	global $lang;
@@ -117,7 +104,6 @@ function lang($format)
 	{
 		$wordList[] = isset($lang[$word])? $lang[$word] : $word;
 	}
-
 	return vsprintf(implode($lang['useSpace']? ' ' : '', $wordList), array_slice($argList, 1));
 }
 

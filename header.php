@@ -26,6 +26,7 @@ require 'lang/en.lng.php';
 require 'lang/' .$config['lang']. '.lng.php';
 require 'lib/user.lib.php';
 require 'lib/HTMLform.lib.php';
+require 'lib/plugin.lib.php';
 $plugins = fdir('plugin');
 foreach($plugins as $plugin)
 {

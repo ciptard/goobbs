@@ -115,11 +115,10 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	}
 	$out['content'] .= pageControl($p, $total, 'view.php/forum/' .$_GET['forum']);
 }
-else if(isGET('plugin') && function_exists($_GET['plugin']. '_view'))
+else if(isGET('plugin') && isValidHook('view', $_GET['plugin']))
 {
-	$misc = $_GET['plugin']. '_view';
 	$out['subtitle'] = strtolower($_GET['plugin']);
-	$out['content'] .= $misc();
+	$out['content'] .= myHook('view', $_GET['plugin']);
 }
 else
 {

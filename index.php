@@ -17,15 +17,17 @@ if(isGET('new'))
 			$topic = $replyEntry['topic'];
 		}
 		$topicEntry = readEntry('topic', $topic);
+		$count = count($topicEntry['reply'])+1;
+		$width = $count <= 4? 12/$count : 3;
 		$out['content'] .= '<div class="hero-unit">
 			<h1>' .$topicEntry['title']. '</h1>
 			<hr/>
 			<div class="row-fluid">
-				<div class="span3">' .summary($topicEntry['content']). '</div>';
+				<div class="span' .$width. '">' .summary($topicEntry['content']). '</div>';
 				foreach(array_slice($topicEntry['reply'], -3) as $reply)
 				{
 					$replyEntry = readEntry('reply', $reply);
-					$out['content'] .= '<div class="span3">' .summary($replyEntry['content']). '</div>';
+					$out['content'] .= '<div class="span' .$width. '">' .summary($replyEntry['content']). '</div>';
 				}
 			$out['content'] .= '</div>
 			<hr/>
@@ -83,17 +85,17 @@ else if(isGET('forum'))
 		{
 			foreach($forums as $forum)
 			{
-				$order[$forum] = isPOST($forum)? $_POST[$forum] : '0';	
+				$order[$forum] = isPOST($forum)? $_POST[$forum] : '0';
 			}
 			asort($order);
 			$order = array_keys($order);
 			$forums = array_combine($order, $order);
 			saveEntry('config', 'forumOrder', $forums);
 		}
-		
+
 		$num = range(1, count($forums));
 		$options = array_combine($num, $num);
-		
+
 		$controlStr = '';
 		$out['content'] .= '<table class="table table-striped table-bordered table-condensed">
 		<thead>
@@ -117,7 +119,7 @@ else if(isGET('forum'))
 		}
 		$out['content'] .= '</tbody>
 		</table>'.
-		(isAdmin()? form('index.php/forum', 
+		(isAdmin()? form('index.php/forum',
 			$controlStr.
 			submit()) : '');
 	}
