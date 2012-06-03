@@ -43,13 +43,10 @@ function summary($text)
 	$sum = 0;
 	foreach ($parts as $part)
 	{
-		$len = strlen($part);
-		if ($len === 0)
-			continue;
 		if ($sum > 200)
 			return nl2br(implode("\n", $out));
 		$out[]= $part;
-		$sum += $len;
+		$sum += strlen($part);
 	}
 	return nl2br(implode("\n", $out));
 }

@@ -1,21 +1,21 @@
 <?php
 
-if(!isValidEntry('plugin', 'core'))
-	core_helperInit();
-
 function core_head()
 {
 	$core = readEntry('plugin', 'core');
 	$out = '';
 	foreach(array('bbcode', 'loadreply', 'loadform', 'imgzoom') as $feature)
 	{
-		$out .= $core[$feature]? '<script src="plugin/core/js/' .$feature. '.js"></script>' : '';
+		$out .= $core[$feature]? '<script src="plugin/core/asset/' .$feature. '.js"></script>' : '';
 	}
 	return $out;
 }
 
-function core_helperInit()
+function core_install()
 {
+	if (isValidEntry('plugin', 'core'))
+		return;
+
 	foreach(array('bbcode', 'loadreply', 'loadform', 'imgzoom') as $feature)
 	{
 		$core[$feature] = true;

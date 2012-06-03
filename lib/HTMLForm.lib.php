@@ -43,11 +43,11 @@ function err($eid, $msg)
 function password($name)
 {
 	global $lang;
-	return err($name. 'ErrNotMatch', $lang['errNotMatch']).
-	'<div class="control-group">
+	return '<div class="control-group">
 		<label class="control-label">' .$lang[$name]. '</label>
-		<div class="controls">
-			<input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>
+		<div class="controls">'.
+			err($name. 'ErrNotMatch', $lang['errNotMatch']).
+			'<input type="password" name="' .$name. '"/>  <input type="password" name="' .$name. 'Confirm"/>
 		</div>
 	</div>';
 }
@@ -55,11 +55,11 @@ function password($name)
 function text($name, $default = '')
 {
 	global $lang;
-	return err($name. 'ErrLen', $lang['errLen']).
-	'<div class="control-group">
+	return '<div class="control-group">
 		<label class="control-label">' .$lang[$name]. '</label>
-		<div class="controls">
-			<input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>
+		<div class="controls">'.
+			err($name. 'ErrLen', $lang['errLen']).
+			'<input type="text" name="' .$name. '" value="' .(isPOST($name)? clean($_POST[$name]) : $default). '"/>
 		</div>
 	</div>';
 }
@@ -67,11 +67,11 @@ function text($name, $default = '')
 function textarea($name, $default = '')
 {
 	global $lang;
-	return err($name. 'ErrLen', $lang['errLen']).
-	'<div class="control-group">
+	return '<div class="control-group">
 		<label class="control-label">' .$lang[$name]. '</label>
-		<div class="controls">
-			<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? transNL(clean($_POST[$name])) : $default). '</textarea>
+		<div class="controls">'.
+			err($name. 'ErrLen', $lang['errLen']).
+			'<textarea name="' .$name. '" cols="80" rows="10">' .(isPOST($name)? transNL(clean($_POST[$name])) : $default). '</textarea>
 		</div>
 	</div>';
 }
@@ -82,11 +82,11 @@ function submit()
 	$num1 = rand(1, 10);
 	$num2 = rand(1, 10);
 	$_SESSION['captcha'] = (string) ($num1 * $num2);
-	return err('ErrBot', $lang['errBot']).
-	'<div class="control-group">
+	return '<div class="control-group">
 		<label class="control-label">' .$num1. ' x ' .$num2. ' = ?</label>
-		<div class="controls">
-			<input type="text" name="captcha" style="width: 50px;"/>
+		<div class="controls">'.
+			err('ErrBot', $lang['errBot']).
+			'<input type="text" name="captcha" style="width: 50px;"/>
 		</div>
 	</div>
 	<div class="form-actions">
@@ -98,7 +98,7 @@ function select($name, $options, $default = '')
 {
 	global $lang;
 	$selected = isPOST($name) && isset($options[$_POST[$name]])? $_POST[$name] : $default;
-	$out = 
+	$out =
 	'<div class="control-group">
 		<label class="control-label">' .$lang[$name]. '</label>
 		<div class="controls">

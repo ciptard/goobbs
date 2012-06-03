@@ -25,13 +25,16 @@ $config = readEntry('config', 'config');
 require 'lang/en.lng.php';
 require 'lang/' .$config['lang']. '.lng.php';
 require 'lib/user.lib.php';
-require 'lib/HTMLform.lib.php';
+require 'lib/HTMLForm.lib.php';
 require 'lib/plugin.lib.php';
 $plugins = fdir('plugin');
 foreach($plugins as $plugin)
 {
 	require 'plugin/' .$plugin. '/' .$plugin. '.plg.php';
 }
+hook('install');
+hook('init');
+
 if(in_array($out['self'], array('add', 'edit', 'feed', 'index', 'view', 'service')))
 {
 	hook('bbcode');
