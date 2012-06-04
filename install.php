@@ -1,7 +1,8 @@
 <?php
 
-$out['self'] = 'install';
-require 'header.php';
+require 'lib/db.lib.php';
+require 'lib/util.lib.php';
+require 'lib/HTMLForm.lib.php';
 
 if(!isValidEntry('config', 'config'))
 {
