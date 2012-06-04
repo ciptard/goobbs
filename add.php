@@ -3,7 +3,7 @@
 $out['self'] = 'add';
 require 'header.php';
 
-if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
+if(isGETValidEntry('forum', 'topic'))
 {
 	$forumEntry = readEntry('forum', $_GET['topic']);
 	$out['subtitle'] = lang('add topic : %s', $forumEntry['name']);
@@ -36,7 +36,7 @@ if(isGET('topic') && isValidEntry('forum', $_GET['topic']))
 		preview('content');
 	}
 }
-else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
+else if(isGETValidEntry('topic', 'reply'))
 {
 	$topicEntry = readEntry('topic', $_GET['reply']);
 	if($topicEntry['locked'])
@@ -63,7 +63,7 @@ else if(isGET('reply') && isValidEntry('topic', $_GET['reply']))
 	{
 		$out['content'] .= form('add.php/reply/' .$_GET['reply'],
 			text('trip').
-			textarea('content', isGET('q') && isValidEntry('reply', $_GET['q'])? '[quote]' .$_GET['q']. '[/quote]' : '').
+			textarea('content', isGETValidEntry('reply', 'q')? '[quote]' .$_GET['q']. '[/quote]' : '').
 			submit()).
 		preview('content');
 	}

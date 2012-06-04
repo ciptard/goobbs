@@ -3,7 +3,7 @@
 $out['self'] = 'delete';
 require 'header.php';
 
-if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('topic', $_GET['topic']))
+if(isGETValidEntry('topic', 'topic') && (isWorker() || isAuthor($_GET['topic'])))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$out['subtitle'] = lang('delete topic : %s', $topicEntry['title']);
@@ -28,7 +28,7 @@ if(isGET('topic') && (isWorker() || isAuthor($_GET['topic'])) && isValidEntry('t
 			submit());
 	}
 }
-else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEntry('reply', $_GET['reply']))
+else if(isGETValidEntry('reply', 'reply') && (isWorker() || isAuthor($_GET['reply'])))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
 	$out['subtitle'] = lang('delete reply');
@@ -48,7 +48,7 @@ else if(isGET('reply') && (isWorker() || isAuthor($_GET['reply'])) && isValidEnt
 			submit());
 	}
 }
-else if(isGET('forum') && isAdmin() && isValidEntry('forum', $_GET['forum']))
+else if(isGETValidEntry('forum', 'forum') && isAdmin())
 {
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = lang('delete forum : %s', $forumEntry['name']);

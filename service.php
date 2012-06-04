@@ -5,13 +5,13 @@ require 'header.php';
 
 $json = null;
 
-if(isGET('reply') && isValidEntry('reply', $_GET['reply']))
+if(isGETValidEntry('reply', 'reply'))
 {
 	$replyEntry = readEntry('reply', $_GET['reply']);
 	$json['trip'] = $replyEntry['trip'];
 	$json['content'] = summary($replyEntry['content']);
 }
-else if(isGET('plugin') && isValidHook('service', $_GET['plugin']))
+else if(isGETValidHook('service', 'plugin'))
 {
 	$json = myHook('service', $_GET['plugin']);
 }

@@ -3,7 +3,7 @@
 $out['self'] = 'view';
 require 'header.php';
 
-if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
+if(isGETValidEntry('topic', 'topic'))
 {
 	$topicEntry = readEntry('topic', $_GET['topic']);
 	$forumEntry = readEntry('forum', $topicEntry['forum']);
@@ -77,7 +77,7 @@ if(isGET('topic') && isValidEntry('topic', $_GET['topic']))
 	$out['content'] .= '</tbody>
 	</table>';
 }
-else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
+else if(isGETValidEntry('forum', 'forum'))
 {
 	$forumEntry = readEntry('forum', $_GET['forum']);
 	$out['subtitle'] = $forumEntry['name'];
@@ -115,7 +115,7 @@ else if(isGET('forum') && isValidEntry('forum', $_GET['forum']))
 	}
 	$out['content'] .= pageControl($p, $total, 'view.php/forum/' .$_GET['forum']);
 }
-else if(isGET('plugin') && isValidHook('view', $_GET['plugin']))
+else if(isGETValidHook('view', 'plugin'))
 {
 	$out['subtitle'] = strtolower($_GET['plugin']);
 	$out['content'] .= myHook('view', $_GET['plugin']);

@@ -10,6 +10,16 @@ function isPOST($name)
 	return isset($_POST[$name]) && is_string($_POST[$name]);
 }
 
+function isGETValidEntry($type, $name)
+{
+	return isGET($name) && isValidEntry($type, $_GET[$name]);
+}
+
+function isGETValidHook($hook, $name)
+{
+	return isGET($name) && isValidHook($hook, $_GET[$name]);
+}
+
 function fURL()
 {
 	$out = array();
