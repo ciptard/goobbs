@@ -1,6 +1,6 @@
 <?php
 
-function pageControl($p, $total, $loc)
+function pageLink($p, $total, $loc)
 {
 	$start = ($p-4) >= 1? $p-4 : 1;
 	$end = ($p+4) <= $total? $p+4 : $total;
@@ -18,7 +18,7 @@ function pageControl($p, $total, $loc)
 	return $out;
 }
 
-function totalPage($items)
+function countPage($items)
 {
 	$itemNum = count($items);
 	if($itemNum === 0)

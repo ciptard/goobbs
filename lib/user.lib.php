@@ -32,18 +32,4 @@ function login($password)
 	return false;
 }
 
-function quote($reply)
-{
-	if(isValidEntry('reply', $reply))
-	{
-		$replyEntry = readEntry('reply', $reply);
-		$topicEntry = readEntry('topic', $replyEntry['topic']);
-		return '<a class="label label-info" href="view.php/topic/' .$replyEntry['topic']. '/p/' .onPage($reply, $topicEntry['reply']). '#' .$reply. '">' .$replyEntry['trip']. '</a>';
-	}
-	else
-	{
-		return '<a class="label label-info">[?]</a>';
-	}
-}
-
 ?>

@@ -132,7 +132,7 @@ function check($name, $min = 1, $max = 40)
 	$len = strlen(trim($_POST[$name]));
 	if($len >= $min && $len <= $max)
 		return true;
-	$_SESSION[$name. 'ErrLen'] = '';
+	$_SESSION[$name. 'ErrLen'] = 1;
 	return false;
 }
 
@@ -140,7 +140,7 @@ function checkPass($name)
 {
 	if(check($name) && isPOST($name. 'Confirm') && $_POST[$name] === $_POST[$name. 'Confirm'])
 		return true;
-	$_SESSION[$name. 'ErrNotMatch'] = '';
+	$_SESSION[$name. 'ErrNotMatch'] = 1;
 	return false;
 }
 
@@ -150,7 +150,7 @@ function checkBot()
 		return false;
 	if(isset($_SESSION['captcha']) && $_POST['captcha'] === $_SESSION['captcha'])
 		return true;
-	$_SESSION['ErrBot'] = '';
+	$_SESSION['ErrBot'] = 1;
 	return false;
 }
 

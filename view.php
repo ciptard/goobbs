@@ -31,7 +31,7 @@ if(isGETValidEntry('topic', 'topic'))
 			hook('afterTopic', $_GET['topic']).
 		'</div>
 	</div>';
-	$total = totalPage($topicEntry['reply']);
+	$total = countPage($topicEntry['reply']);
 	$p = pid($total);
 	if($topicEntry['reply'])
 	{
@@ -52,7 +52,7 @@ if(isGETValidEntry('topic', 'topic'))
 			</div>';
 		}
 	}
-	$out['content'] .= pageControl($p, $total, 'view.php/topic/' .$_GET['topic']).
+	$out['content'] .= pageLink($p, $total, 'view.php/topic/' .$_GET['topic']).
 	'<table class="table table-striped table-bordered table-condensed">
 	<thead>
 		<tr>
@@ -88,7 +88,7 @@ else if(isGETValidEntry('forum', 'forum'))
 		hook('afterForum', $_GET['forum']).
 	'</div>';
 	$topics = array_merge($forumEntry['pinnedTopic'], array_reverse(array_diff($forumEntry['topic'], $forumEntry['pinnedTopic'])));
-	$total = totalPage($topics);
+	$total = countPage($topics);
 	$p = pid($total);
 	if($topics)
 	{
@@ -113,7 +113,7 @@ else if(isGETValidEntry('forum', 'forum'))
 		$out['content'] .= '</tbody>
 		</table>';
 	}
-	$out['content'] .= pageControl($p, $total, 'view.php/forum/' .$_GET['forum']);
+	$out['content'] .= pageLink($p, $total, 'view.php/forum/' .$_GET['forum']);
 }
 else if(isGETValidHook('view', 'plugin'))
 {
