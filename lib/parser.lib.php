@@ -9,22 +9,22 @@ function bbcode($text, $summary = true)
 	$pattern[] = '%\[block\]([^\a]+?)\[/block\]%e';
 	$replace[] = $summary? '\'[...]\'' : '\'<pre class="prettyprint linenums">\'.str_replace(\'<br />\', \'\', \'$1\').\'</pre>\'';
 
-	$pattern[] = '%\[b\]([^\a]+?)\[/b\]%';
+	$pattern[] = '%\[b\]([^\n]+?)\[/b\]%';
 	$replace[] = '<b>$1</b>';
 
-	$pattern[] = '%\[i\]([^\a]+?)\[/i\]%';
+	$pattern[] = '%\[i\]([^\n]+?)\[/i\]%';
 	$replace[] = '<i>$1</i>';
 
-	$pattern[] = '%\[u\]([^\a]+?)\[/u\]%';
+	$pattern[] = '%\[u\]([^\n]+?)\[/u\]%';
 	$replace[] = '<ins>$1</ins>';
 
-	$pattern[] = '%\[s\]([^\a]+?)\[/s\]%';
+	$pattern[] = '%\[s\]([^\n]+?)\[/s\]%';
 	$replace[] = '<del>$1</del>';
 
-	$pattern[] = '%\[img\]([^\r\n\[]+?)\[/img\]%';
+	$pattern[] = '%\[img\]([^\n\[]+?)\[/img\]%';
 	$replace[] = '<img class="thumbnail" src="$1" alt=""/>';
 
-	$pattern[] = '%\[url=([^\r\n\[]+?)\]([^\a]+?)\[/url\]%';
+	$pattern[] = '%\[url=([^\n\[]+?)\]([^\n]+?)\[/url\]%';
 	$replace[] = '<a target="_blank" href="$1">$2</a>';
 
 	$pattern[] = '%\[youtube\]([-\w]{11})\[/youtube\]%';
